@@ -3,76 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramli Leeral - Tablë bu Mat</title>
+    <title>Ramli Leeral - Sàkk Téere bi</title>
     <style>
         body { font-family: sans-serif; background-color: #121212; color: white; text-align: center; padding: 15px; margin: 0; }
         h1 { color: #4CAF50; font-size: 22px; }
         .section { background: #1e1e1e; padding: 15px; margin: 15px auto; max-width: 500px; border-radius: 8px; border: 1px solid #333; }
-        select { background: #333; color: white; padding: 10px; margin: 5px; border-radius: 5px; border: 1px solid #555; width: 80%; font-size: 16px; }
-        button { background-color: #4CAF50; color: white; border: none; padding: 12px 24px; font-size: 18px; border-radius: 5px; cursor: pointer; margin-top: 15px; width: 85%; font-weight: bold; }
-        .grid-table { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px; }
+        select { background: #333; color: white; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid #555; width: 90%; font-size: 16px; }
+        button { background-color: #4CAF50; color: white; border: none; padding: 14px; font-size: 18px; border-radius: 5px; cursor: pointer; margin-top: 15px; width: 90%; font-weight: bold; }
+        .grid-table { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 20px; padding: 10px; }
+        @media(min-width: 600px) { .grid-table { grid-template-columns: repeat(4, 1fr); } }
         .ker-box { background: #252525; padding: 10px; border-radius: 6px; border: 1px solid #444; font-size: 14px; }
-        .bët { font-size: 20px; color: #ffeb3b; letter-spacing: 3px; line-height: 1.1; margin: 5px 0; }
-        .nom-fig { color: #ff9800; font-weight: bold; }
-        .firi-text { font-size: 12px; color: #ccc; margin-top: 5px; text-align: left; background: #151515; padding: 5px; border-radius: 4px; }
+        .bët { font-size: 22px; color: #ffeb3b; letter-spacing: 3px; line-height: 1.1; margin: 5px 0; font-weight: bold; }
+        .nom-fig { color: #ff9800; font-weight: bold; font-size: 16px; margin: 5px 0; }
+        .firi-text { font-size: 13px; color: #ccc; margin-top: 8px; text-align: left; background: #151515; padding: 8px; border-radius: 4px; line-height: 1.4; }
     </style>
 </head>
 <body>
 
-    <h1>Ramli Leeral - Sàkk 16 Figure Yi</h1>
-    <p>Tànnal 4 figure jëkk yi ngir sàmpe téere bi</p>
+    <h1>Ramli Leeral - Sàkk 16 Kër Yi</h1>
+    <p>Dugalal 4 figure jëkk yi nga am ci sa tiiraas</p>
 
     <div class="section">
-        <label><b>Kër 1 (Yoon/Saalix):</b></label><br>
-        <select id="m1"></select><br><br>
+        <label><b>Kër 1 (Mmaam jëkk):</b></label><br>
+        <select id="m1">
+            <option value="Janfa">Janfa (• •• • •)</option>
+            <option value="Adama">Adama (• • • •)</option>
+            <option value="Mahdi">Mahdi (•• • •• ••)</option>
+            <option value="Idriss">Idriss (• • •• •)</option>
+            <option value="Alwassa">Alwassa (• •• •• •)</option>
+            <option value="Kaba">Kaba (•• • • ••)</option>
+            <option value="Nusra">Nusra (• • •• ••)</option>
+            <option value="Utba">Utba (•• •• • •)</option>
+            <option value="Lahuze">Lahuze (•• •• •• •)</option>
+            <option value="Bayada">Bayada (•• •• • ••)</option>
+            <option value="Humra">Humra (• •• • ••)</option>
+            <option value="Ingis">Ingis (•• • • •)</option>
+            <option value="Nusra-Daxil">Nusra Daxil (•• •• •• ••)</option>
+            <option value="Nusra-Xarij">Nusra Xarij (• • • ••)</option>
+            <option value="Ijtima">Ijtima (•• • •• •)</option>
+            <option value="Utba-Xarij">Utba Xarij (• •• •• ••)</option>
+        </select><br>
+
         <label><b>Kër 2 (Am-Am):</b></label><br>
-        <select id="m2"></select><br><br>
+        <select id="m2">
+            <option value="Janfa">Janfa (• •• • •)</option>
+            <option value="Adama" selected>Adama (• • • •)</option>
+            <option value="Mahdi">Mahdi (•• • •• ••)</option>
+            <option value="Idriss">Idriss (• • •• •)</option>
+            <option value="Alwassa">Alwassa (• •• •• •)</option>
+            <option value="Kaba">Kaba (•• • • ••)</option>
+            <option value="Nusra">Nusra (• • •• ••)</option>
+            <option value="Utba">Utba (•• •• • •)</option>
+            <option value="Lahuze">Lahuze (•• •• •• •)</option>
+            <option value="Bayada">Bayada (•• •• • ••)</option>
+            <option value="Humra">Humra (• •• • ••)</option>
+            <option value="Ingis">Ingis (•• • • •)</option>
+            <option value="Nusra-Daxil">Nusra Daxil (•• •• •• ••)</option>
+            <option value="Nusra-Xarij">Nusra Xarij (• • • ••)</option>
+            <option value="Ijtima">Ijtima (•• • •• •)</option>
+            <option value="Utba-Xarij">Utba Xarij (• •• •• ••)</option>
+        </select><br>
+
         <label><b>Kër 3 (Nit/Xarit):</b></label><br>
-        <select id="m3"></select><br><br>
+        <select id="m3">
+            <option value="Janfa">Janfa (• •• • •)</option>
+            <option value="Adama">Adama (• • • •)</option>
+            <option value="Mahdi" selected>Mahdi (•• • •• ••)</option>
+            <option value="Idriss">Idriss (• • •• •)</option>
+            <option value="Alwassa">Alwassa (• •• •• •)</option>
+            <option value="Kaba">Kaba (•• • • ••)</option>
+            <option value="Nusra">Nusra (• • •• ••)</option>
+            <option value="Utba">Utba (•• •• • •)</option>
+            <option value="Lahuze">Lahuze (•• •• •• •)</option>
+            <option value="Bayada">Bayada (•• •• • ••)</option>
+            <option value="Humra">Humra (• •• • ••)</option>
+            <option value="Ingis">Ingis (•• • • •)</option>
+            <option value="Nusra-Daxil">Nusra Daxil (•• •• •• ••)</option>
+            <option value="Nusra-Xarij">Nusra Xarij (• • • ••)</option>
+            <option value="Ijtima">Ijtima (•• • •• •)</option>
+            <option value="Utba-Xarij">Utba Xarij (• •• •• ••)</option>
+        </select><br>
+
         <label><b>Kër 4 (Kër/Mujeel):</b></label><br>
-        <select id="m4"></select><br>
+        <select id="m4">
+            <option value="Janfa">Janfa (• •• • •)</option>
+            <option value="Adama">Adama (• • • •)</option>
+            <option value="Mahdi">Mahdi (•• • •• ••)</option>
+            <option value="Idriss" selected>Idriss (• • •• •)</option>
+            <option value="Alwassa">Alwassa (• •• •• •)</option>
+            <option value="Kaba">Kaba (•• • • ••)</option>
+            <option value="Nusra">Nusra (• • •• ••)</option>
+            <option value="Utba">Utba (•• •• • •)</option>
+            <option value="Lahuze">Lahuze (•• •• •• •)</option>
+            <option value="Bayada">Bayada (•• •• • ••)</option>
+            <option value="Humra">Humra (• •• • ••)</option>
+            <option value="Ingis">Ingis (•• • • •)</option>
+            <option value="Nusra-Daxil">Nusra Daxil (•• •• •• ••)</option>
+            <option value="Nusra-Xarij">Nusra Xarij (• • • ••)</option>
+            <option value="Ijtima">Ijtima (•• • •• •)</option>
+            <option value="Utba-Xarij">Utba Xarij (• •• •• ••)</option>
+        </select><br>
         
-        <button onclick="sàmpeTéere()">Calculé 16 Kër Yi</button>
+        <button onclick="sampeTeere()">Boole & Firil 16 Kër Yi</button>
     </div>
 
     <div class="grid-table" id="table-place"></div>
 
     <script>
-        const dëkkaléYi = {
-            "Janfa": { code:, firi: "Naxate, tawat, walla jafé-jafé buy ñëw ci wet." },
-            "Adama": { code:, firi: "Barke, am-am bu bees, ak mbegeel gu sell." },
-            "Mahdi": { code:, firi: "Teranga, jamm, ak ndàm ci kaw say mbir." },
-            "Idriss": { code:, firi: "Xam-xam, daraja gu rëy, ak yoonu njàng." },
-            "Alwassa": { code:, firi: "Ubbiwum buntu barke, yaatal ak liggéey." },
-            "Kaba": { code:, firi: "Tukki, soppi dëkkaay, walla gàddaay." },
-            "Nusra": { code:, firi: "Ndàm ak nguru gu bees ci sa dund." },
-            "Utba": { code:, firi: "Mujeel gu baax walla kër gu bees." },
-            "Lahuze": { code:, firi: "Wax ju rëy walla xabar buy ñëw digg yoon." },
-            "Bayada": { code:, firi: "Weexal xol, jamm, ak sellal bëgg-bëgg." },
-            "Humra": { code:, firi: "Xulóo, xéex, walla colére bu am ci wet." },
-            "Ingis": { code:, firi: "Guddu fann ak dëgëral wér-wérle." },
-            "Nusra-Daxil": { code:, firi: "Dugal lu bees lu am barke ci biir kër." },
-            "Nusra-Xarij": { code:, firi: "Gennal mbir walla tawat buy genn." },
-            "Ijtima": { code:, firi: "Daje, mbooloo, walla dëgëral maslaa." },
-            "Utba-Xarij": { code:, firi: "Xabar bu rëy bu genn ci bitim réer." }
+        const dekkaleYi = {
+            "Janfa": { code:, firi: "Janfa day leral mbiri naxate, rëcc-rëcc walla tawat buy ñëw ci sa wet." },
+            "Adama": { code:, firi: "Barke, am-am bu bees, ak mbegeel gu sell mu ngi ci biir kër gi." },
+            "Mahdi": { code:, firi: "Teranga, jamm gu dëggu, ak ndàm ci kaw say mbir ak say xalaat." },
+            "Idriss": { code:, firi: "Xam-xam bu xote, daraja gu rëy, ak yoonu njàng walla liggéey buy soti." },
+            "Alwassa": { code:, firi: "Ubbiwum buntu barke, yaatal say bëgg-bëgg, ak liggéey bu rëy." },
+            "Kaba": { code:, firi: "Tukki bu sori, soppi dëkkaay, walla gàddaay bu am solo mu ngi ci yoon." },
+            "Nusra": { code:, firi: "Ndàm ak nguru gu bees ci sa dund. Say jafé-jafé yëpp dañuy saafara." },
+            "Utba": { code:, firi: "Mujeel gu baax, xalaat bu dëggu, walla sàkk kër gu bees." },
+            "Lahuze": { code:, firi: "Wax ju rëy walla xabar buy ñëw digg yoon. Faww nga maslaa." },
+            "Bayada": { code:, firi: "Weexal xol, jamm, sellal bëgg-bëgg, ak rëcc ci say musiba." },
+            "Humra": { code:, firi: "Xulóo, xéex, walla colére bu am ci wet. Faww nga teey ci say baat." },
+            "Ingis": { code:, firi: "Guddu fann, dëgëral wér-wérle, ak dëj mbir mu yàgg ci sa dund." },
+            "Nusra-Daxil": { code:, firi: "Dugal lu bees lu am barke, xaliss, walla teranga ci biir kër." },
+            "Nusra-Xarij": { code:, firi: "Gennal mbir walla tawat buy genn. Lu rëcc ci sa loxo." },
+            "Ijtima": { code:, firi: "Daje bu am solo, mbooloo, walla dëgëral maslaa ak say xarit." },
+            "Utba-Xarij": { code:, firi: "Xabar bu rëy bu genn ci bitim réer walla lu sori la lay fecc." }
         };
 
-        const selects = ['m1', 'm2', 'm3', 'm4'];
-        setTimeout(() => {
-            selects.forEach(id => {
-                const el = document.getElementById(id);
-                if(el) {
-                    Object.keys(dëkkaléYi).forEach(nom => {
-                        let opt = document.createElement('option');
-                        opt.value = nom;
-                        opt.innerText = nom;
-                        el.appendChild(opt);
-                    });
-                }
-            });
-        }, 100);
-
-        function booleXët(c1, c2) {
+        function booleXet(c1, c2) {
             let res = [];
             for(let i=0; i<4; i++) {
                 res.push((c1[i] + c2[i]) % 2 === 0 ? 2 : 1);
@@ -80,59 +137,43 @@
             return res;
         }
 
-        function woneBët(code) {
+        function woneBet(code) {
             return code.map(p => p === 1 ? "•" : "••").join("<br>");
         }
 
-        function jëlTur(code) {
-            for (let nom in dëkkaléYi) {
-                if (dëkkaléYi[nom].code.join(',') === code.join(',')) return nom;
+        function jelTur(code) {
+            for (let nom in dekkaleYi) {
+                if (dekkaleYi[nom].code.join(',') === code.join(',')) return nom;
             }
             return "Kër gu Bees";
         }
 
-        function sàmpeTéere() {
-            let m1 = dëkkaléYi[document.getElementById('m1').value].code;
-            let m2 = dëkkaléYi[document.getElementById('m2').value].code;
-            let m3 = dëkkaléYi[document.getElementById('m3').value].code;
-            let m4 = dëkkaléYi[document.getElementById('m4').value].code;
+        function sampeTeere() {
+            let m1 = dekkaleYi[document.getElementById('m1').value].code;
+            let m2 = dekkaleYi[document.getElementById('m2').value].code;
+            let m3 = dekkaleYi[document.getElementById('m3').value].code;
+            let m4 = dekkaleYi[document.getElementById('m4').value].code;
 
-            let t = [];
+            let t = {};
             t[1] = m1; t[2] = m2; t[3] = m3; t[4] = m4;
 
+            // 5 ba 8: Jël xëtu mmaam yi
             t[5] = [m1[0], m2[0], m3[0], m4[0]];
             t[6] = [m1[1], m2[1], m3[1], m4[1]];
             t[7] = [m1[2], m2[2], m3[2], m4[2]];
             t[8] = [m1[3], m2[3], m3[3], m4[3]];
 
-            t[9] = booleXët(t[1], t[2]);
-            t[10] = booleXët(t[3], t[4]);
-            t[11] = booleXët(t[5], t[6]);
-            t[12] = booleXët(t[7], t[8]);
+            // 9 ba 12: Boole mmaam yi ak xale yi
+            t[9] = booleXet(t[1], t[2]);
+            t[10] = booleXet(t[3], t[4]);
+            t[11] = booleXet(t[5], t[6]);
+            t[12] = booleXet(t[7], t[8]);
 
-            t[13] = booleXët(t[9], t[10]);
-            t[14] = booleXët(t[11], t[12]);
+            // 13 ba 14: Les Témoins
+            t[13] = booleXet(t[9], t[10]);
+            t[14] = booleXet(t[11], t[12]);
 
-            t[15] = booleXët(t[13], t[14]);
-            t[16] = booleXët(t[15], t[1]);
+            // 15: Le Juge
+            t[15] = booleXet(t[13], t[14]);
 
-            const place = document.getElementById("table-place");
-            place.innerHTML = "";
-
-            for(let i=1; i<=16; i++) {
-                let nom = jëlTur(t[i]);
-                let firiText = dëkkaléYi[nom] ? dëkkaléYi[nom].firi : "Firi bi mu ngi ñëw...";
-                
-                place.innerHTML += `
-                    <div class="ker-box">
-                        <b>Kër ${i}</b>
-                        <div class="nom-fig">${nom}</div>
-                        <div class="bët">${woneBët(t[i])}</div>
-                        <div class="firi-text">${firiText}</div>
-                    </div>
-                `;
-            }
-        }
-    </script>
-</body>
-</html>
+            // 16: Le Juge des Juges
