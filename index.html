@@ -142,8 +142,9 @@
         }
 
         function jelTur(code) {
+            let strCode = code.join(',');
             for (let nom in dekkaleYi) {
-                if (dekkaleYi[nom].code.join(',') === code.join(',')) return nom;
+                if (dekkaleYi[nom].code.join(',') === strCode) return nom;
             }
             return "Kër gu Bees";
         }
@@ -154,7 +155,6 @@
             let m3 = dekkaleYi[document.getElementById('m3').value].code;
             let m4 = dekkaleYi[document.getElementById('m4').value].code;
 
-            // Sàmpe 16 kër yi dëgg-dëgg (1 ba 16)
             let t = {};
             t[1] = m1; t[2] = m2; t[3] = m3; t[4] = m4;
 
