@@ -3,28 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramli Leeral - Téggaloo</title>
+    <title>Ramli Leeral - Sa Turi Yonent</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #121212;
             color: #ffffff;
             text-align: center;
-            padding: 10px;
+            padding: 5px;
+            margin: 0;
         }
-        h1 { color: #ffcc00; margin-bottom: 5px; }
+        h1 { color: #ffcc00; margin: 10px 0 5px 0; font-size: 22px; }
         .container {
-            max-width: 600px;
+            max-width: 100%;
             margin: auto;
             background: #1e1e1e;
-            padding: 15px;
+            padding: 10px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            box-sizing: border-box;
         }
         .mother-input {
-            margin: 12px 0;
-            padding: 8px;
-            border-bottom: 1px solid #333;
+            margin: 8px 0;
+            padding: 5px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -35,50 +36,63 @@
             color: white;
             border: 1px solid #555;
             border-radius: 5px;
-            font-size: 16px;
-            width: 65%;
+            font-size: 15px;
+            width: 70%;
         }
         button {
             background: #ffcc00;
             color: #000;
             border: none;
             padding: 12px 25px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 15px;
+            margin: 10px 0;
             width: 100%;
         }
-        .result-grid {
-            margin-top: 25px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 15px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .jant-table {
+            width: 100%;
+            min-width: 550px;
+            border-collapse: collapse;
+            background: #ffffff;
+            color: #000000;
             display: none;
         }
-        .house-box {
-            background: #252525;
-            padding: 10px 5px;
-            border-radius: 5px;
-            border: 1px solid #333;
+        .jant-table td {
+            border: 1px solid #cccccc;
             text-align: center;
+            vertical-align: middle;
+            padding: 6px 2px;
         }
-        .house-title {
-            font-size: 13px;
+        .row-title {
+            font-size: 10px;
             font-weight: bold;
-            color: #ffcc00;
-            margin-bottom: 8px;
+            color: #555555;
+            margin-bottom: 2px;
+            display: block;
         }
-        .geomancy-figure {
+        .fig-name {
+            font-size: 9px;
+            color: #2b7a78;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 3px;
+        }
+        .figure-dots {
             font-family: monospace;
-            font-size: 20px;
-            line-height: 1.2;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 1.1;
             letter-spacing: 2px;
-            color: #ffffff;
-            background: #1a1a1a;
-            padding: 5px 0;
-            border-radius: 4px;
+            color: #121212;
+            display: inline-block;
         }
     </style>
 </head>
@@ -87,150 +101,113 @@
     <h1>🔮 Ramli Leeral</h1>
     
     <div class="container">
-        <h3>Tànnal 4 Ndiy yi</h3>
-        
-        <div class="mother-input">
-            <label>Kër 1 :</label>
+        <!-- Sélection des 4 mères basées exactement sur tes figures -->
+        <div class="mother-input"><label>Kër 1 :</label>
             <select id="m1">
-                <option value="1,1,2,1">Yuusufa (1,1,2,1)</option>
-                <option value="1,1,2,1">Solaymaan (1,1,2,1)</option>
-                <option value="2,1,1,1">Ayyuub (2,1,1,1)</option>
-                <option value="1,2,1,2">Muhammad (1,2,1,2)</option>
-                <option value="2,1,1,2">Haliyyu / Ousmane (2,1,1,2)</option>
-                <option value="1,2,2,1">Lomara (1,2,2,1)</option>
-                <option value="1,1,1,1">Adama (1,1,1,1)</option>
-                <option value="2,2,2,2">Médi (2,2,2,2)</option>
-                <option value="1,1,2,2">Ibrahima (1,1,2,2)</option>
-                <option value="2,2,1,2">Missa (2,2,1,2)</option>
-                <option value="1,2,1,1">Insa (1,2,1,1)</option>
-                <option value="1,1,1,2">Trawore (1,1,1,2)</option>
-                <option value="2,1,2,2">Seahu (2,1,2,2)</option>
-                <option value="1,2,2,2">Yunus (1,2,2,2)</option>
-                <option value="2,2,2,1">Muusaa (2,2,2,1)</option>
+                <option value="1,1,2,1">Yoosufa (1,1,2,1)</option>
+                <option value="1,2,2,2">Adama (1,2,2,2)</option>
+                <option value="2,1,1,1">Muhammad (2,1,1,1)</option>
+                <option value="2,2,1,2">Idriis (2,2,1,2)</option>
+                <option value="1,1,1,1">Ibrahima (1,1,1,1)</option>
+                <option value="1,2,1,2">Hiisaa (1,2,1,2)</option>
+                <option value="2,1,2,2">Oumar (2,1,2,2)</option>
+                <option value="1,1,2,2">Jibriil (1,1,2,2)</option>
+                <option value="1,2,2,1">Solayman (1,2,2,1)</option>
+                <option value="2,1,1,2">Haliyyu (2,1,1,2)</option>
+                <option value="2,2,1,1">Nuuh (2,2,1,1)</option>
+                <option value="1,1,1,2">Hasan (1,1,1,2)</option>
+                <option value="1,2,1,1">Yunus (1,2,1,1)</option>
+                <option value="2,1,2,1">Ousmane (2,1,2,1)</option>
+                <option value="2,2,2,2">Muusaa (2,2,2,2)</option>
             </select>
         </div>
 
-        <div class="mother-input">
-            <label>Kër 2 :</label>
+        <div class="mother-input"><label>Kër 2 :</label>
             <select id="m2">
-                <option value="2,1,1,1">Ayyuub (2,1,1,1)</option>
-                <option value="2,2,1,1">Yuusufa (2,2,1,1)</option>
-                <option value="1,1,2,1">Solaymaan (1,1,2,1)</option>
-                <option value="1,2,1,2">Muhammad (1,2,1,2)</option>
-                <option value="2,1,1,2">Haliyyu / Ousmane (2,1,1,2)</option>
-                <option value="1,2,2,1">Lomara (1,2,2,1)</option>
-                <option value="1,1,1,1">Adama (1,1,1,1)</option>
-                <option value="2,2,2,2">Médi (2,2,2,2)</option>
-                <option value="1,1,2,2">Ibrahima (1,1,2,2)</option>
-                <option value="2,2,1,2">Missa (2,2,1,2)</option>
-                <option value="1,2,1,1">Insa (1,2,1,1)</option>
-                <option value="1,1,1,2">Trawore (1,1,1,2)</option>
-                <option value="2,1,2,2">Seahu (2,1,2,2)</option>
-                <option value="1,2,2,2">Yunus (1,2,2,2)</option>
-                <option value="2,2,2,1">Muusaa (2,2,2,1)</option>
+                <option value="1,2,2,2">Adama (1,2,2,2)</option>
+                <option value="1,1,2,1">Yoosufa (1,1,2,1)</option>
+                <option value="2,1,1,1">Muhammad (2,1,1,1)</option>
+                <option value="2,2,1,2">Idriis (2,2,1,2)</option>
+                <option value="1,1,1,1">Ibrahima (1,1,1,1)</option>
+                <option value="1,2,1,2">Hiisaa (1,2,1,2)</option>
+                <option value="2,1,2,2">Oumar (2,1,2,2)</option>
+                <option value="1,1,2,2">Jibriil (1,1,2,2)</option>
+                <option value="1,2,2,1">Solayman (1,2,2,1)</option>
+                <option value="2,1,1,2">Haliyyu (2,1,1,2)</option>
+                <option value="2,2,1,1">Nuuh (2,2,1,1)</option>
+                <option value="1,1,1,2">Hasan (1,1,1,2)</option>
+                <option value="1,2,1,1">Yunus (1,2,1,1)</option>
+                <option value="2,1,2,1">Ousmane (2,1,2,1)</option>
+                <option value="2,2,2,2">Muusaa (2,2,2,2)</option>
             </select>
         </div>
 
-        <div class="mother-input">
-            <label>Kër 3 :</label>
+        <div class="mother-input"><label>Kër 3 :</label>
             <select id="m3">
-                <option value="1,2,1,2">Muhammad (1,2,1,2)</option>
-                <option value="2,2,1,1">Yuusufa (2,2,1,1)</option>
-                <option value="1,1,2,1">Solaymaan (1,1,2,1)</option>
-                <option value="2,1,1,1">Ayyuub (2,1,1,1)</option>
-                <option value="2,1,1,2">Haliyyu / Ousmane (2,1,1,2)</option>
-                <option value="1,2,2,1">Lomara (1,2,2,1)</option>
-                <option value="1,1,1,1">Adama (1,1,1,1)</option>
-                <option value="2,2,2,2">Médi (2,2,2,2)</option>
-                <option value="1,1,2,2">Ibrahima (1,1,2,2)</option>
-                <option value="2,2,1,2">Missa (2,2,1,2)</option>
-                <option value="1,2,1,1">Insa (1,2,1,1)</option>
-                <option value="1,1,1,2">Trawore (1,1,1,2)</option>
-                <option value="2,1,2,2">Seahu (2,1,2,2)</option>
-                <option value="1,2,2,2">Yunus (1,2,2,2)</option>
-                <option value="2,2,2,1">Muusaa (2,2,2,1)</option>
+                <option value="2,1,1,1">Muhammad (2,1,1,1)</option>
+                <option value="1,1,2,1">Yoosufa (1,1,2,1)</option>
+                <option value="1,2,2,2">Adama (1,2,2,2)</option>
+                <option value="2,2,1,2">Idriis (2,2,1,2)</option>
+                <option value="1,1,1,1">Ibrahima (1,1,1,1)</option>
+                <option value="1,2,1,2">Hiisaa (1,2,1,2)</option>
+                <option value="2,1,2,2">Oumar (2,1,2,2)</option>
+                <option value="1,1,2,2">Jibriil (1,1,2,2)</option>
+                <option value="1,2,2,1">Solayman (1,2,2,1)</option>
+                <option value="2,1,1,2">Haliyyu (2,1,1,2)</option>
+                <option value="2,2,1,1">Nuuh (2,2,1,1)</option>
+                <option value="1,1,1,2">Hasan (1,1,1,2)</option>
+                <option value="1,2,1,1">Yunus (1,2,1,1)</option>
+                <option value="2,1,2,1">Ousmane (2,1,2,1)</option>
+                <option value="2,2,2,2">Muusaa (2,2,2,2)</option>
             </select>
         </div>
 
-        <div class="mother-input">
-            <label>Kër 4 :</label>
+        <div class="mother-input"><label>Kër 4 :</label>
             <select id="m4">
-                <option value="1,1,2,1">Yuusufa (2,2,1,1)</option>
-                <option value="1,2,2,1">Solaymaan (1,1,2,1)</option>
-                <option value="2,2,2,1">Ayyuub (2,1,1,1)</option>
-                <option value="2,1,1,1">Muhammad (1,2,1,2)</option>
-                <option value="2,1,1,2">Haliyyu / Ousmane (2,1,1,2)</option>
-                <option value="2,1,2,2">Lomara (1,2,2,1)</option>
-                <option value="1,2,2,2">Adama (1,1,1,1)</option>
-                <option value="2,2,2,2">Médi (2,2,2,2)</option>
-                <option value="1,1,1,1">Ibrahima (1,1,2,2)</option>
-                <option value="2,2,2,2">Missa (2,2,1,2)</option>
-                <option value="1,2,1,2">Insa (1,2,1,1)</option>
-                <option value="1,1,1,2">Trawore (1,1,1,2)</option>
-                <option value="2,1,2,2">Seahu (2,1,2,2)</option>
-                <option value="1,2,2,2">Yunus (1,2,2,2)</option>
-                <option value="2,2,2,1">Muusaa (2,2,2,1)</option>
+                <option value="2,2,1,2">Idriis (2,2,1,2)</option>
+                <option value="1,1,2,1">Yoosufa (1,1,2,1)</option>
+                <option value="1,2,2,2">Adama (1,2,2,2)</option>
+                <option value="2,1,1,1">Muhammad (2,1,1,1)</option>
+                <option value="1,1,1,1">Ibrahima (1,1,1,1)</option>
+                <option value="1,2,1,2">Hiisaa (1,2,1,2)</option>
+                <option value="2,1,2,2">Oumar (2,1,2,2)</option>
+                <option value="1,1,2,2">Jibriil (1,1,2,2)</option>
+                <option value="1,2,2,1">Solayman (1,2,2,1)</option>
+                <option value="2,1,1,2">Haliyyu (2,1,1,2)</option>
+                <option value="2,2,1,1">Nuuh (2,2,1,1)</option>
+                <option value="1,1,1,2">Hasan (1,1,1,2)</option>
+                <option value="1,2,1,1">Yunus (1,2,1,1)</option>
+                <option value="2,1,2,1">Ousmane (2,1,2,1)</option>
+                <option value="2,2,2,2">Muusaa (2,2,2,2)</option>
             </select>
         </div>
 
         <button onclick="calculerRamli()">Boole Poñ yi</button>
 
-        <!-- Résultats sous forme de tableau de cartes -->
-        <div id="results" class="result-grid"></div>
-    </div>
-
-    <script>
-        function addFigures(f1, f2) {
-            let result = [];
-            for (let i = 0; i < 4; i++) {
-                let sum = f1[i] + f2[i];
-                result.push(sum % 2 === 0 ? 2 : 1);
-            }
-            return result;
-        }
-
-        // Firi poñ yi ci anam gu téggaloo (Bòpp ba Tank) mel ni sa natal
-        function formatVerticalDots(arr) {
-            return arr.map(num => num === 1 ? "o" : "o o").join("<br>");
-        }
-
-        function calculerRamli() {
-            let m1 = document.getElementById("m1").value.split(",").map(Number);
-            let m2 = document.getElementById("m2").value.split(",").map(Number);
-            let m3 = document.getElementById("m3").value.split(",").map(Number);
-            let m4 = document.getElementById("m4").value.split(",").map(Number);
-
-            let h = {};
-            h[1] = m1; h[2] = m2; h[3] = m3; h[4] = m4;
-
-            h[5] = [m1[0], m2[0], m3[0], m4[0]];
-            h[6] = [m1[1], m2[1], m3[1], m4[1]];
-            h[7] = [m1[2], m2[2], m3[2], m4[2]];
-            h[8] = [m1[3], m2[3], m3[3], m4[3]];
-
-            h[9] = addFigures(h[1], h[2]);
-            h[10] = addFigures(h[3], h[4]);
-            h[11] = addFigures(h[5], h[6]);
-            h[12] = addFigures(h[7], h[8]);
-
-            h[13] = addFigures(h[9], h[10]);
-            h[14] = addFigures(h[11], h[12]);
-            h[15] = addFigures(h[13], h[14]);
-            h[16] = addFigures(h[15], h[1]);
-
-            let html = "";
-            for (let i = 1; i <= 16; i++) {
-                let borderStyle = (i === 15) ? "style='border: 2px solid #ffcc00; background: #332b00;'" : "";
-                html += `<div class="house-box" ${borderStyle}>
-                            <div class="house-title">Kër ${i}</div>
-                            <div class="geomancy-figure">${formatVerticalDots(h[i])}</div>
-                         </div>`;
-            }
-
-            let resDiv = document.getElementById("results");
-            resDiv.innerHTML = html;
-            resDiv.style.display = "grid";
-        }
-    </script>
-</body>
-</html>
+        <div class="table-responsive">
+            <table id="jantDisplay" class="jant-table">
+                <!-- Sàll 1: 8 kër -->
+                <tr>
+                    <td><span class="row-title">Kër 8</span><span id="n8" class="fig-name"></span><div id="k8" class="figure-dots"></div></td>
+                    <td><span class="row-title">Kër 7</span><span id="n7" class="fig-name"></span><div id="k7" class="figure-dots"></div></td>
+                    <td><span class="row-title">Kër 6</span><span id="n6" class="fig-name"></span><div id="k6" class="figure-dots"></div></td>
+                    <td><span class="row-title">Kër 5</span><span id="n5" class="fig-name"></span><div id="k5" class="figure-dots"></div></td>
+                    <td><span class="row-title">Kër 4</span><span id="n4" class="fig-name"></span><div id="k4" class="figure-dots"></div></td>
+                    <td><span class="row-title">Kër 3</span><span id="n3" class="fig-name"></span><div id="k3" class="figure-dots"></div></td>
+                    <td><span class="row-title">Kër 2</span><span id="n2" class="fig-name"></span><div id="k2" class="figure-dots"></div></td>
+                    <td><span class="row-title">Kër 1</span><span id="n1" class="fig-name"></span><div id="k1" class="figure-dots"></div></td>
+                </tr>
+                <!-- Sàll 2: 4 kër -->
+                <tr>
+                    <td colspan="2"><span class="row-title">Kër 12</span><span id="n12" class="fig-name"></span><div id="k12" class="figure-dots"></div></td>
+                    <td colspan="2"><span class="row-title">Kër 11</span><span id="n11" class="fig-name"></span><div id="k11" class="figure-dots"></div></td>
+                    <td colspan="2"><span class="row-title">Kër 10</span><span id="n10" class="fig-name"></span><div id="k10" class="figure-dots"></div></td>
+                    <td colspan="2"><span class="row-title">Kër 9</span><span id="n9" class="fig-name"></span><div id="k9" class="figure-dots"></div></td>
+                </tr>
+                <!-- Sàll 3: 2 kër -->
+                <tr>
+                    <td colspan="4"><span class="row-title">Kër 14</span><span id="n14" class="fig-name"></span><div id="k14" class="figure-dots"></div></td>
+                    <td colspan="4"><span class="row-title">Kër 13</span><span id="n13" class="fig-name"></span><div id="k13" class="figure-dots"></div></td>
+                </tr>
+                <!-- Sàll 4: Kër 15 -->
+                <tr>
