@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramli Leeral - Sa Turi Yonent</title>
+    <title>Ramli Leeral - Ndeyi Ramli</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,150 +13,118 @@
             padding: 20px;
             margin: 0;
         }
-        h1 { color: #ffcc00; margin-bottom: 20px; }
         .container {
-            max-width: 500px;
+            max-width: 600px;
             margin: auto;
             background: #1e1e1e;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
-        .instruction {
-            color: #cccccc;
-            font-size: 15px;
-            margin-bottom: 20px;
-            line-height: 1.4;
+        h1 { color: #ffcc00; }
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
         }
-        /* Style barigo yu ñuy bës */
-        .figure-builder {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        .row-btn {
-            background: #2a2a2a;
-            border: 2px solid #ffcc00;
-            color: #ffcc00;
-            width: 120px;
+        label { display: block; margin-bottom: 5px; color: #ffcc00; }
+        input {
+            width: 100%;
             padding: 10px;
-            font-size: 22px;
-            font-weight: bold;
-            letter-spacing: 5px;
+            background: #2a2a2a;
+            border: 1px solid #ffcc00;
+            color: white;
             border-radius: 5px;
-            cursor: pointer;
-            transition: 0.2s;
+            box-sizing: border-box;
         }
-        .row-btn:hover {
-            background: #ffcc00;
-            color: #000;
-        }
-        .action-btn {
+        button {
             background: #ffcc00;
             color: #000;
             border: none;
-            padding: 14px 30px;
+            padding: 12px 20px;
             font-size: 16px;
             font-weight: bold;
-            border-radius: 5px;
             cursor: pointer;
+            border-radius: 5px;
             width: 100%;
             margin-top: 10px;
         }
-        .action-btn:hover { background: #e6b800; }
-        /* Style u bbarigo ndam li */
-        #resultat {
-            margin-top: 25px;
+        button:hover { background: #e6b800; }
+        .result-box {
+            margin-top: 20px;
             padding: 15px;
             background: #2a2a2a;
-            border-radius: 5px;
             border-left: 5px solid #ffcc00;
-            display: none;
+            border-radius: 5px;
             text-align: left;
+            display: none;
         }
-        #resultat h2 { color: #ffcc00; margin-top: 0; font-size: 20px; }
-        #resultat p { color: #e0e0e0; line-height: 1.5; font-size: 15px; }
+        .house-title { font-weight: bold; color: #ffcc00; margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1>Ramli Leeral</h1>
-    <p class="instruction">Bësal ci barigo yi ngir tànn 1 walla 2i ponk ngir sàkk sa figure :</p>
-
-    <!-- Zone bu ñuy bës ngir toggu figure bi -->
-    <div class="figure-builder">
-        <button class="row-btn" id="l1" onclick="changerLigne('l1')">*</button>
-        <button class="row-btn" id="l2" onclick="changerLigne('l2')">*</button>
-        <button class="row-btn" id="l3" onclick="changerLigne('l3')">*</button>
-        <button class="row-btn" id="l4" onclick="changerLigne('l4')">*</button>
+    <p>Duggalal kod 4 Ndeyi Ramli yi (coow walla tomb yi, mel ni: 1 1 2 1)</p>
+    
+    <div class="input-group">
+        <label>Buntu 1 (Nit ki ak dundam):</label>
+        <input type="text" id="buntu1" placeholder="Mel ni: 1 1 2 1">
+    </div>
+    <div class="input-group">
+        <label>Buntu 2 (Alal ak koom-koom):</label>
+        <input type="text" id="buntu2" placeholder="Mel ni: 1 2 2 2">
+    </div>
+    <div class="input-group">
+        <label>Buntu 3 (Mbokk ak gox):</label>
+        <input type="text" id="buntu3" placeholder="Mel ni: 2 1 1 1">
+    </div>
+    <div class="input-group">
+        <label>Buntu 4 (Kër, ndey ak baay):</label>
+        <input type="text" id="buntu4" placeholder="Mel ni: 2 2 1 2">
     </div>
 
-    <button class="action-btn" onclick="interpreterRamli()">Firi Figure Bi</button>
+    <button onclick="firiRamli()">Firi Mbir Mi</button>
 
-    <!-- Fii la firi gi di genné -->
-    <div id="resultat">
-        <h2 id="fig-nom"></h2>
-        <p id="fig-firi"></p>
-    </div>
+    <div id="resultat" class="result-box"></div>
 </div>
 
 <script>
-// Dictionnaire u 16 figure yi ci Wolof
-const dictionnaireRamli = {
-    "1111": { nom: "Youssof (Yoon)", firi: "Yoon bu uwwu, tukki bu hëw, doxalin, walla yoonu jamm bu ubbeeku." },
-    "2222": { nom: "Adama (Mbooloo)", firi: "Mbooloo mu dajalo, jëmm, rati rati, walla dund gu rafet ci biir nit ñi." },
-    "1122": { nom: "Mahdiou (Alal)", firi: "Alal, ngàariñ, barke, ak koom-koom bu bees bu lay dikal." },
-    "2211": { nom: "Idriss (Am / Ndariñ)", firi: "Ligéey bu am solo, ndam, walla li nga doon wut mu ngi lay jox njariñ." },
-    "1211": { nom: "Ibrahim (Mbégte)", firi: "Mbégte, jamm, xew-xew bu neex, ak wërsëg bu lëw." },
-    "1121": { nom: "Issa (Ñàkk / Rëcc)", firi: "Genn ñàkk walla rëcc-rëcc, faww nga saytu sa bopp ci wàllu dépense." },
-    "2122": { nom: "Oumar (Xonq / Fit)", firi: "Fit, xare, kàttan, walla col bu tàng. Dafa laaj tàyyeel ak reesal." },
-    "2212": { nom: "Ayoub (Naqar)", firi: "Metit, xel bu tiis, walla xaar gu yàgg. Ligéey bu laaj muñ." },
-    "1221": { nom: "Lomara (Biir / Suttura)", firi: "Teju, biir, suttura, walla mbir mu fuyu mu nekk ci suttura." },
-    "2112": { nom: "Abdoullah (Daje)", firi: "Daje bu am solo, wetu, walla waxtaan bu nuy jëme kanam." },
-    "1112": { nom: "Aliou (Lëkkalé / Sey)", firi: "Sey, lëkkalé, ligéeyandoo, walla diggante ñaari nit yu baax." },
-    "2111": { nom: "Nohou (Taxaw / Jagat)", firi: "Mbir mu taxaw, rëcc-rëcc bu laaj njaatige walla kilifa gu lay jàppale." },
-    "1212": { nom: "Ousmane (Set / Jamm)", firi: "Xel bu dal, xol bu set, jamm, ak selaat ci li ngay def." },
-    "2121": { nom: "Slemane (Tawat / Coona)", firi: "Coona, tawat, walla nattu bu ndaw. Dafa laaj nga noci sa bopp." },
-    "1222": { nom: "Moussa (Kàddu / Kaddou)", firi: "Kàddu yu am solo, tàggat, wax gu rëy walla xabar buy dikk." },
-    "2221": { nom: "Younous (Ndam)", firi: "Ndam bu mag, sargal, teddungal, ak lëf bu neex buy sotti." }
+const ramliData = {
+    "1 1 2 1": { name: "Yuusufa", m1: "Nit ku muus, ku am yaakar, te xéewal di ko dikkal ci dundam.", m2: "Alal buy dugsi bu gaaw te am barke.", m3: "Mbokk walla xarit yu am muus te bëgg la.", m4: "Kër gu am xéewal, muus, te barkeel." },
+    "1 2 2 2": { name: "Adama", m1: "Nit ku dëgër bopp, ku am fula, ku bëgg dëgg, te taxawu dundam.", m2: "Alal bu dëgër (lu mel ni kër walla suuf) buy yàgg.", m3: "Diggante gu dëgër te yàgg ak sa mbooloo.", m4: "Kër gu dëgër, baay walla ndey ku am fula." },
+    "2 1 1 1": { name: "Muhammad", m1: "Nit ku am ngor, ku jor, ku am teddanga, te nit ñi bëgg ko lool.", m2: "Alal bu sell, bu ñu amé ci yoonu jàmm ak njub.", m3: "Mbokk yu sell, yu la amé teddanga ak njub.", m4: "Kër gu sell, gu am njub ak teddanga." },
+    "2 2 1 2": { name: "Idriis", m1: "Nit ku am jàqare léegi, walla ku nekk ci nattu bu ko wara jox léison.", m2: "Wàccug alal walla coono ci wàllu xaalis léegi.", m3: "Jàqare walla naxari xool buy bawe ci mbokk.", m4: "Mbir mu wàcc walla coono ci biir kër." },
+    "1 1 1 1": { name: "Ibrahima", m1: "Nit ku mbooloo sopp, ku yaatu xol, te am ndimbal ci nit ñi.", m2: "Xaalis buy dajalo walla alal buy bawe ci mbooloo.", m3: "Dajalo gu rëy ak say mbokk walla sa dëkk.", m4: "Kër gu dajale mbooloo mu bari saa su nekk." },
+    "1 2 1 2": { name: "Hiisaa", m1: "Nit ku xool bu sedd am, ku sell xol, te am jàmm ci dundam.", m2: "Koom bu lér, bu amul njuumte, te buy joxe jàmm.", m3: "Jàmm gu rëy ak xool bu sedd ci sa diggante ak ñi la wër.", m4: "Jàmm, weex, ak xool bu sedd ci biir kër." },
+    "2 1 2 2": { name: "Oumar", m1: "Nit ku am fit lool, ku gaaw a mer, te am raye ci li mu bëgg.", m2: "Alal bu ñu amé ci fitna walla coono gu rëy.", m3: "Xare, xuloo, walla fitna diggante mbokk.", m4: "Fitna, mer, walla xuloo ci biir kër." },
+    "2 2 2 1": { name: "Ayyuuba", m1: "Nit ku bëgg tukki walla liggéey, waaye nag mu nekk ci coono buy génn.", m2: "Xaalis buy génn loxo walla koom buy rëcc léegi.", m3: "Tàggoo walla tukki bu lay soreal ak sa mbokk.", m4: "Génn kër walla tukki bu lay soreal ak sa dëkk." },
+    "1 1 2 2": { name: "Jibriil", m1: "Nit ku bëgg soppiku, ku tàyel dëkk fenu rekk, te bëgg dox yoon.", m2: "Alal buy bawe ci tukki walla dox yoon.", m3: "Yoon walla dox buy am ci sa gox-goxaan.", m4: "Yoon walla soppiku buy am ci sa biir kër." },
+    "1 2 2 1": { name: "Solayman", m1: "Nit ku laxas, ku am lu mu bëgg génne ci loxoom mbaa ku jàq lool.", m2: "Xaalis buy génn bu gaaw (tasu alal).", m3: "Tasu walla soreyante ak say mbokk.", m4: "Alal buy génn kër walla tasug mbir." },
+    "2 1 1 2": { name: "Haliyyu", m1: "Nit ku beegg dëgër te dëgëral boppam, ku teye alal walla sàmm mbir.", m2: "Teye xaalis walla alal buy duggaat ci loxo.", m3: "Jappante ak teye diggante bu baax ak say xarit.", m4: "Teye alal walla soxla su faju ci biir kër." },
+    "2 2 1 1": { name: "Nuuhu", m1: "Nit ku am njubte, ku sàmm diggante, te sopp mbooloo.", m2: "Koom buy dajalo ci liggéey bu rëy.", m3: "Daje walla taxawal liggéey bu rëy ak say mbokk.", m4: "Mbooloo wallay liggéey bu mag buy taxaw ci kër gi." },
+    "1 1 1 2": { name: "Hasan", m1: "Nit ku am barke ak mbegte gu gaaw ci dundam.", m2: "Xéewal ak xaalis bu gaaw a tàbbi ci loxo.", m3: "Mbegte ak barke buy bawe ci sa gox.", m4: "Barke ak mbegte gu rëy ci sa njabot." },
+    "1 2 1 1": { name: "Yunus", m1: "Nit ku siw, ku am daraja, te bëgg joxe ndimbal.", m2: "Alal buy yaatu te di siwal nit ki.", m3: "Daraja ak tudd bu rafet ci sa biir mbooloo.", m4: "Kër gu siw te rafet tudd ci gox bi." },
+    "2 1 2 1": { name: "Ousmane", m1: "Nit ku nekk ci diggante (lu nekk sàytu dundam), am na yaakar yu bari.", m2: "Koom bu dëgërut, faaw nga sàytu ko bu baax.", m3: "Diggante gu dëgërut, faaw nga sàytu say xarit.", m4: "Mbir mu tëju-ubbeeku, faaw nga sàytu sa kër." },
+    "2 2 2 2": { name: "Muusaa", m1: "Nit ku am fula lool, ku nekk ci yoon wu am coono waaye mu dëgër.", m2: "Koom bu tëju léegi waaye buy ubbeeku ci coono bu yàgg.", m3: "Yoon bu tëju mbaa coono ci wàllu diggante gox-goxaan.", m4: "Kër gu dëgër bopp waaye gu am coono yu bari." }
 };
 
-// Fonction buy soppi ponk yi (* walla **)
-function changerLigne(id) {
-    const btn = document.getElementById(id);
-    if (btn.innerText === "*") {
-        btn.innerText = "**";
-    } else {
-        btn.innerText = "*";
-    }
-}
+function firiRamli() {
+    const b1 = document.getElementById('buntu1').value.trim();
+    const b2 = document.getElementById('buntu2').value.trim();
+    const b3 = document.getElementById('buntu3').value.trim();
+    const b4 = document.getElementById('buntu4').value.trim();
 
-// Fonction buy kalkilé tey firi
-function interpreterRamli() {
-    let code = "";
+    let texthtml = "<h2>Resultat yu leer:</h2>";
     
-    // Xool li nekk ci 4i ligne yi
-    for (let i = 1; i <= 4; i++) {
-        const val = document.getElementById("l" + i).innerText;
-        code += (val === "*") ? "1" : "2";
-    }
-    
-    // Gëstu ci dictionnaire bi
-    const figure = dictionnaireRamli[code];
-    const blocResultat = document.getElementById("resultat");
-    
-    if (figure) {
-        document.getElementById("fig-nom").innerText = figure.nom;
-        document.getElementById("fig-firi").innerText = figure.firi;
-        blocResultat.style.display = "block";
-    } else {
-        document.getElementById("fig-nom").innerText = "Njuumte !";
-        document.getElementById("fig-firi").innerText = "Figure bi dëppowul ak li am. Saytul ponk yi.";
-        blocResultat.style.display = "block";
-    }
+    if(ramliData[b1]) texthtml += `<div class="house-title">Buntu 1 (${ramliData[b1].name}):</div><div>${ramliData[b1].m1}</div>`;
+    if(ramliData[b2]) texthtml += `<div class="house-title">Buntu 2 (${ramliData[b2].name}):</div><div>${ramliData[b2].m2}</div>`;
+    if(ramliData[b3]) texthtml += `<div class="house-title">Buntu 3 (${ramliData[b3].name}):</div><div>${ramliData[b3].m3}</div>`;
+    if(ramliData[b4]) texthtml += `<div class="house-title">Buntu 4 (${ramliData[b4].name}):</div><div>${ramliData[b4].m4}</div>`;
+
+    const resBox = document.getElementById('resultat');
+    resBox.innerHTML = texthtml;
+    resBox.style.display = "block";
 }
 </script>
 
