@@ -3,46 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramli Leeral - 16 Kër Yi</title>
+    <title>Ramli Leeral - Tombu ci Baaraam</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #121212;
             color: #ffffff;
             text-align: center;
-            padding: 20px;
+            padding: 15px;
             margin: 0;
         }
         .container {
-            max-width: 550px;
+            max-width: 600px;
             margin: auto;
             background: #1e1e1e;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
-        h1 { color: #ffcc00; margin-bottom: 10px; }
+        h1 { color: #ffcc00; margin-bottom: 10px; font-size: 24px; }
         .instruction {
             color: #cccccc;
             font-size: 14px;
             margin-bottom: 20px;
-            line-height: 1.4;
         }
-        .input-group {
-            margin-bottom: 15px;
+        .house-selector {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px dashed #ffcc00;
             text-align: left;
         }
-        label { display: block; margin-bottom: 5px; color: #ffcc00; font-weight: bold; }
-        input {
-            width: 100%;
-            padding: 12px;
-            background: #2a2a2a;
-            border: 1px solid #ffcc00;
-            color: white;
-            border-radius: 5px;
-            box-sizing: border-box;
+        .house-slot {
+            margin-bottom: 10px;
             font-size: 16px;
+            font-weight: bold;
+            color: #ffcc00;
         }
+        .slot-val {
+            color: #00ffcc;
+            background: #121212;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-left: 10px;
+            display: inline-block;
+            min-width: 100px;
+            text-align: center;
+        }
+        .grid-tombu {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .btn-fig {
+            background: #333333;
+            color: white;
+            border: 1px solid #555;
+            padding: 12px 5px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-fig:hover { background: #444; border-color: #ffcc00; }
         .action-btn {
             background: #ffcc00;
             color: #000;
@@ -53,7 +79,6 @@
             border-radius: 5px;
             cursor: pointer;
             width: 100%;
-            margin-top: 10px;
             transition: 0.2s;
         }
         .action-btn:hover { background: #e6b800; }
@@ -82,24 +107,36 @@
 <div class="container">
     <h1>Ramli Leeral</h1>
     <div class="instruction">
-        Duggalal <b>turu figiir bi dëgg</b> ci 4 Ndeyi Ramli yi (Misaal: Yuusufa, Adama, Muhammad, Idriis, Ibrahima, Hiisaa...). Application bi dina sàkk 16 kër yi yëpp automatiqam.
+        Tombul (cliquer) benn yoon ci turu figiir yi ci suuf ngir mottali 4 Këri Ndey yi.
     </div>
-    
-    <div class="input-group">
-        <label>Kër 1 (Nit ki ak dundam):</label>
-        <input type="text" id="buntu1" placeholder="Misaal: Yuusufa">
+
+    <!-- Fi figiir yi di toggu su ñu la tombee -->
+    <div class="house-selector">
+        <div class="house-slot">Kër 1 (Dundu): <span id="slot1" class="slot-val">Seet...</span></div>
+        <div class="house-slot">Kër 2 (Alal): <span id="slot2" class="slot-val">Seet...</span></div>
+        <div class="house-slot">Kër 3 (Mbokk): <span id="slot3" class="slot-val">Seet...</span></div>
+        <div class="house-slot">Kër 4 (Kër): <span id="slot4" class="slot-val">Seet...</span></div>
+        <button style="background:#cc0000; color:white; padding:5px 10px; border:none; border-radius:3px; font-size:12px; cursor:pointer; margin-top:5px;" onclick="raasalYëpp()">Dindi yëpp (Effacer)</button>
     </div>
-    <div class="input-group">
-        <label>Kër 2 (Alal ak koom-koom):</label>
-        <input type="text" id="buntu2" placeholder="Misaal: Adama">
-    </div>
-    <div class="input-group">
-        <label>Kër 3 (Mbokk ak gox-goxaan):</label>
-        <input type="text" id="buntu3" placeholder="Misaal: Muhammad">
-    </div>
-    <div class="input-group">
-        <label>Kër 4 (Kër, ndey ak baay):</label>
-        <input type="text" id="buntu4" placeholder="Misaal: Idriis">
+
+    <!-- Tableau tombu bi (Grid boutons) -->
+    <div class="grid-tombu">
+        <button class="btn-fig" onclick="tombuFigiir('yuusufa')">Yuusufa</button>
+        <button class="btn-fig" onclick="tombuFigiir('adama')">Adama</button>
+        <button class="btn-fig" onclick="tombuFigiir('muhammad')">Muhammad</button>
+        <button class="btn-fig" onclick="tombuFigiir('idriis')">Idriis</button>
+        <button class="btn-fig" onclick="tombuFigiir('ibrahima')">Ibrahima</button>
+        <button class="btn-fig" onclick="tombuFigiir('hiisaa')">Hiisaa</button>
+        <button class="btn-fig" onclick="tombuFigiir('oumar')">Oumar</button>
+        <button class="btn-fig" onclick="tombuFigiir('ayyuuba')">Ayyuuba</button>
+        <button class="btn-fig" onclick="tombuFigiir('jibriil')">Jibriil</button>
+        <button class="btn-fig" onclick="tombuFigiir('solayman')">Solayman</button>
+        <button class="btn-fig" onclick="tombuFigiir('haliyyu')">Haliyyu</button>
+        <button class="btn-fig" onclick="tombuFigiir('nuuhu')">Nuuhu</button>
+        <button class="btn-fig" onclick="tombuFigiir('hasan')">Hasan</button>
+        <button class="btn-fig" onclick="tombuFigiir('yunus')">Yunus</button>
+        <button class="btn-fig" onclick="tombuFigiir('ousmane')">Ousmane</button>
+        <button class="btn-fig" onclick="tombuFigiir('muusaa')">Muusaa</button>
     </div>
 
     <button class="action-btn" onclick="firiMbirYëpp()">Firi 16 Kër Yi</button>
@@ -110,25 +147,24 @@
 <script>
 // 1. Dencukaayóŋ tur yi, kod yi, ak firiy yi dëgg
 const ramliDatabase = {
-    "yuusufa":   { code:, name: "Yuusufa (Al-Ataba ad-Daxila)", desc: "Xéewal buy tàbbi ci biir kër, muus, ak yaakar bu baax. Ndam bu gaaw." },
-    "adama":     { code:, name: "Adama (Al-Caxza)", desc: "Suuf, dëgëray, alal buy yàgg te dëgër. Faaw nga muñ te taxawu sa mbir." },
-    "muhammad":  { code:, name: "Muhammad (Al-Aslah)", desc: "Sellal, njub, ngor, ak teddanga ci mbooloo. Jàmm ak rafetal xool." },
-    "idriis":    { code:, name: "Idriis (Al-Inkis)", desc: "Mbir mu wàcc walla lu daanu ci suuf, nattu buy joxe léson, jàqare buy gaawra génn." },
-    "ibrahima":  { code:, name: "Ibrahima (Al-Jama'a)", desc: "Mbooloo, dajalo, taxawal mbir mu rëy ak ndimbalu nit ñi saa su ne." },
-    "hiisaa":    { code:, name: "Hiisaa (Al-Bayad)", desc: "Weex, sell xol, jàmm gu rëy, ak xool bu sedd ci dundu nit ki." },
-    "oumar":     { code:, name: "Oumar (Al-Humra)", desc: "Fitna, xonq, fit bu rëy, xare walla mer bu gaaw. Sàytu ko bu baax." },
-    "ayyuuba":   { code:, name: "Ayyuuba (Al-Ataba al-Xarija)", desc: "Tukki, génn, alal walla mbir buy rëcc mbaa buy tàggoo kër walla dëkk." },
-    "jibriil":   { code:, name: "Jibriil (Tariki)", desc: "Yoon buy dox, tukki, soppiku, walla xalaat buy dox yoon." },
-    "solayman":  { code:, name: "Solayman (Al-Qabd al-Xarij)", desc: "Laxas, alal buy génn loxo bu gaaw, mbaa jàqare gu gàtt." },
-    "haliyyu":   { code:, name: "Haliyyu (Al-Qabd ad-Daxil)", desc: "Teye alal, sàmm mbir ci biir kër, mbaa soxla su faju ci jàmm." },
-    "nuuhu":     { code:, name: "Nuuhu (Al-Ijtima)", desc: "Daje, mbooloo, liggéey bu rëy buy taxaw ci njubte ak dëgëray." },
-    "hasan":     { code:, name: "Hasan (Al-Nasra ad-Daxila)", desc: "Ndam buy dugsi, barke, ak mbegte gu gaaw ci dundu njabot." },
-    "yunus":     { code:, name: "Yunus (Al-Nasra al-Xarija)", desc: "Siw, daraja, tudd bu rafet, ak bëgg joxe ndimbal mbooloo." },
-    "ousmane":   { code:, name: "Ousmane (Al-Kousaj)", desc: "Mbir mu dëgërut (diggante), faaw nga sàytu sa dund ak say xarit." },
-    "muusaa":    { code:, name: "Muusaa (Al-Tariq al-Muxlaq)", desc: "Yoon bu tëju, fula bu rëy, coono buy joxe ndam bu dëgër bu yàgg." }
+    "yuusufa":   { code: [1, 1, 2, 1], name: "Yuusufa (Al-Ataba ad-Daxila)", desc: "Xéewal buy tàbbi ci biir kër, muus, ak yaakar bu baax. Ndam bu gaaw." },
+    "adama":     { code: [1, 2, 2, 2], name: "Adama (Al-Caxza)", desc: "Suuf, dëgëray, alal buy yàgg te dëgër. Faaw nga muñ te taxawu sa mbir." },
+    "muhammad":  { code: [2, 1, 1, 1], name: "Muhammad (Al-Aslah)", desc: "Sellal, njub, ngor, ak teddanga ci mbooloo. Jàmm ak rafetal xool." },
+    "idriis":    { code: [2, 2, 1, 2], name: "Idriis (Al-Inkis)", desc: "Mbir mu wàcc walla lu daanu ci suuf, nattu buy joxe léson, jàqare buy gaawra génn." },
+    "ibrahima":  { code: [1, 1, 1, 1], name: "Ibrahima (Al-Jama'a)", desc: "Mbooloo, dajalo, taxawal mbir mu rëy ak ndimbalu nit ñi saa su ne." },
+    "hiisaa":    { code: [1, 2, 1, 2], name: "Hiisaa (Al-Bayad)", desc: "Weex, sell xol, jàmm gu rëy, ak xool bu sedd ci dundu nit ki." },
+    "oumar":     { code: [2, 1, 2, 2], name: "Oumar (Al-Humra)", desc: "Fitna, xonq, fit bu rëy, xare walla mer bu gaaw. Sàytu ko bu baax." },
+    "ayyuuba":   { code: [2, 2, 2, 1], name: "Ayyuuba (Al-Ataba al-Xarija)", desc: "Tukki, génn, alal walla mbir buy rëcc mbaa buy tàggoo kër walla dëkk." },
+    "jibriil":   { code: [1, 1, 2, 2], name: "Jibriil (Tariki)", desc: "Yoon buy dox, tukki, soppiku, walla xalaat buy dox yoon." },
+    "solayman":  { code: [1, 2, 2, 1], name: "Solayman (Al-Qabd al-Xarij)", desc: "Laxas, alal buy génn loxo bu gaaw, mbaa jàqare gu gàtt." },
+    "haliyyu":   { code: [2, 1, 1, 2], name: "Haliyyu (Al-Qabd ad-Daxil)", desc: "Teye alal, sàmm mbir ci biir kër, mbaa soxla su faju ci jàmm." },
+    "nuuhu":     { code: [2, 2, 1, 1], name: "Nuuhu (Al-Ijtima)", desc: "Daje, mbooloo, liggéey bu rëy buy taxaw ci njubte ak dëgëray." },
+    "hasan":     { code: [1, 1, 1, 2], name: "Hasan (Al-Nasra ad-Daxila)", desc: "Ndam buy dugsi, barke, ak mbegte gu gaaw ci dundu njabot." },
+    "yunus":     { code: [1, 2, 1, 1], name: "Yunus (Al-Nasra al-Xarija)", desc: "Siw, daraja, tudd bu rafet, ak bëgg joxe ndimbal mbooloo." },
+    "ousmane":   { code: [2, 1, 2, 1], name: "Ousmane (Al-Kousaj)", desc: "Mbir mu dëgërut (diggante), faaw nga sàytu sa dund ak say xarit." },
+    "muusaa":    { code: [2, 2, 2, 2], name: "Muusaa (Al-Tariq al-Muxlaq)", desc: "Yoon bu tëju, fula bu rëy, coono buy joxe ndam bu dëgër bu yàgg." }
 };
 
-// 2. Kód yi ñuy jëlë ngir xam turu figiir bi
 const codeToName = {
     "1 1 2 1": "Yuusufa (Al-Ataba ad-Daxila)", "1 2 2 2": "Adama (Al-Caxza)", "2 1 1 1": "Muhammad (Al-Aslah)", "2 2 1 2": "Idriis (Al-Inkis)",
     "1 1 1 1": "Ibrahima (Al-Jama'a)", "1 2 1 2": "Hiisaa (Al-Bayad)", "2 1 2 2": "Oumar (Al-Humra)", "2 2 2 1": "Ayyuuba (Al-Ataba al-Xarija)",
@@ -136,7 +172,6 @@ const codeToName = {
     "1 1 1 2": "Hasan (Al-Nasra ad-Daxila)", "1 2 1 1": "Yunus (Al-Nasra al-Xarija)", "2 1 2 1": "Ousmane (Al-Kousaj)", "2 2 2 2": "Muusaa (Al-Tariq al-Muxlaq)"
 };
 
-// 3. Firiy kër yi ci Ramli
 const houseNames = {
     1: "Kër 1 (Nit ki ak dundam)", 2: "Kër 2 (Alal ak koom-koom)", 3: "Kër 3 (Mbokk ak gox-goxaan)", 4: "Kër 4 (Kër, ndey ak baay)",
     5: "Kër 5 (Dom ak mbegte)", 6: "Kër 6 (Tawat ak coono)", 7: "Kër 7 (Sey ak liggéeyandoo)", 8: "Kër 8 (Dee ak lu nexut)",
@@ -144,75 +179,33 @@ const houseNames = {
     13: "Kër 13 (Kër gi dëkk / firi mbind mi)", 14: "Kër 14 (Li buy dikk suba)", 15: "Kër 15 (Mîzaan / Attekat bi)", 16: "Kër 16 (Dëgg gu magg gu mujj)"
 };
 
+let selectedFigs = [null, null, null, null];
+
+// Funksoŋ biiy denc figiir bi nit ki tombu
+function tombuFigiir(key) {
+    for (let i = 0; i < 4; i++) {
+        if (selectedFigs[i] === null) {
+            selectedFigs[i] = key;
+            document.getElementById(`slot${i+1}`).innerText = ramliDatabase[key].name.split(' ')[0];
+            return;
+        }
+    }
+}
+
+function raasalYëpp() {
+    selectedFigs = [null, null, null, null];
+    for (let i = 1; i <= 4; i++) document.getElementById(`slot${i}`).innerText = "Seet...";
+    document.getElementById('resultat').style.display = "none";
+}
+
 function boolePonk(p1, p2) {
     return (p1 + p2) % 2 === 0 ? 2 : 1;
 }
 
 function firiMbirYëpp() {
-    let getCode = id => {
-        let name = document.getElementById(id).value.trim().toLowerCase();
-        return ramliDatabase[name] ? ramliDatabase[name].code : null;
-    };
-    
-    let k1 = getCode('buntu1');
-    let k2 = getCode('buntu2');
-    let k3 = getCode('buntu3');
-    let k4 = getCode('buntu4');
-
-    if (!k1 || !k2 || !k3 || !k4) {
-        alert("Am na njuumte! Sàytul tur yi nga bind (Misaal: Yuusufa, Adama, Muhammad, Idriis...) te nga ràññee leen bu baax.");
+    if (selectedFigs.includes(null)) {
+        alert("Am na njuumte! Faaw nga tombu 4 figiir ngir mottali kër yi.");
         return;
     }
 
-    let ker = [];
-    ker = k1;
-    ker = k2;
-    ker = k3;
-    ker = k4;
-
-    // Sàkk Doom yi (Kër 5 ba 8)
-    ker = [k1[0], k2[0], k3[0], k4[0]];
-    ker = [k1[1], k2[1], k3[1], k4[1]];
-    ker = [k1[2], k2[2], k3[2], k4[2]];
-    ker = [k1[3], k2[3], k3[3], k4[3]];
-
-    // Sàkk Set-frere yi (Kër 9 ba 12)
-    ker  = [boolePonk(ker[0], ker[0]), boolePonk(ker[1], ker[1]), boolePonk(ker[2], ker[2]), boolePonk(ker[3], ker[3])];
-    ker = [boolePonk(ker[0], ker[0]), boolePonk(ker[1], ker[1]), boolePonk(ker[2], ker[2]), boolePonk(ker[3], ker[3])];
-    ker = [boolePonk(ker[0], ker[0]), boolePonk(ker[1], ker[1]), boolePonk(ker[2], ker[2]), boolePonk(ker[3], ker[3])];
-    ker = [boolePonk(ker[0], ker[0]), boolePonk(ker[1], ker[1]), boolePonk(ker[2], ker[2]), boolePonk(ker[3], ker[3])];
-
-    // Sàkk Seere ak Attekat (Kër 13 ba 15)
-    ker = [boolePonk(ker[0], ker[0]), boolePonk(ker[1], ker[1]), boolePonk(ker[2], ker[2]), boolePonk(ker[3], ker[3])];
-    ker = [boolePonk(ker[0], ker[0]), boolePonk(ker[1], ker[1]), boolePonk(ker[2], ker[2]), boolePonk(ker[3], ker[3])];
-    ker = [boolePonk(ker[0], ker[0]), boolePonk(ker[1], ker[1]), boolePonk(ker[2], ker[2]), boolePonk(ker[3], ker[3])];
-
-    // Kër 16
-    ker = [boolePonk(ker[0], ker[0]), boolePonk(ker[1], ker[1]), boolePonk(ker[2], ker[2]), boolePonk(ker[3], ker[3])];
-
-    // Wane firi bi ci ekraan bi
-    let texthtml = "<h2>Resultat yu leer:</h2>";
-    for (let i = 1; i <= 16; i++) {
-        let kodFigiir = ker[i].join(" ");
-        let turDëgg = codeToName[kodFigiir] || "Xamut";
-        
-        let firiBuntu = "Mbir mu lëndëm.";
-        let findKey = Object.keys(ramliDatabase).find(k => ramliDatabase[k].name === turDëgg);
-        if (findKey) firiBuntu = ramliDatabase[findKey].desc;
-
-        texthtml += `
-            <div class="house-item">
-                <span class="house-title">${houseNames[i]}:</span> 
-                <span class="fig-name">${turDëgg}</span><br>
-                <span style="color: #cccccc; font-size: 14px;">${firiBuntu}</span>
-            </div>`;
-    }
-
-    const resBox = document.getElementById('resultat');
-    resBox.innerHTML = texthtml;
-    resBox.style.display = "block";
-}
-</script>
-
-</body>
-</html>
+    let k1 = ramliDatabase[selectedFigs[0]].code;
