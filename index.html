@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramli Leeral - Tombu ci Baaraam</title>
+    <title>Ramli Leeral - Firi Bu Wër</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -143,30 +143,31 @@
 </div>
 
 <script>
+// 1. Dencukaayóŋ tur yi, kod yi, ak firiy yi dëgg gu wër
 const ramliDatabase = {
-    "yuusufa":   { code:, name: "Yuusufa (Al-Ataba ad-Daxila)", desc: "Xéewal buy tàbbi ci biir kër, muus, ak yaakar bu baax. Ndam bu gaaw." },
-    "adama":     { code:, name: "Adama (Al-Caxza)", desc: "Suuf, dëgëray, alal buy yàgg te dëgër. Faaw nga muñ te taxawu sa mbir." },
-    "muhammad":  { code:, name: "Muhammad (Al-Aslah)", desc: "Sellal, njub, ngor, ak teddanga ci mbooloo. Jàmm ak rafetal xool." },
-    "idriis":    { code:, name: "Idriis (Al-Inkis)", desc: "Mbir mu wàcc walla lu daanu ci suuf, nattu buy joxe léson, jàqare buy gaawra génn." },
-    "ibrahima":  { code:, name: "Ibrahima (Al-Jama'a)", desc: "Mbooloo, dajalo, taxawal mbir mu rëy ak ndimbalu nit ñi saa su ne." },
-    "hiisaa":    { code:, name: "Hiisaa (Al-Bayad)", desc: "Weex, sell xol, jàmm gu rëy, ak xool bu sedd ci dundu nit ki." },
-    "oumar":     { code:, name: "Oumar (Al-Humra)", desc: "Fitna, xonq, fit bu rëy, xare walla mer bu gaaw. Sàytu ko bu baax." },
-    "ayyuuba":   { code:, name: "Ayyuuba (Al-Ataba al-Xarija)", desc: "Tukki, génn, alal walla mbir buy rëcc mbaa buy tàggoo kër walla dëkk." },
-    "jibriil":   { code:, name: "Jibriil (Tariki)", desc: "Yoon buy dox, tukki, soppiku, walla xalaat buy dox yoon." },
-    "solayman":  { code:, name: "Solayman (Al-Qabd al-Xarij)", desc: "Laxas, alal buy génn loxo bu gaaw, mbaa jàqare gu gàtt." },
-    "haliyyu":   { code:, name: "Haliyyu (Al-Qabd ad-Daxil)", desc: "Teye alal, sàmm mbir ci biir kër, mbaa soxla su faju ci jàmm." },
-    "nuuhu":     { code:, name: "Nuuhu (Al-Ijtima)", desc: "Daje, mbooloo, liggéey bu rëy buy taxaw ci njubte ak dëgëray." },
-    "hasan":     { code:, name: "Hasan (Al-Nasra ad-Daxila)", desc: "Ndam buy dugsi, barke, ak mbegte gu gaaw ci dundu njabot." },
-    "yunus":     { code:, name: "Yunus (Al-Nasra al-Xarija)", desc: "Siw, daraja, tudd bu rafet, ak bëgg joxe ndimbal mbooloo." },
-    "ousmane":   { code:, name: "Ousmane (Al-Kousaj)", desc: "Mbir mu dëgërut (diggante), faaw nga sàytu sa dund ak say xarit." },
-    "muusaa":    { code:, name: "Muusaa (Al-Tariq al-Muxlaq)", desc: "Yoon bu tëju, fula bu rëy, coono buy joxe ndam bu dëgër bu yàgg." }
+    "yuusufa":   { code:, name: "Yuusufa", desc: "Nit ku muus, ku yaatu xol, te am yaakar bu baax. Alal walla xéewal buy tàbbi bu gaaw ci dundam walla ci biir kërëm. Mbir mi ci ndam lay dox." },
+    "adama":     { code:, name: "Adama", desc: "Suuf, dëgëray, ak alal buy yàgg (lu mel ni kër walla liggéey bu dëgër). Nit ku bëgg dëgg te dëgër bopp. Faaw nga muñ te taxawu sa mbir." },
+    "muhammad":  { code:, name: "Muhammad", desc: "Sellal, njub, ngor, ak teddanga ci mbooloo. Nit ku rafet melokan, ku nit ñi sopp, te dundum yëpp ci yoonu jàmm ak sellal lay doxé." },
+    "idriis":    { code:, name: "Idriis", desc: "Mbir mu wàcc walla lu daanu ci suuf, nattu buy joxe léson gu rëy. Nit ku am jàqare walla xalaat yu rëy léegi, waaye mu wara dëgëral boppam." },
+    "ibrahima":  { code:, name: "Ibrahima", desc: "Mbooloo, dajalo, ak taxawal mbir mu rëy. Nit ku yaatu xol, ku bëgg dajale nit ñi, te di am ndimbal walla soxla su buy safara ci ndimbalu mbooloo." },
+    "hiisaa":    { code:, name: "Hiisaa", desc: "Weex, sell xol, jàmm gu rëy, ak xool bu sedd. Koom bu lér bu amul njuumte, ak xéewal gu rëy gu buy joxe jàmm ak mbegte ci dundu nit ki." },
+    "oumar":     { code:, name: "Oumar", desc: "Fitna, xonq, mer, walla xuloo bu gaaw. Nit ku am fit bu rëy, ku gaaw a mer, te am raye ci li mu bëgg. Mbir mi dafa sàqtu teye ak muñ." },
+    "ayyuuba":   { code:, name: "Ayyuuba", desc: "Tukki, génn, alal walla mbir buy rëcc mbaa buy tàggoo kër walla dëkk. Nit ku bëgg liggéey walla tukki, waaye mu nekk ci coono buy génn léegi." },
+    "jibriil":   { code:, name: "Jibriil", desc: "Yoon buy dox, tukki, soppiku, walla xalaat buy dox yoon. Nit ku bëgg dox walla soppiku saa su ne, ku tàyel dëkk fenu rekk, bëgg yoon wu ubbeeku." },
+    "solayman":  { code:, name: "Solayman", desc: "Laxas, alal buy génn loxo bu gaaw, mbaa jàqare gu gàtt. Tasug mbir walla alal buy génn kër bu gaaw. Sàytul sa koom-koom." },
+    "haliyyu":   { code:, name: "Haliyyu", desc: "Teye alal, sàmm mbir ci biir kër, mbaa soxla su faju ci jàmm. Nit ku bëgg dëgër te dëgëral boppam, ku teye alal walla sàmm diggante bu baax." },
+    "nuuhu":     { code:, name: "Nuuhu", desc: "Daje, mbooloo, liggéey bu rëy buy taxaw ci njubte ak dëgëray. Nit ku am njubte ci wàllu liggéey, ku sàmm diggante, te sopp mbooloo." },
+    "hasan":     { code:, name: "Hasan", desc: "Ndam buy dugsi, barke, ak mbegte gu gaaw ci dundu njabot. Xéewal ak xaalis bu gaaw a tàbbi ci loxo, ak jàmm gu tàbbi ci biir kër." },
+    "yunus":     { code:, name: "Yunus", desc: "Siw, daraja, tudd bu rafet, ak bëgg joxe ndimbal mbooloo. Alal buy yaatu te di siwal nit ki ci rafetay ak daraja gu mag ci goxam." },
+    "ousmane":   { code:, name: "Ousmane", desc: "Mbir mu dëgërut (diggante lu tëju-ubbeeku). Nit ku am njuumte ci xalaatam léeg-léeg, am na yaakar yu bari waaye faaw mu sàytu dundam bu baax." },
+    "muusaa":    { code:, name: "Muusaa", desc: "Yoon bu tëju, fula bu rëy, coono buy joxe ndam bu dëgër bu yàgg. Nit ku am fula lool, ku nekk ci yoon wu am coono waaye mu dëgër ba am ndam." }
 };
 
 const codeToName = {
-    "1 1 2 1": "Yuusufa (Al-Ataba ad-Daxila)", "1 2 2 2": "Adama (Al-Caxza)", "2 1 1 1": "Muhammad (Al-Aslah)", "2 2 1 2": "Idriis (Al-Inkis)",
-    "1 1 1 1": "Ibrahima (Al-Jama'a)", "1 2 1 2": "Hiisaa (Al-Bayad)", "2 1 2 2": "Oumar (Al-Humra)", "2 2 2 1": "Ayyuuba (Al-Ataba al-Xarija)",
-    "1 1 2 2": "Jibriil (Tariki)", "1 2 2 1": "Solayman (Al-Qabd al-Xarij)", "2 1 1 2": "Haliyyu (Al-Qabd ad-Daxil)", "2 2 1 1": "Nuuhu (Al-Ijtima)",
-    "1 1 1 2": "Hasan (Al-Nasra ad-Daxila)", "1 2 1 1": "Yunus (Al-Nasra al-Xarija)", "2 1 2 1": "Ousmane (Al-Kousaj)", "2 2 2 2": "Muusaa (Al-Tariq al-Muxlaq)"
+    "1 1 2 1": "Yuusufa", "1 2 2 2": "Adama", "2 1 1 1": "Muhammad", "2 2 1 2": "Idriis",
+    "1 1 1 1": "Ibrahima", "1 2 1 2": "Hiisaa", "2 1 2 2": "Oumar", "2 2 2 1": "Ayyuuba",
+    "1 1 2 2": "Jibriil", "1 2 2 1": "Solayman", "2 1 1 2": "Haliyyu", "2 2 1 1": "Nuuhu",
+    "1 1 1 2": "Hasan", "1 2 1 1": "Yunus", "2 1 2 1": "Ousmane", "2 2 2 2": "Muusaa"
 };
 
 const houseNames = {
@@ -182,33 +183,10 @@ function tombuFigiir(key) {
     for (let i = 0; i < 4; i++) {
         if (selectedFigs[i] === null) {
             selectedFigs[i] = key;
-            document.getElementById(`slot${i+1}`).innerText = ramliDatabase[key].name.split(' ')[0];
+            document.getElementById(`slot${i+1}`).innerText = ramliDatabase[key].name;
             return;
         }
     }
 }
 
 function raasalYëpp() {
-    selectedFigs = [null, null, null, null];
-    for (let i = 1; i <= 4; i++) document.getElementById(`slot${i}`).innerText = "Seet...";
-    document.getElementById('resultat').style.display = "none";
-}
-
-function boolePonk(p1, p2) {
-    return (p1 + p2) % 2 === 0 ? 2 : 1;
-}
-
-function firiMbirYëpp() {
-    if (selectedFigs.includes(null)) {
-        alert("Am na njuumte! Faaw nga tombu 4 figiir ngir mottali kër yi.");
-        return;
-    }
-
-    let k1 = ramliDatabase[selectedFigs[0]].code;
-    let k2 = ramliDatabase[selectedFigs[1]].code;
-    let k3 = ramliDatabase[selectedFigs[2]].code;
-    let k4 = ramliDatabase[selectedFigs[3]].code;
-
-    let ker = [];
-    ker[1] = k1; ker[2] = k2; ker[3] = k3; ker[4] = k4;
-
