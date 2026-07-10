@@ -1,40 +1,211 @@
-def generate_geomancy_chart(m1, m2, m3, m4):
-    """
-    Kàbbalu ràmmu: Boo boolee poñ yi:
-    Sum bu mat (even) -> 2 poñ
-    Sum bu manke (odd) -> 1 poñ
-    """
-    def add_figures(f1, f2):
-        return [2 if (x + y) % 2 == 0 else 1 for x, y in zip(f1, f2)]
-    
-    # 1. Tàbbal 4 Ndiy yi (Mothers)
-    M = {1: m1, 2: m2, 3: m3, 4: m4}
-    
-    # 2. Sàkk 4 Doom yi (Daughters: M5 ba M8) ci sàllu Ndiy yi
-    M[5] = [M[1][0], M[2][0], M[3][0], M[4][0]]
-    M[6] = [M[1][1], M[2][1], M[3][1], M[4][1]]
-    M[7] = [M[1][2], M[2][2], M[3][2], M[4][2]]
-    M[8] = [M[1][3], M[2][3], M[3][3], M[4][3]]
-    
-    # 3. Sàkk 4 Sëfët yi (Nephews: M9 ba M12)
-    M[9]  = add_figures(M[1], M[2])   # Këru Tukki
-    M[10] = add_figures(M[3], M[4])   # Këru Liggéey
-    M[11] = add_figures(M[5], M[6])   # Këru Yaakaar
-    M[12] = add_figures(M[7], M[8])   # Këru Noon
-    
-    # 4. Sàkk Seere yi ak Àtte bi (M13 ba M15)
-    M[13] = add_figures(M[9], M[10]) # Ki togg
-    M[14] = add_figures(M[11], M[12]) # Xabar buy ñëw
-    M[15] = add_figures(M[13], M[14]) # ÀTTE BI (Haliyyu / Ousmane)
-    
-    # 5. Sàkk Firndéel gu mujj gi (M16 = M15 + M1)
-    M[16] = add_figures(M[15], M[1])
-    
-    return M
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramli Leeral</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 { color: #ffcc00; }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        .mother-input {
+            margin: 15px 0;
+            padding: 10px;
+            border-bottom: 1px solid #333;
+        }
+        select {
+            padding: 8px;
+            background: #333;
+            color: white;
+            border: 1px solid #555;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background: #ffcc00;
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+        }
+        button:hover { background: #e6b800; }
+        .result-box {
+            margin-top: 30px;
+            text-align: left;
+            background: #252525;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .house-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #333;
+        }
+        .dots {
+            font-weight: bold;
+            letter-spacing: 3px;
+            color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
 
-# --- 🚀 REEFEERE REZULTO CI SA 4 YONENT YI ---
-# Solaymaan= [1, 1, 2, 1] | Ayyuub= [2, 1, 1, 1] | Muhammad= [1, 2, 1, 2] | Yuusufa= [2, 2, 1, 1]
-jant_bi = generate_geomancy_chart([1, 1, 2, 1], [2, 1, 1, 1], [1, 2, 1, 2], [2, 2, 1, 1])
+    <h1>🔮 Ramli Leeral</h1>
+    <div class="container">
+        <h3>Tànnal 4 Ndiy yi (Les 4 Mères)</h3>
+        
+        <!-- Sélection des 4 premières figures -->
+        <div class="mother-input">
+            <label>Kër 1 (M1) : </label>
+            <select id="m1">
+                <option value="1,1,2,1">Solaymaan (1,1,2,1)</option>
+                <option value="2,1,1,1">Ayyuub (2,1,1,1)</option>
+                <option value="1,2,1,2">Muhammad (1,2,1,2)</option>
+                <option value="2,2,1,1">Yuusufa (2,2,1,1)</option>
+            </select>
+        </div>
 
-print("Figiir bu Kër 15 (Àtte bi) :", jant_bi[15]) # Dina genn [1, 1, 1, 1] buy woné Adama
-print("Figiir bu Kër 16 (Firndéel):", jant_bi[16]) # Dina genn [2, 2, 1, 2]
+        <div class="mother-input">
+            <label>Kër 2 (M2) : </label>
+            <select id="m2">
+                <option value="2,1,1,1">Ayyuub (2,1,1,1)</option>
+                <option value="1,1,2,1">Solaymaan (1,1,2,1)</option>
+                <option value="1,2,1,2">Muhammad (1,2,1,2)</option>
+                <option value="2,2,1,1">Yuusufa (2,2,1,1)</option>
+            </select>
+        </div>
+
+        <div class="mother-input">
+            <label>Kër 3 (M3) : </label>
+            <select id="m3">
+                <option value="1,2,1,2">Muhammad (1,2,1,2)</option>
+                <option value="1,1,2,1">Solaymaan (1,1,2,1)</option>
+                <option value="2,1,1,1">Ayyuub (2,1,1,1)</option>
+                <option value="2,2,1,1">Yuusufa (2,2,1,1)</option>
+            </select>
+        </div>
+
+        <div class="mother-input">
+            <label>Kër 4 (M4) : </label>
+            <select id="m4">
+                <option value="2,2,1,1">Yuusufa (2,2,1,1)</option>
+                <option value="1,1,2,1">Solaymaan (1,1,2,1)</option>
+                <option value="2,1,1,1">Ayyuub (2,1,1,1)</option>
+                <option value="1,2,1,2">Muhammad (1,2,1,2)</option>
+            </select>
+        </div>
+
+        <button onclick="calculerRamli()">Boole Poñ yi (Calculer)</button>
+
+        <!-- Zone d'affichage des résultats -->
+        <div id="results" class="result-box">
+            <h3 style="color: #ffcc00; text-align: center;">Gennayu Jant bi (Résultats)</h3>
+            <div id="house-list"></div>
+        </div>
+    </div>
+
+    <script>
+        // Fonction d'addition géomantique (XOR logique)
+        // 1+1=2, 2+2=2, 1+2=1
+        function addFigures(f1, f2) {
+            let result = [];
+            for (let i = 0; i < 4; i++) {
+                let sum = f1[i] + f2[i];
+                result.push(sum % 2 === 0 ? 2 : 1);
+            }
+            return result;
+        }
+
+        // Convertir les lignes de points en texte visuel (o ou oo)
+        function formatDots(arr) {
+            return arr.map(num => num === 1 ? "  o  " : "o  o").join(" | ");
+        }
+
+        function calculerRamli() {
+            // Récupération des valeurs des 4 mères
+            let m1 = document.getElementById("m1").value.split(",").map(Number);
+            let m2 = document.getElementById("m2").value.split(",").map(Number);
+            let m3 = document.getElementById("m3").value.split(",").map(Number);
+            let m4 = document.getElementById("m4").value.split(",").map(Number);
+
+            let houses = {};
+            houses[1] = m1;
+            houses[2] = m2;
+            houses[3] = m3;
+            houses[4] = m4;
+
+            // Génération des Filles (M5 à M8) à partir des lignes des mères
+            houses[5] = [m1[0], m2[0], m3[0], m4[0]];
+            houses[6] = [m1[1], m2[1], m3[1], m4[1]];
+            houses[7] = [m1[2], m2[2], m3[2], m4[2]];
+            houses[8] = [m1[3], m2[3], m3[3], m4[3]];
+
+            // Génération des Neveux (M9 à M12)
+            houses[9] = addFigures(houses[1], houses[2]);
+            houses[10] = addFigures(houses[3], houses[4]);
+            houses[11] = addFigures(houses[5], houses[6]);
+            houses[12] = addFigures(houses[7], houses[8]);
+
+            // Génération des Témoins et du Juge (M13 à M15)
+            houses[13] = addFigures(houses[9], houses[10]);
+            houses[14] = addFigures(houses[11], houses[12]);
+            houses[15] = addFigures(houses[13], houses[14]); // LE JUGE
+
+            // Maison 16 (La Sentence)
+            houses[16] = addFigures(houses[15], houses[1]);
+
+            // Affichage dans l'interface
+            let html = "";
+            let nomsMaisons = {
+                1: "Kër 1 (M1) - Jëmm / Dundu",
+                2: "Kër 2 (M2) - Alal / Barke",
+                3: "Kër 3 (M3) - Mbokk / Yoon",
+                4: "Kër 4 (M4) - Kër / Mujju",
+                5: "Kër 5 (M5) - Doom / Mbegte",
+                6: "Kër 6 (M6) - Wér-gu-yaram",
+                7: "Kër 7 (M7) - Sey / Jëmm",
+                8: "Kër 8 (M8) - Dee / Nëbbu",
+                9: "Kër 9 (M9) - Tukki / Yoon",
+                10: "Kër 10 (M10) - Liggéey / Daraja",
+                11: "Kër 11 (M11) - Yaakaar / Xarit",
+                12: "Kër 12 (M12) - Noon / Fitna",
+                13: "Kër 13 (M13) - Ki togg",
+                14: "Kër 14 (M14) - Xabar buy ñëw",
+                15: "Kër 15 (M15) - ÀTTE BI (Le Juge)",
+                16: "Kër 16 (M16) - Firndéel gu mujj"
+            };
+
+            for (let i = 1; i <= 16; i++) {
+                let styleHighlight = (i === 15) ? "style='color: #ffcc00; font-weight: bold; background: #332b00; padding: 5px;'" : "";
+                html += `<div class="house-item" ${styleHighlight}>
+                            <span>${nomsMaisons[i]} :</span>
+                            <span class="dots">[ ${formatDots(houses[i])} ]</span>
+                         </div>`;
+            }
+
+            document.getElementById("house-list").innerHTML = html;
+            document.getElementById("results").style.display = "block";
+        }
+    </script>
+</body>
+</html>
