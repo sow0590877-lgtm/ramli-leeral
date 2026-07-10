@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="wo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramli Leeral ci Wolof</title>
+    <style>
+        body { font-family: sans-serif; background-color: #121212; color: white; text-align: center; padding: 20px; }
+        h1 { color: #4CAF50; }
+        button { background-color: #4CAF50; color: white; border: none; padding: 12px 24px; font-size: 18px; border-radius: 5px; cursor: pointer; margin: 20px 0; font-weight: bold; }
+        button:hover { background-color: #45a049; }
+        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px; }
+        .box { background: #1e1e1e; padding: 20px; width: 280px; border-radius: 8px; border: 1px solid #333; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
+        .bët { font-size: 28px; color: #ffeb3b; letter-spacing: 5px; line-height: 1.2; margin: 15px 0; }
+        .titre-box { color: #ff9800; font-size: 18px; margin-bottom: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h1>Ramli Leeral - Tiiraas bu Gaaw</h1>
+    <p>Cuqal ci bouton bi ci sufe ngir giss li gënë fës ak li nit ki xalaat</p>
+
+    <!-- Bouton ngir def tiiraas -->
+    <button onclick="defTiiraas()">Bësul ngir Tiiraas</button>
+
+    <!-- Fi tiiraas bi di gusee -->
+    <div class="container" id="gisaane-place"></div>
+
+    <script>
+        // Teeré 16 figure yi ak seen firi
+        const figuresRamli = [
+            { nom: "Janfa", bet: "•<br>••<br>•<br>•", fës: "Wone na trahison walla naxate ci sa wet.", xalaat: "Nit ki mu ngi naxarlu te am na rëcc-rëcc ci limuy xalaat." },
+            { nom: "Adama", bet: "•<br>•<br>•<br>•", fës: "Barke ak am-am bu rëy mu ngi ñëw.", xalaat: "Nit ki mu ngi xalaat mbirum mbegeel walla kër gu mu bëgg a sàkk." },
+            { nom: "Mahdi", bet: "••<br>•<br>••<br>••", fës: "Teranga ak jamm gu dëggu ci sa dund.", xalaat: "Yene bu baax ak xalaat bu sell ngir dimbali sa wet." },
+            { nom: "Idriss", bet: "•<br>•<br>••<br>•", fës: "Xam-xam bu xote ak rëyal sa daraja.", xalaat: "Nit ki mu ngi xalaat jàng walla dëgëral ay mbiram." },
+            { nom: "Alwassa", bet: "•<br>••<br>••<br>•", fës: "Ubbiwum buntu barke ak rëyug liggéey.", xalaat: "Xalaat ci anam gu ubbiku ak yaatal say bëgg-bëgg." },
+            { nom: "Kaba", bet: "••<br>•<br>•<br>••", fës: "Gàddaay walla tukki bu am solo mu ngi ci yoon.", xalaat: "Nit ki mu ngi xalaat soppi dëkkaay walla ronu yoon." },
+            { nom: "Nusra", bet: "•<br>•<br>••<br>••", fës: "Ndàm bu rëy ci kaw say ndaje ak say jafé-jafé.", xalaat: "Dafay xalaat naka lay dahnée ab mbir bu ko tàkkaloon." },
+            { nom: "Utba", bet: "••<br>••<br>•<br>•", fës: "Buntu ndaje bu bees walla nguru gu bees.", xalaat: "Nit ki mu ngi xalaat doxalin bu bees ci dundam." }
+            // Mën nañ koo gëna yaatal ba 16 yi mat su leen jallee
+        ];
+
+        function defTiiraas() {
+            // Jël ñaari figure ci anam gu hasard
+            const fig1 = figuresRamli[Math.floor(Math.random() * figuresRamli.length)];
+            const fig2 = figuresRamli[Math.floor(Math.random() * figuresRamli.length)];
+
+            const place = document.getElementById("gisaane-place");
+            
+            // Dugal mbind mi ci biir xët bi
+            place.innerHTML = `
+                <div class="box">
+                    <div class="titre-box">Li gënë fës ci nit ki</div>
+                    <h2>${fig1.nom}</h2>
+                    <div class="bët">${fig1.bet}</div>
+                    <p>${fig1.fës}</p>
+                </div>
+                <div class="box">
+                    <div class="titre-box">Limuy xalaat ci biiram</div>
+                    <h2>${fig2.nom}</h2>
+                    <div class="bët">${fig2.bet}</div>
+                    <p>${fig2.xalaat}</p>
+                </div>
+            `;
+        }
+    </script>
+
+</body>
+</html>
