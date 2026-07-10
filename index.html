@@ -3,53 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramli - Tomb</title>
+    <title>Ramli - Tomb ci Baaram</title>
     <style>
         body { font-family: sans-serif; background: #121212; color: white; text-align: center; padding: 10px; margin: 0; }
-        button { width: 90%; padding: 14px; margin: 10px 0; border-radius: 5px; font-size: 16px; font-weight: bold; background: #4CAF50; color: white; border: none; cursor: pointer; }
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 15px; }
-        .box { background: #252525; padding: 10px; border-radius: 5px; border: 1px solid #444; }
-        .bet { font-size: 20px; color: #ffeb3b; letter-spacing: 3px; line-height: 1; margin: 5px 0; }
+        .btn-tomb { background: #4CAF50; color: white; padding: 15px; width: 85%; font-size: 18px; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; margin: 15px 0; }
+        .grid-mmaam { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 400px; margin: 10px auto; }
+        .mmaam-box { background: #1e1e1e; padding: 10px; border-radius: 5px; border: 1px solid #444; }
+        .bet-tomb { font-size: 24px; color: #ffeb3b; letter-spacing: 3px; line-height: 1.2; font-weight: bold; min-height: 100px; }
+        .grid-16 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 20px; }
+        .box-16 { background: #252525; padding: 10px; border-radius: 5px; border: 1px solid #555; }
+        .bet-16 { font-size: 20px; color: #ffeb3b; letter-spacing: 3px; line-height: 1; margin: 5px 0; }
     </style>
 </head>
 <body>
 
-    <h2>Ramli - Tomb 16 Kër Yi</h2>
-    <p id="info">Bësul ci bouton bi ngir tàmbat tomb</p>
-    
-    <button onclick="tomb()">Cuqal fii ngir Tomb</button>
-    <div class="grid" id="res"></div>
+    <h2>Ramli - Tomb ci Baaram</h2>
+    <p id="status">Cuqal ci bouton bi ci sufe 4 yoon ngir sàkk 4 mmaam yi</p>
+
+    <!-- Bouton bi ngay bës ci sa baaram -->
+    <button class="btn-tomb" onclick="defTombBaaram()">Cuqal fii ci sa Baaram</button>
+
+    <!-- Fi 4 mmaam yi di tàbbee bu nga koy bës -->
+    <div class="grid-mmaam">
+        <div class="mmaam-box"><b>M1</b><div class="bet-tomb" id="b1"></div></div>
+        <div class="mmaam-box"><b>M2</b><div class="bet-tomb" id="b2"></div></div>
+        <div class="mmaam-box"><b>M3</b><div class="bet-tomb" id="b3"></div></div>
+        <div class="mmaam-box"><b>M4</b><div class="bet-tomb" id="b4"></div></div>
+    </div>
+
+    <!-- Fi 16 kër yi di gusee su mu maté -->
+    <div class="grid-16" id="res"></div>
 
     <script>
         const nom = {"1,2,1,1":"Janfa", "1,1,1,1":"Adama", "2,1,2,2":"Mahdi", "1,1,2,1":"Idriss"};
         const txt = {"Janfa":"Naxate walla tawat.", "Adama":"Barke ak am-am.", "Mahdi":"Teranga ak jamm.", "Idriss":"Xam-xam ak daraja."};
 
-        function add(c1, c2) { return c1.map((v, i) => (v + c2[i]) % 2 === 0 ? 2 : 1); }
-        function rand() { return [Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1]; }
+        let xetDije = [];
+        let mmaamYi = [];
 
-        function tomb() {
-            let m1 = rand(); let m2 = rand(); let m3 = rand(); let m4 = rand();
+        function boole(c1, c2) { return c1.map((v, i) => (v + c2[i]) % 2 === 0 ? 2 : 1); }
+
+        function defTombBaaram() {
+            if (mmaamYi.length >= 4) {
+                // Su maté ba noppi, dila bësaatal bees
+                mmaamYi = []; xetDije = [];
+                for(let i=1; i<=4; i++) document.getElementById('b'+i).innerHTML = "";
+                document.getElementById('res').innerHTML = "";
+            }
+
+            // Di jël lu hasard (1 walla 2) saa su nekk nga cuqé ci sa baaram
+            let p = Math.floor(Math.random() * 2) + 1;
+            xetDije.push(p);
+
+            // Su mu maté 4 xët, sàkk na benn figure
+            if (xetDije.length === 4) {
+                mmaamYi.push(xetDije);
+                let num = mmaamYi.length;
+                document.getElementById('b' + num).innerHTML = xetDije.map(v => v === 1 ? "•" : "••").join("<br>");
+                xetDije = [];
+                document.getElementById('status').innerText = "Sàkk nga Mmaam " + num + "! Des na " + (4 - num);
+            }
+
+            // Su 4 mmaam yi maté dëgg-dëgg, mu calculé 16 kër yi yëpp
+            if (mmaamYi.length === 4) {
+                document.getElementById('status').innerText = "16 Kër yi soti naññi ci sa loxo!";
+                calculer16Ker(mmaamYi[0], mmaamYi[1], mmaamYi[2], mmaamYi[3]);
+            }
+        }
+
+        function calculer16Ker(m1, m2, m3, m4) {
             let t = [null, m1, m2, m3, m4];
             
-            t[5] = [m1[0], m2[0], m3[0], m4[0]];
-            t[6] = [m1[1], m2[1], m3[1], m4[1]];
-            t[7] = [m1[2], m2[2], m3[2], m4[2]];
-            t[8] = [m1[3], m2[3], m3[3], m4[3]];
+            // 5 ba 8: Les Filles
+            t = [m1, m2, m3, m4];
+            t = [m1, m2, m3, m4];
+            t = [m1, m2, m3, m4];
+            t = [m1, m2, m3, m4];
 
-            t[9] = add(t[1], t[2]);   t[10] = add(t[3], t[4]);
-            t[11] = add(t[5], t[6]);  t[12] = add(t[7], t[8]);
-            t[13] = add(t[9], t[10]); t[14] = add(t[11], t[12]);
-            t[15] = add(t[13], t[14]);t[16] = add(t[15], t[1]);
+            // 9 ba 12: Les Neveux
+            t = boole(t, t); t = boole(t, t);
+            t = boole(t, t); t = boole(t, t);
+
+            // 13 ak 14: Les Témoins
+            t = boole(t, t); t = boole(t, t);
+
+            // 15: Le Juge
+            t = boole(t, t);
+
+            // 16: Le Juge des Juges
+            t = boole(t, t);
 
             let html = "";
             for(let i=1; i<=16; i++) {
                 let n = nom[t[i].join(',')] || "Kër gu Bees";
                 let f = txt[n] || "Mbirum kër gi baax na.";
                 let b = t[i].map(p => p === 1 ? "•" : "••").join("<br>");
-                html += `<div class="box"><b>Kër ${i}</b><br><span style="color:#ff9800">${n}</span><div class="bet">${b}</div><small>${f}</small></div>`;
+                html += `<div class="box-16"><b>Kër ${i}</b><br><span style="color:#ff9800">${n}</span><div class="bet-16">${b}</div><small>${f}</small></div>`;
             }
             document.getElementById('res').innerHTML = html;
-            document.getElementById('info').innerText = "Tomb bi soti na ci anam gu leer!";
         }
     </script>
 </body>
