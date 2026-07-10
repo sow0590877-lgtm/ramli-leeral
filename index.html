@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramli Leeral</title>
+    <title>Ramli Leeral - Sa Turi Yonent</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -59,7 +59,7 @@
         }
         .jant-table {
             width: 100%;
-            min-width: 500px;
+            min-width: 550px;
             border-collapse: collapse;
             background: #ffffff;
             color: #000000;
@@ -75,12 +75,19 @@
             font-size: 10px;
             font-weight: bold;
             color: #555555;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
             display: block;
+        }
+        .fig-name {
+            font-size: 9px;
+            color: #2b7a78;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 3px;
         }
         .figure-dots {
             font-family: monospace;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             line-height: 1.1;
             letter-spacing: 2px;
@@ -94,11 +101,12 @@
     <h1>🔮 Ramli Leeral</h1>
     
     <div class="container">
+        <!-- Sélection des 4 mères basées exactement sur tes figures -->
         <div class="mother-input"><label>Kër 1 :</label>
             <select id="m1">
-                <option value="2,1,1,1">Muhammad (2,1,1,1)</option>
                 <option value="1,1,2,1">Yoosufa (1,1,2,1)</option>
                 <option value="1,2,2,2">Adama (1,2,2,2)</option>
+                <option value="2,1,1,1">Muhammad (2,1,1,1)</option>
                 <option value="2,2,1,2">Idriis (2,2,1,2)</option>
                 <option value="1,1,1,1">Ibrahima (1,1,1,1)</option>
                 <option value="1,2,1,2">Hiisaa (1,2,1,2)</option>
@@ -111,15 +119,14 @@
                 <option value="1,2,1,1">Yunus (1,2,1,1)</option>
                 <option value="2,1,2,1">Ousmane (2,1,2,1)</option>
                 <option value="2,2,2,2">Muusaa (2,2,2,2)</option>
-                <option value="2,2,2,1">Almami (2,2,2,1)</option>
             </select>
         </div>
 
         <div class="mother-input"><label>Kër 2 :</label>
             <select id="m2">
-                <option value="2,1,1,1">Muhammad (2,1,1,1)</option>
-                <option value="1,1,2,1">Yoosufa (1,1,2,1)</option>
                 <option value="1,2,2,2">Adama (1,2,2,2)</option>
+                <option value="1,1,2,1">Yoosufa (1,1,2,1)</option>
+                <option value="2,1,1,1">Muhammad (2,1,1,1)</option>
                 <option value="2,2,1,2">Idriis (2,2,1,2)</option>
                 <option value="1,1,1,1">Ibrahima (1,1,1,1)</option>
                 <option value="1,2,1,2">Hiisaa (1,2,1,2)</option>
@@ -132,7 +139,6 @@
                 <option value="1,2,1,1">Yunus (1,2,1,1)</option>
                 <option value="2,1,2,1">Ousmane (2,1,2,1)</option>
                 <option value="2,2,2,2">Muusaa (2,2,2,2)</option>
-                <option value="2,2,2,1">Almami (2,2,2,1)</option>
             </select>
         </div>
 
@@ -153,16 +159,15 @@
                 <option value="1,2,1,1">Yunus (1,2,1,1)</option>
                 <option value="2,1,2,1">Ousmane (2,1,2,1)</option>
                 <option value="2,2,2,2">Muusaa (2,2,2,2)</option>
-                <option value="2,2,2,1">Almami (2,2,2,1)</option>
             </select>
         </div>
 
         <div class="mother-input"><label>Kër 4 :</label>
             <select id="m4">
                 <option value="2,2,1,2">Idriis (2,2,1,2)</option>
-                <option value="2,1,1,1">Muhammad (2,1,1,1)</option>
                 <option value="1,1,2,1">Yoosufa (1,1,2,1)</option>
                 <option value="1,2,2,2">Adama (1,2,2,2)</option>
+                <option value="2,1,1,1">Muhammad (2,1,1,1)</option>
                 <option value="1,1,1,1">Ibrahima (1,1,1,1)</option>
                 <option value="1,2,1,2">Hiisaa (1,2,1,2)</option>
                 <option value="2,1,2,2">Oumar (2,1,2,2)</option>
@@ -174,7 +179,6 @@
                 <option value="1,2,1,1">Yunus (1,2,1,1)</option>
                 <option value="2,1,2,1">Ousmane (2,1,2,1)</option>
                 <option value="2,2,2,2">Muusaa (2,2,2,2)</option>
-                <option value="2,2,2,1">Almami (2,2,2,1)</option>
             </select>
         </div>
 
@@ -182,40 +186,28 @@
 
         <div class="table-responsive">
             <table id="jantDisplay" class="jant-table">
+                <!-- Sàll 1: 8 kër -->
                 <tr>
-                    <td colspan="2"><span class="row-title">Kër 8</span><div id="k8" class="figure-dots"></div></td>
-                    <td colspan="2"><span class="row-title">Kër 7</span><div id="k7" class="figure-dots"></div></td>
-                    <td colspan="2"><span class="row-title">Kër 6</span><div id="k6" class="figure-dots"></div></td>
-                    <td colspan="2"><span class="row-title">Kër 5</span><div id="k5" class="figure-dots"></div></td>
-                    <td colspan="2"><span class="row-title">Kër 4</span><div id="k4" class="figure-dots"></div></td>
-                    <td colspan="2"><span class="row-title">Kër 3</span><div id="k3" class="figure-dots"></div></td>
-                    <td colspan="2"><span class="row-title">Kër 2</span><div id="k2" class="figure-dots"></div></td>
-                    <td colspan="2"><span class="row-title">Kër 1</span><div id="k1" class="figure-dots"></div></td>
+                    <td><span class="row-title">Kër 8</span><span id="n8" class="fig-name"></span><div id="k8" class="figure-dots"></div></td>
+                    <td><span class="row-title">Kër 7</span><span id="n7" class="fig-name"></span><div id="k7" class="figure-dots"></div></td>
+                    <td><span class="row-title">Kër 6</span><span id="n6" class="fig-name"></span><div id="k6" class="figure-dots"></div></td>
+                    <td><span class="row-title">Kër 5</span><span id="n5" class="fig-name"></span><div id="k5" class="figure-dots"></div></td>
+                    <td><span class="row-title">Kër 4</span><span id="n4" class="fig-name"></span><div id="k4" class="figure-dots"></div></td>
+                    <td><span class="row-title">Kër 3</span><span id="n3" class="fig-name"></span><div id="k3" class="figure-dots"></div></td>
+                    <td><span class="row-title">Kër 2</span><span id="n2" class="fig-name"></span><div id="k2" class="figure-dots"></div></td>
+                    <td><span class="row-title">Kër 1</span><span id="n1" class="fig-name"></span><div id="k1" class="figure-dots"></div></td>
                 </tr>
+                <!-- Sàll 2: 4 kër -->
                 <tr>
-                    <td colspan="4"><span class="row-title">Kër 12</span><div id="k12" class="figure-dots"></div></td>
-                    <td colspan="4"><span class="row-title">Kër 11</span><div id="k11" class="figure-dots"></div></td>
-                    <td colspan="4"><span class="row-title">Kër 10</span><div id="k10" class="figure-dots"></div></td>
-                    <td colspan="4"><span class="row-title">Kër 9</span><div id="k9" class="figure-dots"></div></td>
+                    <td colspan="2"><span class="row-title">Kër 12</span><span id="n12" class="fig-name"></span><div id="k12" class="figure-dots"></div></td>
+                    <td colspan="2"><span class="row-title">Kër 11</span><span id="n11" class="fig-name"></span><div id="k11" class="figure-dots"></div></td>
+                    <td colspan="2"><span class="row-title">Kër 10</span><span id="n10" class="fig-name"></span><div id="k10" class="figure-dots"></div></td>
+                    <td colspan="2"><span class="row-title">Kër 9</span><span id="n9" class="fig-name"></span><div id="k9" class="figure-dots"></div></td>
                 </tr>
+                <!-- Sàll 3: 2 kër -->
                 <tr>
-                    <td colspan="8"><span class="row-title">Kër 14</span><div id="k14" class="figure-dots"></div></td>
-                    <td colspan="8"><span class="row-title">Kër 13</span><div id="k13" class="figure-dots"></div></td>
+                    <td colspan="4"><span class="row-title">Kër 14</span><span id="n14" class="fig-name"></span><div id="k14" class="figure-dots"></div></td>
+                    <td colspan="4"><span class="row-title">Kër 13</span><span id="n13" class="fig-name"></span><div id="k13" class="figure-dots"></div></td>
                 </tr>
+                <!-- Sàll 4: Kër 15 -->
                 <tr>
-                    <td colspan="16" style="background: #fff9e6;"><span class="row-title" style="color:#b38600;">Kër 15 (ÀTTE BI)</span><div id="k15" class="figure-dots"></div></td>
-                </tr>
-                <tr>
-                    <td colspan="16" style="background: #f0f7ff;"><span class="row-title" style="color:#0056b3;">Kër 16 (FIRNDÉEL)</span><div id="k16" class="figure-dots"></div></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-    <script>
-        function addFigures(f1, f2) {
-            let result = [];
-            for (let i = 0; i < 4; i++) {
-                let sum = Number(f1[i]) + Number(f2[i]);
-                result.push(sum % 2 === 0 ? 2 : 1);
-            }
