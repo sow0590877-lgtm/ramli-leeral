@@ -3,35 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramli - 4 Ràyyo</title>
+    <title>Ramli - Xatím bu Mat</title>
     <style>
         body { font-family: sans-serif; background: #121212; color: white; text-align: center; padding: 10px; margin: 0; }
-        h2 { color: #4CAF50; font-size: 20px; }
-        .ràyyo-container { max-width: 400px; margin: 15px auto; }
-        .ràyyo { background: #1e1e1e; border: 2px solid #444; height: 50px; margin: 10px 0; border-radius: 25px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: bold; color: #4CAF50; transition: 0.2s; }
-        .ràyyo:active { background: #333; border-color: #4CAF50; }
+        .zone-tomb { background: #1e1e1e; border: 2px dashed #4CAF50; padding: 25px 10px; margin: 15px auto; max-width: 400px; border-radius: 8px; cursor: pointer; }
+        .zone-tomb:active { background: #252525; }
         .grid-mmaam { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 400px; margin: 15px auto; }
-        .mmaam-box { background: #222; padding: 10px; border-radius: 5px; border: 1px solid #555; min-height: 120px; }
+        .mmaam-box { background: #222; padding: 10px; border-radius: 5px; border: 1px solid #444; min-height: 110px; }
         .bet-tomb { font-size: 24px; color: #ffeb3b; letter-spacing: 3px; line-height: 1.2; font-weight: bold; margin-top: 5px; }
-        .grid-16 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 25px; }
-        .box-16 { background: #252525; padding: 10px; border-radius: 5px; border: 1px solid #444; }
-        .bet-16 { font-size: 20px; color: #ffeb3b; letter-spacing: 3px; line-height: 1; margin: 5px 0; }
+        .grid-16 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 25px auto; max-width: 500px; }
+        .box-16 { background: #1e1e1e; padding: 12px; border-radius: 6px; border: 1px solid #555; text-align: center; }
+        .bet-16 { font-size: 22px; color: #ffeb3b; letter-spacing: 3px; line-height: 1.1; margin: 8px 0; font-weight: bold; }
+        .firi-text { font-size: 13px; color: #ccc; margin-top: 5px; background: #121212; padding: 5px; border-radius: 4px; text-align: left; }
     </style>
 </head>
 <body>
 
-    <h2>Ramli - Tomb ci 4 Ràyyo</h2>
-    <p id="status" style="color: #ff9800; font-weight: bold;">Cuqal ci ràyyo bu nekk 4 yoon ci sa baaram ngir tomb</p>
+    <h2>Ramli - Xatím ci Baaram</h2>
+    <p id="status" style="color: #ff9800; font-weight: bold;">Cuqal ci boyet bi ci sufe 16 yoon ngir xatím 4 mmaam yi</p>
 
-    <!-- Fi 4 Ràyyo yi doon ngir tomb ci baaram -->
-    <div class="ràyyo-container">
-        <div class="ràyyo" onclick="tombRàyyo(0)">RÀYYO 1 (Ullu kaw)</div>
-        <div class="ràyyo" onclick="tombRàyyo(1)">RÀYYO 2 (Digg kaw)</div>
-        <div class="ràyyo" onclick="tombRàyyo(2)">RÀYYO 3 (Digg suuf)</div>
-        <div class="ràyyo" onclick="tombRàyyo(3)">RÀYYO 4 (Ullu suuf)</div>
+    <div class="zone-tomb" onclick="tombCiBaaram()">
+        <b style="font-size: 18px; color: #4CAF50;">CUQAL FII CI SA BAARAM NGIR TOMB</b><br>
+        <small style="color: #aaa;">Sa su nekk nga cuqé, bët yi dañuy xatímu</small>
     </div>
 
-    <!-- Fi 4 mmaam yi di tàbbee -->
     <div class="grid-mmaam">
         <div class="mmaam-box"><b>M1</b><div class="bet-tomb" id="b1"></div></div>
         <div class="mmaam-box"><b>M2</b><div class="bet-tomb" id="b2"></div></div>
@@ -39,69 +34,113 @@
         <div class="mmaam-box"><b>M4</b><div class="bet-tomb" id="b4"></div></div>
     </div>
 
-    <!-- Fi 16 kër yi di gusee su mu maté -->
+    <!-- Fi 16 kër yi di gusee dëgg dëgg -->
     <div class="grid-16" id="res"></div>
 
     <script>
-        const nom = {"1,2,1,1":"Janfa", "1,1,1,1":"Adama", "2,1,2,2":"Mahdi", "1,1,2,1":"Idriss"};
-        const txt = {"Janfa":"Naxate walla tawat.", "Adama":"Barke ak am-am.", "Mahdi":"Teranga ak jamm.", "Idriss":"Xam-xam ak daraja."};
+        const dekkaleYi = {
+            "Janfa": { code:, firi: "Naxate, tawat, walla jafé-jafé buy ñëw ci sa wet." },
+            "Adama": { code:, firi: "Barke, am-am bu bees, ak mbegeel gu sell ci biir kër." },
+            "Mahdi": { code:, firi: "Teranga, jamm gu dëggu, ak ndàm ci kaw say mbir." },
+            "Idriss": { code:, firi: "Xam-xam bu xote, daraja gu rëy, walla yoonu njàng." },
+            "Alwassa": { code:, firi: "Ubbiwum buntu barke, yaatal say bëgg-bëgg, ak liggéey." },
+            "Kaba": { code:, firi: "Tukki bu sori, soppi dëkkaay, walla gàddaay bu am solo." },
+            "Nusra": { code:, firi: "Ndàm ak nguru gu bees. Say jafé-jafé dañuy saafara." },
+            "Utba": { code:, firi: "Mujeel gu baax, xalaat bu dëggu, walla sàkk kër gu bees." },
+            "Lahuze": { code:, firi: "Wax ju rëy walla xabar buy ñëw digg yoon. Maslaal." },
+            "Bayada": { code:, firi: "Weexal xol, jamm, sellal bëgg-bëgg, ak rëcc ci musiba." },
+            "Humra": { code:, firi: "Xulóo, xéex, walla colére. Teeyal ci say baat." },
+            "Ingis": { code:, firi: "Guddu fann, dëgëral wér-wérle, ak dëj mbir mu yàgg." },
+            "Nusra-Daxil": { code:, firi: "Dugal lu bees lu am barke, xaliss, walla teranga." },
+            "Nusra-Xarij": { code:, firi: "Gennal mbir walla tawat buy genn. Lu rëcc ci sa loxo." },
+            "Ijtima": { code:, firi: "Daje bu am solo, mbooloo, walla dëgëral maslaa." },
+            "Utba-Xarij": { code:, firi: "Xabar bu rëy bu genn ci bitim réer walla lu sori." }
+        };
 
         let kuñuCuq = 0;
         let mmaamYi = [[], [], [], []];
 
-        function boole(c1, c2) { return c1.map((v, i) => (v + c2[i]) % 2 === 0 ? 2 : 1); }
+        function booleXet(c1, c2) {
+            let res = [];
+            for(let i=0; i<4; i++) {
+                res.push((c1[i] + c2[i]) % 2 === 0 ? 2 : 1);
+            }
+            return res;
+        }
 
-        function tombRàyyo(lineIndex) {
+        function woneBet(code) {
+            return code.map(p => p === 1 ? "•" : "••").join("<br>");
+        }
+
+        function jelTur(code) {
+            let strCode = code.join(',');
+            for (let nom in dekkaleYi) {
+                if (dekkaleYi[nom].code.join(',') === strCode) return nom;
+            }
+            return "Kër gu Bees";
+        }
+
+        function tombCiBaaram() {
             if (kuñuCuq >= 16) {
                 kuñuCuq = 0; mmaamYi = [[], [], [], []];
                 for(let i=1; i<=4; i++) document.getElementById('b'+i).innerHTML = "";
                 document.getElementById('res').innerHTML = "";
             }
 
-            // Di jël poñ bu hasard (1 walla 2) ci sa baaram boo bësé ràyyo bi
             let p = Math.floor(Math.random() * 2) + 1;
-            
-            // Jàdd mmaam bi mu wàcc (M1 ba M4)
-            let mmaamIndex = Math.floor(kuñuCuq / 4);
-            mmaamYi[mmaamIndex].push(p);
+            let indexMmaam = Math.floor(kuñuCuq / 4);
+            mmaamYi[indexMmaam].push(p);
             kuñuCuq++;
 
-            // Wone bët yi ci sa su nekk
-            let numMmaam = mmaamIndex + 1;
-            document.getElementById('b' + numMmaam).innerHTML = mmaamYi[mmaamIndex].map(v => v === 1 ? "•" : "••").join("<br>");
+            let numMmaam = indexMmaam + 1;
+            document.getElementById('b' + numMmaam).innerHTML = mmaamYi[indexMmaam].map(v => v === 1 ? "•" : "••").join("<br>");
+            document.getElementById('status').innerText = "Cuq nga " + kuñuCuq + " yoon ci sa baaram.";
 
-            document.getElementById('status').innerText = "Cuq nga " + kuñuCuq + " yoon ci ràyyo yi.";
-
-            // Su maté 16 cuq dëgg dëgg, mu sàkk 16 kër yi
             if (kuñuCuq === 16) {
-                document.getElementById('status').innerText = "16 Kër yi mat naññi ci sa 4 ràyyo!";
-                calculer16Ker(mmaamYi, mmaamYi, mmaamYi, mmaamYi);
+                document.getElementById('status').innerText = "16 Kër yi soti naññi ci sufe!";
+                calculer16Ker(mmaamYi[0], mmaamYi[1], mmaamYi[2], mmaamYi[3]);
             }
         }
 
         function calculer16Ker(m1, m2, m3, m4) {
-            let t = [null, m1, m2, m3, m4];
-            
-            t = [m1, m2, m3, m4];
-            t = [m1, m2, m3, m4];
-            t = [m1, m2, m3, m4];
-            t = [m1, m2, m3, m4];
+            let t = [];
+            t[1] = m1; t[2] = m2; t[3] = m3; t[4] = m4;
 
-            t = boole(t, t); t = boole(t, t);
-            t = boole(t, t); t = boole(t, t);
+            // 5 ba 8: Les Filles (Mbooloo mmaam yi)
+            t[5] = [m1[0], m2[0], m3[0], m4[0]];
+            t[6] = [m1[1], m2[1], m3[1], m4[1]];
+            t[7] = [m1[2], m2[2], m3[2], m4[2]];
+            t[8] = [m1[3], m2[3], m3[3], m4[3]];
 
-            t = boole(t, t); t = boole(t, t);
+            // 9 ba 12: Les Neveux
+            t[9] = booleXet(t[1], t[2]);
+            t[10] = booleXet(t[3], t[4]);
+            t[11] = booleXet(t[5], t[6]);
+            t[12] = booleXet(t[7], t[8]);
 
-            t = boole(t, t);
+            // 13 ak 14: Les Témoins
+            t[13] = booleXet(t[9], t[10]);
+            t[14] = booleXet(t[11], t[12]);
 
-            t = boole(t, t);
+            // 15: Le Juge
+            t[15] = booleXet(t[13], t[14]);
+
+            // 16: Le Juge des Juges
+            t[16] = booleXet(t[15], t[1]);
 
             let html = "";
             for(let i=1; i<=16; i++) {
-                let n = nom[t[i].join(',')] || "Kër gu Bees";
-                let f = txt[n] || "Mbirum kër gi baax na.";
-                let b = t[i].map(p => p === 1 ? "•" : "••").join("<br>");
-                html += `<div class="box-16"><b>Kër ${i}</b><br><span style="color:#ff9800">${n}</span><div class="bet-16">${b}</div><small>${f}</small></div>`;
+                let n = jelTur(t[i]);
+                let f = dekkaleYi[n] ? dekkaleYi[n].firi : "Mbirum kër gi baax na.";
+                let b = woneBet(t[i]);
+                html += `
+                    <div class="box-16">
+                        <b>Kër ${i}</b><br>
+                        <span style="color:#ff9800; font-weight:bold;">${n}</span>
+                        <div class="bet-16">${b}</div>
+                        <div class="firi-text">${f}</div>
+                    </div>
+                `;
             }
             document.getElementById('res').innerHTML = html;
         }
