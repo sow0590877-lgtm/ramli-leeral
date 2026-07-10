@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramli 16 Kër</title>
+    <title>Ramli - Tomb</title>
     <style>
-        body { font-family: sans-serif; background: #121212; color: white; text-align: center; padding: 10px; }
-        select, button { width: 90%; padding: 12px; margin: 5px; border-radius: 5px; font-size: 16px; font-weight: bold; }
-        select { background: #333; color: white; }
-        button { background: #4CAF50; color: white; border: none; cursor: pointer; }
+        body { font-family: sans-serif; background: #121212; color: white; text-align: center; padding: 10px; margin: 0; }
+        button { width: 90%; padding: 14px; margin: 10px 0; border-radius: 5px; font-size: 16px; font-weight: bold; background: #4CAF50; color: white; border: none; cursor: pointer; }
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 15px; }
         .box { background: #252525; padding: 10px; border-radius: 5px; border: 1px solid #444; }
         .bet { font-size: 20px; color: #ffeb3b; letter-spacing: 3px; line-height: 1; margin: 5px 0; }
@@ -16,14 +14,10 @@
 </head>
 <body>
 
-    <h2>Ramli - Sàkk 16 Kër</h2>
+    <h2>Ramli - Tomb 16 Kër Yi</h2>
+    <p id="info">Bësul ci bouton bi ngir tàmbat tomb</p>
     
-    <select id="m1"><option value="1,2,1,1">Janfa</option><option value="1,1,1,1">Adama</option><option value="2,1,2,2">Mahdi</option><option value="1,1,2,1">Idriss</option></select>
-    <select id="m2"><option value="1,2,1,1">Janfa</option><option value="1,1,1,1" selected>Adama</option><option value="2,1,2,2">Mahdi</option><option value="1,1,2,1">Idriss</option></select>
-    <select id="m3"><option value="1,2,1,1">Janfa</option><option value="1,1,1,1">Adama</option><option value="2,1,2,2" selected>Mahdi</option><option value="1,1,2,1">Idriss</option></select>
-    <select id="m4"><option value="1,2,1,1">Janfa</option><option value="1,1,1,1">Adama</option><option value="2,1,2,2">Mahdi</option><option value="1,1,2,1" selected>Idriss</option></select>
-    
-    <button onclick="cal()">Boole & Firil 16 Kër Yi</button>
+    <button onclick="tomb()">Cuqal fii ngir Tomb</button>
     <div class="grid" id="res"></div>
 
     <script>
@@ -31,23 +25,21 @@
         const txt = {"Janfa":"Naxate walla tawat.", "Adama":"Barke ak am-am.", "Mahdi":"Teranga ak jamm.", "Idriss":"Xam-xam ak daraja."};
 
         function add(c1, c2) { return c1.map((v, i) => (v + c2[i]) % 2 === 0 ? 2 : 1); }
+        function rand() { return [Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1]; }
 
-        function cal() {
-            let m1 = document.getElementById('m1').value.split(',').map(Number);
-            let m2 = document.getElementById('m2').value.split(',').map(Number);
-            let m3 = document.getElementById('m3').value.split(',').map(Number);
-            let m4 = document.getElementById('m4').value.split(',').map(Number);
-
+        function tomb() {
+            let m1 = rand(); let m2 = rand(); let m3 = rand(); let m4 = rand();
             let t = [null, m1, m2, m3, m4];
+            
             t[5] = [m1[0], m2[0], m3[0], m4[0]];
             t[6] = [m1[1], m2[1], m3[1], m4[1]];
             t[7] = [m1[2], m2[2], m3[2], m4[2]];
             t[8] = [m1[3], m2[3], m3[3], m4[3]];
 
-            t[9] = add(t[1], t[2]);  t[10] = add(t[3], t[4]);
-            t[11] = add(t[5], t[6]); t[12] = add(t[7], t[8]);
+            t[9] = add(t[1], t[2]);   t[10] = add(t[3], t[4]);
+            t[11] = add(t[5], t[6]);  t[12] = add(t[7], t[8]);
             t[13] = add(t[9], t[10]); t[14] = add(t[11], t[12]);
-            t[15] = add(t[13], t[14]); t[16] = add(t[1], t[15]);
+            t[15] = add(t[13], t[14]);t[16] = add(t[15], t[1]);
 
             let html = "";
             for(let i=1; i<=16; i++) {
@@ -57,6 +49,7 @@
                 html += `<div class="box"><b>Kër ${i}</b><br><span style="color:#ff9800">${n}</span><div class="bet">${b}</div><small>${f}</small></div>`;
             }
             document.getElementById('res').innerHTML = html;
+            document.getElementById('info').innerText = "Tomb bi soti na ci anam gu leer!";
         }
     </script>
 </body>
