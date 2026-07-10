@@ -3,67 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramli Leeral ci Wolof</title>
+    <title>Ramli Leeral - Tablë bu Mat</title>
     <style>
-        body { font-family: sans-serif; background-color: #121212; color: white; text-align: center; padding: 20px; }
-        h1 { color: #4CAF50; }
-        button { background-color: #4CAF50; color: white; border: none; padding: 12px 24px; font-size: 18px; border-radius: 5px; cursor: pointer; margin: 20px 0; font-weight: bold; }
-        button:hover { background-color: #45a049; }
-        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px; }
-        .box { background: #1e1e1e; padding: 20px; width: 280px; border-radius: 8px; border: 1px solid #333; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
-        .bët { font-size: 28px; color: #ffeb3b; letter-spacing: 5px; line-height: 1.2; margin: 15px 0; }
-        .titre-box { color: #ff9800; font-size: 18px; margin-bottom: 10px; font-weight: bold; }
+        body { font-family: sans-serif; background-color: #121212; color: white; text-align: center; padding: 15px; margin: 0; }
+        h1 { color: #4CAF50; font-size: 22px; }
+        .section { background: #1e1e1e; padding: 15px; margin: 15px auto; max-width: 500px; border-radius: 8px; border: 1px solid #333; }
+        select { background: #333; color: white; padding: 10px; margin: 5px; border-radius: 5px; border: 1px solid #555; width: 80%; font-size: 16px; }
+        button { background-color: #4CAF50; color: white; border: none; padding: 12px 24px; font-size: 18px; border-radius: 5px; cursor: pointer; margin-top: 15px; width: 85%; font-weight: bold; }
+        .grid-table { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px; }
+        .ker-box { background: #252525; padding: 10px; border-radius: 6px; border: 1px solid #444; font-size: 14px; }
+        .bët { font-size: 20px; color: #ffeb3b; letter-spacing: 3px; line-height: 1.1; margin: 5px 0; }
+        .nom-fig { color: #ff9800; font-weight: bold; }
+        .firi-text { font-size: 12px; color: #ccc; margin-top: 5px; text-align: left; background: #151515; padding: 5px; border-radius: 4px; }
     </style>
 </head>
 <body>
 
-    <h1>Ramli Leeral - Tiiraas bu Gaaw</h1>
-    <p>Cuqal ci bouton bi ci sufe ngir giss li gënë fës ak li nit ki xalaat</p>
+    <h1>Ramli Leeral - Sàkk 16 Figure Yi</h1>
+    <p>Tànnal 4 figure jëkk yi ngir sàmpe téere bi</p>
 
-    <!-- Bouton ngir def tiiraas -->
-    <button onclick="defTiiraas()">Bësul ngir Tiiraas</button>
+    <div class="section">
+        <label><b>Kër 1 (Yoon/Saalix):</b></label><br>
+        <select id="m1"></select><br><br>
+        <label><b>Kër 2 (Am-Am):</b></label><br>
+        <select id="m2"></select><br><br>
+        <label><b>Kër 3 (Nit/Xarit):</b></label><br>
+        <select id="m3"></select><br><br>
+        <label><b>Kër 4 (Kër/Mujeel):</b></label><br>
+        <select id="m4"></select><br>
+        
+        <button onclick="sàmpeTéere()">Calculé 16 Kër Yi</button>
+    </div>
 
-    <!-- Fi tiiraas bi di gusee -->
-    <div class="container" id="gisaane-place"></div>
+    <div class="grid-table" id="table-place"></div>
 
     <script>
-        // Teeré 16 figure yi ak seen firi
-        const figuresRamli = [
-            { nom: "Janfa", bet: "•<br>••<br>•<br>•", fës: "Wone na trahison walla naxate ci sa wet.", xalaat: "Nit ki mu ngi naxarlu te am na rëcc-rëcc ci limuy xalaat." },
-            { nom: "Adama", bet: "•<br>•<br>•<br>•", fës: "Barke ak am-am bu rëy mu ngi ñëw.", xalaat: "Nit ki mu ngi xalaat mbirum mbegeel walla kër gu mu bëgg a sàkk." },
-            { nom: "Mahdi", bet: "••<br>•<br>••<br>••", fës: "Teranga ak jamm gu dëggu ci sa dund.", xalaat: "Yene bu baax ak xalaat bu sell ngir dimbali sa wet." },
-            { nom: "Idriss", bet: "•<br>•<br>••<br>•", fës: "Xam-xam bu xote ak rëyal sa daraja.", xalaat: "Nit ki mu ngi xalaat jàng walla dëgëral ay mbiram." },
-            { nom: "Alwassa", bet: "•<br>••<br>••<br>•", fës: "Ubbiwum buntu barke ak rëyug liggéey.", xalaat: "Xalaat ci anam gu ubbiku ak yaatal say bëgg-bëgg." },
-            { nom: "Kaba", bet: "••<br>•<br>•<br>••", fës: "Gàddaay walla tukki bu am solo mu ngi ci yoon.", xalaat: "Nit ki mu ngi xalaat soppi dëkkaay walla ronu yoon." },
-            { nom: "Nusra", bet: "•<br>•<br>••<br>••", fës: "Ndàm bu rëy ci kaw say ndaje ak say jafé-jafé.", xalaat: "Dafay xalaat naka lay dahnée ab mbir bu ko tàkkaloon." },
-            { nom: "Utba", bet: "••<br>••<br>•<br>•", fës: "Buntu ndaje bu bees walla nguru gu bees.", xalaat: "Nit ki mu ngi xalaat doxalin bu bees ci dundam." }
-            // Mën nañ koo gëna yaatal ba 16 yi mat su leen jallee
-        ];
+        const dëkkaléYi = {
+            "Janfa": { code:, firi: "Naxate, tawat, walla jafé-jafé buy ñëw ci wet." },
+            "Adama": { code:, firi: "Barke, am-am bu bees, ak mbegeel gu sell." },
+            "Mahdi": { code:, firi: "Teranga, jamm, ak ndàm ci kaw say mbir." },
+            "Idriss": { code:, firi: "Xam-xam, daraja gu rëy, ak yoonu njàng." },
+            "Alwassa": { code:, firi: "Ubbiwum buntu barke, yaatal ak liggéey." },
+            "Kaba": { code:, firi: "Tukki, soppi dëkkaay, walla gàddaay." },
+            "Nusra": { code:, firi: "Ndàm ak nguru gu bees ci sa dund." },
+            "Utba": { code:, firi: "Mujeel gu baax walla kër gu bees." },
+            "Lahuze": { code:, firi: "Wax ju rëy walla xabar buy ñëw digg yoon." },
+            "Bayada": { code:, firi: "Weexal xol, jamm, ak sellal bëgg-bëgg." },
+            "Humra": { code:, firi: "Xulóo, xéex, walla colére bu am ci wet." },
+            "Ingis": { code:, firi: "Guddu fann ak dëgëral wér-wérle." },
+            "Nusra-Daxil": { code:, firi: "Dugal lu bees lu am barke ci biir kër." },
+            "Nusra-Xarij": { code:, firi: "Gennal mbir walla tawat buy genn." },
+            "Ijtima": { code:, firi: "Daje, mbooloo, walla dëgëral maslaa." },
+            "Utba-Xarij": { code:, firi: "Xabar bu rëy bu genn ci bitim réer." }
+        };
 
-        function defTiiraas() {
-            // Jël ñaari figure ci anam gu hasard
-            const fig1 = figuresRamli[Math.floor(Math.random() * figuresRamli.length)];
-            const fig2 = figuresRamli[Math.floor(Math.random() * figuresRamli.length)];
+        const selects = ['m1', 'm2', 'm3', 'm4'];
+        setTimeout(() => {
+            selects.forEach(id => {
+                const el = document.getElementById(id);
+                if(el) {
+                    Object.keys(dëkkaléYi).forEach(nom => {
+                        let opt = document.createElement('option');
+                        opt.value = nom;
+                        opt.innerText = nom;
+                        el.appendChild(opt);
+                    });
+                }
+            });
+        }, 100);
 
-            const place = document.getElementById("gisaane-place");
-            
-            // Dugal mbind mi ci biir xët bi
-            place.innerHTML = `
-                <div class="box">
-                    <div class="titre-box">Li gënë fës ci nit ki</div>
-                    <h2>${fig1.nom}</h2>
-                    <div class="bët">${fig1.bet}</div>
-                    <p>${fig1.fës}</p>
-                </div>
-                <div class="box">
-                    <div class="titre-box">Limuy xalaat ci biiram</div>
-                    <h2>${fig2.nom}</h2>
-                    <div class="bët">${fig2.bet}</div>
-                    <p>${fig2.xalaat}</p>
-                </div>
-            `;
+        function booleXët(c1, c2) {
+            let res = [];
+            for(let i=0; i<4; i++) {
+                res.push((c1[i] + c2[i]) % 2 === 0 ? 2 : 1);
+            }
+            return res;
+        }
+
+        function woneBët(code) {
+            return code.map(p => p === 1 ? "•" : "••").join("<br>");
+        }
+
+        function jëlTur(code) {
+            for (let nom in dëkkaléYi) {
+                if (dëkkaléYi[nom].code.join(',') === code.join(',')) return nom;
+            }
+            return "Kër gu Bees";
+        }
+
+        function sàmpeTéere() {
+            let m1 = dëkkaléYi[document.getElementById('m1').value].code;
+            let m2 = dëkkaléYi[document.getElementById('m2').value].code;
+            let m3 = dëkkaléYi[document.getElementById('m3').value].code;
+            let m4 = dëkkaléYi[document.getElementById('m4').value].code;
+
+            let t = [];
+            t[1] = m1; t[2] = m2; t[3] = m3; t[4] = m4;
+
+            t[5] = [m1[0], m2[0], m3[0], m4[0]];
+            t[6] = [m1[1], m2[1], m3[1], m4[1]];
+            t[7] = [m1[2], m2[2], m3[2], m4[2]];
+            t[8] = [m1[3], m2[3], m3[3], m4[3]];
+
+            t[9] = booleXët(t[1], t[2]);
+            t[10] = booleXët(t[3], t[4]);
+            t[11] = booleXët(t[5], t[6]);
+            t[12] = booleXët(t[7], t[8]);
+
+            t[13] = booleXët(t[9], t[10]);
+            t[14] = booleXët(t[11], t[12]);
+
+            t[15] = booleXët(t[13], t[14]);
+            t[16] = booleXët(t[15], t[1]);
+
+            const place = document.getElementById("table-place");
+            place.innerHTML = "";
+
+            for(let i=1; i<=16; i++) {
+                let nom = jëlTur(t[i]);
+                let firiText = dëkkaléYi[nom] ? dëkkaléYi[nom].firi : "Firi bi mu ngi ñëw...";
+                
+                place.innerHTML += `
+                    <div class="ker-box">
+                        <b>Kër ${i}</b>
+                        <div class="nom-fig">${nom}</div>
+                        <div class="bët">${woneBët(t[i])}</div>
+                        <div class="firi-text">${firiText}</div>
+                    </div>
+                `;
+            }
         }
     </script>
-
 </body>
 </html>
