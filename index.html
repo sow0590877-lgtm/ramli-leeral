@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramli Leeral - Téggaloo</title>
+    <title>Ramli Leeral - Jantu Taxaw</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,10 +11,11 @@
             color: #ffffff;
             text-align: center;
             padding: 10px;
+            margin: 0;
         }
-        h1 { color: #ffcc00; margin-bottom: 5px; }
+        h1 { color: #ffcc00; margin: 10px 0 5px 0; font-size: 24px; }
         .container {
-            max-width: 600px;
+            max-width: 800px;
             margin: auto;
             background: #1e1e1e;
             padding: 15px;
@@ -22,9 +23,8 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
         .mother-input {
-            margin: 12px 0;
-            padding: 8px;
-            border-bottom: 1px solid #333;
+            margin: 10px 0;
+            padding: 5px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -36,7 +36,7 @@
             border: 1px solid #555;
             border-radius: 5px;
             font-size: 16px;
-            width: 65%;
+            width: 70%;
         }
         button {
             background: #ffcc00;
@@ -47,38 +47,39 @@
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 15px;
+            margin: 15px 0;
             width: 100%;
         }
-        .result-grid {
-            margin-top: 25px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+        /* Léegi jant bi day genn ci anam gu rëy mu mel ni sa natal bi */
+        .jant-table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+            color: #000000;
             display: none;
         }
-        .house-box {
-            background: #252525;
-            padding: 10px 5px;
-            border-radius: 5px;
-            border: 1px solid #333;
+        .jant-table td {
+            border: 1px solid #cccccc;
             text-align: center;
+            vertical-align: middle;
+            padding: 10px 5px;
         }
-        .house-title {
-            font-size: 13px;
+        .row-title {
+            font-size: 11px;
             font-weight: bold;
-            color: #ffcc00;
-            margin-bottom: 8px;
+            color: #555555;
+            margin-bottom: 5px;
+            display: block;
         }
-        .geomancy-figure {
+        .figure-dots {
             font-family: monospace;
-            font-size: 20px;
-            line-height: 1.2;
-            letter-spacing: 2px;
-            color: #ffffff;
-            background: #1a1a1a;
-            padding: 5px 0;
-            border-radius: 4px;
+            font-size: 26px;
+            font-weight: bold;
+            line-height: 1.1;
+            letter-spacing: 3px;
+            color: #121212;
+            display: inline-block;
         }
     </style>
 </head>
@@ -87,10 +88,7 @@
     <h1>🔮 Ramli Leeral</h1>
     
     <div class="container">
-        <h3>Tànnal 4 Ndiy yi</h3>
-        
-        <div class="mother-input">
-            <label>Kër 1 :</label>
+        <div class="mother-input"><label>Kër 1 :</label>
             <select id="m1">
                 <option value="2,2,1,1">Yuusufa (2,2,1,1)</option>
                 <option value="1,1,2,1">Solaymaan (1,1,2,1)</option>
@@ -110,8 +108,7 @@
             </select>
         </div>
 
-        <div class="mother-input">
-            <label>Kër 2 :</label>
+        <div class="mother-input"><label>Kër 2 :</label>
             <select id="m2">
                 <option value="2,1,1,1">Ayyuub (2,1,1,1)</option>
                 <option value="2,2,1,1">Yuusufa (2,2,1,1)</option>
@@ -131,8 +128,7 @@
             </select>
         </div>
 
-        <div class="mother-input">
-            <label>Kër 3 :</label>
+        <div class="mother-input"><label>Kër 3 :</label>
             <select id="m3">
                 <option value="1,2,1,2">Muhammad (1,2,1,2)</option>
                 <option value="2,2,1,1">Yuusufa (2,2,1,1)</option>
@@ -152,8 +148,7 @@
             </select>
         </div>
 
-        <div class="mother-input">
-            <label>Kër 4 :</label>
+        <div class="mother-input"><label>Kër 4 :</label>
             <select id="m4">
                 <option value="2,2,1,1">Yuusufa (2,2,1,1)</option>
                 <option value="1,1,2,1">Solaymaan (1,1,2,1)</option>
@@ -175,8 +170,36 @@
 
         <button onclick="calculerRamli()">Boole Poñ yi</button>
 
-        <!-- Résultats sous forme de tableau de cartes -->
-        <div id="results" class="result-grid"></div>
+        <!-- Tableau Géomantique visuel comme l'image -->
+        <table id="jantDisplay" class="jant-table">
+            <!-- Ligne 1: Kër 1 à Kër 8 (Mères et Filles) -->
+            <tr>
+                <td colspan="2"><span class="row-title">Kër 8</span><div id="k8" class="figure-dots"></div></td>
+                <td colspan="2"><span class="row-title">Kër 7</span><div id="k7" class="figure-dots"></div></td>
+                <td colspan="2"><span class="row-title">Kër 6</span><div id="k6" class="figure-dots"></div></td>
+                <td colspan="2"><span class="row-title">Kër 5</span><div id="k5" class="figure-dots"></div></td>
+                <td colspan="2"><span class="row-title">Kër 4</span><div id="k4" class="figure-dots"></div></td>
+                <td colspan="2"><span class="row-title">Kër 3</span><div id="k3" class="figure-dots"></div></td>
+                <td colspan="2"><span class="row-title">Kër 2</span><div id="k2" class="figure-dots"></div></td>
+                <td colspan="2"><span class="row-title">Kër 1</span><div id="k1" class="figure-dots"></div></td>
+            </tr>
+            <!-- Ligne 2: Kër 9 à Kër 12 (Neveux) -->
+            <tr>
+                <td colspan="4"><span class="row-title">Kër 12</span><div id="k12" class="figure-dots"></div></td>
+                <td colspan="4"><span class="row-title">Kër 11</span><div id="k11" class="figure-dots"></div></td>
+                <td colspan="4"><span class="row-title">Kër 10</span><div id="k10" class="figure-dots"></div></td>
+                <td colspan="4"><span class="row-title">Kër 9</span><div id="k9" class="figure-dots"></div></td>
+            </tr>
+            <!-- Ligne 3: Kër 13 & Kër 14 (Témoins) -->
+            <tr>
+                <td colspan="8"><span class="row-title">Kër 14</span><div id="k14" class="figure-dots"></div></td>
+                <td colspan="8"><span class="row-title">Kër 13</span><div id="k13" class="figure-dots"></div></td>
+            </tr>
+            <!-- Ligne 4: Kër 15 (Le Juge) -->
+            <tr>
+                <td colspan="16" style="background: #fff9e6;"><span class="row-title" style="color:#b38600;">Kër 15 (ÀTTE BI)</span><div id="k15" class="figure-dots"></div></td>
+            </tr>
+        </table>
     </div>
 
     <script>
@@ -189,48 +212,11 @@
             return result;
         }
 
-        // Firi poñ yi ci anam gu téggaloo (Bòpp ba Tank) mel ni sa natal
+        // Li nga bëgg: Taxaw poolu (● wala ● ●) baña saasaloo jëm suuf
         function formatVerticalDots(arr) {
-            return arr.map(num => num === 1 ? "o" : "o o").join("<br>");
+            return arr.map(num => num === 1 ? "●" : "● ●").join("<br>");
         }
 
         function calculerRamli() {
             let m1 = document.getElementById("m1").value.split(",").map(Number);
             let m2 = document.getElementById("m2").value.split(",").map(Number);
-            let m3 = document.getElementById("m3").value.split(",").map(Number);
-            let m4 = document.getElementById("m4").value.split(",").map(Number);
-
-            let h = {};
-            h[1] = m1; h[2] = m2; h[3] = m3; h[4] = m4;
-
-            h[5] = [m1[0], m2[0], m3[0], m4[0]];
-            h[6] = [m1[1], m2[1], m3[1], m4[1]];
-            h[7] = [m1[2], m2[2], m3[2], m4[2]];
-            h[8] = [m1[3], m2[3], m3[3], m4[3]];
-
-            h[9] = addFigures(h[1], h[2]);
-            h[10] = addFigures(h[3], h[4]);
-            h[11] = addFigures(h[5], h[6]);
-            h[12] = addFigures(h[7], h[8]);
-
-            h[13] = addFigures(h[9], h[10]);
-            h[14] = addFigures(h[11], h[12]);
-            h[15] = addFigures(h[13], h[14]);
-            h[16] = addFigures(h[15], h[1]);
-
-            let html = "";
-            for (let i = 1; i <= 16; i++) {
-                let borderStyle = (i === 15) ? "style='border: 2px solid #ffcc00; background: #332b00;'" : "";
-                html += `<div class="house-box" ${borderStyle}>
-                            <div class="house-title">Kër ${i}</div>
-                            <div class="geomancy-figure">${formatVerticalDots(h[i])}</div>
-                         </div>`;
-            }
-
-            let resDiv = document.getElementById("results");
-            resDiv.innerHTML = html;
-            resDiv.style.display = "grid";
-        }
-    </script>
-</body>
-</html>
