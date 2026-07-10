@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramli Leeral - Jantu Taxaw</title>
+    <title>Ramli Leeral - Jantu Taxaw Bu Mat</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -50,7 +50,6 @@
             margin: 15px 0;
             width: 100%;
         }
-        /* Léegi jant bi day genn ci anam gu rëy mu mel ni sa natal bi */
         .jant-table {
             margin-top: 20px;
             width: 100%;
@@ -170,9 +169,8 @@
 
         <button onclick="calculerRamli()">Boole Poñ yi</button>
 
-        <!-- Tableau Géomantique visuel comme l'image -->
         <table id="jantDisplay" class="jant-table">
-            <!-- Ligne 1: Kër 1 à Kër 8 (Mères et Filles) -->
+            <!-- Ligne 1: 8 Kër (1 à 8) -->
             <tr>
                 <td colspan="2"><span class="row-title">Kër 8</span><div id="k8" class="figure-dots"></div></td>
                 <td colspan="2"><span class="row-title">Kër 7</span><div id="k7" class="figure-dots"></div></td>
@@ -183,21 +181,25 @@
                 <td colspan="2"><span class="row-title">Kër 2</span><div id="k2" class="figure-dots"></div></td>
                 <td colspan="2"><span class="row-title">Kër 1</span><div id="k1" class="figure-dots"></div></td>
             </tr>
-            <!-- Ligne 2: Kër 9 à Kër 12 (Neveux) -->
+            <!-- Ligne 2: 4 Kër (9 à 12) -->
             <tr>
                 <td colspan="4"><span class="row-title">Kër 12</span><div id="k12" class="figure-dots"></div></td>
                 <td colspan="4"><span class="row-title">Kër 11</span><div id="k11" class="figure-dots"></div></td>
                 <td colspan="4"><span class="row-title">Kër 10</span><div id="k10" class="figure-dots"></div></td>
                 <td colspan="4"><span class="row-title">Kër 9</span><div id="k9" class="figure-dots"></div></td>
             </tr>
-            <!-- Ligne 3: Kër 13 & Kër 14 (Témoins) -->
+            <!-- Ligne 3: 2 Kër (13 & 14) -->
             <tr>
                 <td colspan="8"><span class="row-title">Kër 14</span><div id="k14" class="figure-dots"></div></td>
                 <td colspan="8"><span class="row-title">Kër 13</span><div id="k13" class="figure-dots"></div></td>
             </tr>
-            <!-- Ligne 4: Kër 15 (Le Juge) -->
+            <!-- Ligne 4: Kër 15 (ÀTTE BI) -->
             <tr>
                 <td colspan="16" style="background: #fff9e6;"><span class="row-title" style="color:#b38600;">Kër 15 (ÀTTE BI)</span><div id="k15" class="figure-dots"></div></td>
+            </tr>
+            <!-- Ligne 5: Kër 16 (FIRNDÉEL) -->
+            <tr>
+                <td colspan="16" style="background: #f0f7ff;"><span class="row-title" style="color:#0056b3;">Kër 16 (FIRNDÉEL)</span><div id="k16" class="figure-dots"></div></td>
             </tr>
         </table>
     </div>
@@ -212,7 +214,6 @@
             return result;
         }
 
-        // Li nga bëgg: Taxaw poolu (● wala ● ●) baña saasaloo jëm suuf
         function formatVerticalDots(arr) {
             return arr.map(num => num === 1 ? "●" : "● ●").join("<br>");
         }
