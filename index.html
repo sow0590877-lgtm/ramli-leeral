@@ -3,27 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramli Leeral - Jantu Taxaw Bu Mat</title>
+    <title>Ramli Leeral - Jantu Taxaw</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #121212;
             color: #ffffff;
             text-align: center;
-            padding: 10px;
+            padding: 5px;
             margin: 0;
         }
-        h1 { color: #ffcc00; margin: 10px 0 5px 0; font-size: 24px; }
+        h1 { color: #ffcc00; margin: 10px 0 5px 0; font-size: 22px; }
         .container {
-            max-width: 800px;
+            max-width: 100%;
             margin: auto;
             background: #1e1e1e;
-            padding: 15px;
+            padding: 10px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            box-sizing: border-box;
         }
         .mother-input {
-            margin: 10px 0;
+            margin: 8px 0;
             padding: 5px;
             display: flex;
             justify-content: space-between;
@@ -35,7 +36,7 @@
             color: white;
             border: 1px solid #555;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 15px;
             width: 70%;
         }
         button {
@@ -43,16 +44,23 @@
             color: #000;
             border: none;
             padding: 12px 25px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
-            margin: 15px 0;
+            margin: 10px 0;
             width: 100%;
         }
-        .jant-table {
-            margin-top: 20px;
+        /* Fii lañu tuutilé tablo bi te ubbil ko yoon mu mën a dox ci wet gu nekk */
+        .table-responsive {
             width: 100%;
+            overflow-x: auto;
+            margin-top: 15px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .jant-table {
+            width: 100%;
+            min-width: 480px; /* Sàrt ngir mu baña bëtëxu ci telefon bu ndaw */
             border-collapse: collapse;
             background: #ffffff;
             color: #000000;
@@ -62,21 +70,21 @@
             border: 1px solid #cccccc;
             text-align: center;
             vertical-align: middle;
-            padding: 10px 5px;
+            padding: 6px 2px;
         }
         .row-title {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: bold;
             color: #555555;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
             display: block;
         }
         .figure-dots {
             font-family: monospace;
-            font-size: 26px;
+            font-size: 18px; /* Tuutil nañu poñ yi ngir mu mat sëkk */
             font-weight: bold;
             line-height: 1.1;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             color: #121212;
             display: inline-block;
         }
@@ -169,55 +177,42 @@
 
         <button onclick="calculerRamli()">Boole Poñ yi</button>
 
-        <table id="jantDisplay" class="jant-table">
-            <!-- Row 1: Kër 8 ba Kër 1 -->
-            <tr>
-                <td colspan="2"><span class="row-title">Kër 8</span><div id="k8" class="figure-dots"></div></td>
-                <td colspan="2"><span class="row-title">Kër 7</span><div id="k7" class="figure-dots"></div></td>
-                <td colspan="2"><span class="row-title">Kër 6</span><div id="k6" class="figure-dots"></div></td>
-                <td colspan="2"><span class="row-title">Kër 5</span><div id="k5" class="figure-dots"></div></td>
-                <td colspan="2"><span class="row-title">Kër 4</span><div id="k4" class="figure-dots"></div></td>
-                <td colspan="2"><span class="row-title">Kër 3</span><div id="k3" class="figure-dots"></div></td>
-                <td colspan="2"><span class="row-title">Kër 2</span><div id="k2" class="figure-dots"></div></td>
-                <td colspan="2"><span class="row-title">Kër 1</span><div id="k1" class="figure-dots"></div></td>
-            </tr>
-            <!-- Row 2: Kër 12 ba Kër 9 -->
-            <tr>
-                <td colspan="4"><span class="row-title">Kër 12</span><div id="k12" class="figure-dots"></div></td>
-                <td colspan="4"><span class="row-title">Kër 11</span><div id="k11" class="figure-dots"></div></td>
-                <td colspan="4"><span class="row-title">Kër 10</span><div id="k10" class="figure-dots"></div></td>
-                <td colspan="4"><span class="row-title">Kër 9</span><div id="k9" class="figure-dots"></div></td>
-            </tr>
-            <!-- Row 3: Kër 14 ak Kër 13 -->
-            <tr>
-                <td colspan="8"><span class="row-title">Kër 14</span><div id="k14" class="figure-dots"></div></td>
-                <td colspan="8"><span class="row-title">Kër 13</span><div id="k13" class="figure-dots"></div></td>
-            </tr>
-            <!-- Row 4: Kër 15 -->
-            <tr>
-                <td colspan="16" style="background: #fff9e6;"><span class="row-title" style="color:#b38600;">Kër 15 (ÀTTE BI)</span><div id="k15" class="figure-dots"></div></td>
-            </tr>
-            <!-- Row 5: Kër 16 -->
-            <tr>
-                <td colspan="16" style="background: #f0f7ff;"><span class="row-title" style="color:#0056b3;">Kër 16 (FIRNDÉEL)</span><div id="k16" class="figure-dots"></div></td>
-            </tr>
-        </table>
+        <!-- Cadre responsive ngir mu baña bëtëxu écran bi -->
+        <div class="table-responsive">
+            <table id="jantDisplay" class="jant-table">
+                <!-- Row 1: 8 Kër -->
+                <tr>
+                    <td colspan="2"><span class="row-title">Kër 8</span><div id="k8" class="figure-dots"></div></td>
+                    <td colspan="2"><span class="row-title">Kër 7</span><div id="k7" class="figure-dots"></div></td>
+                    <td colspan="2"><span class="row-title">Kër 6</span><div id="k6" class="figure-dots"></div></td>
+                    <td colspan="2"><span class="row-title">Kër 5</span><div id="k5" class="figure-dots"></div></td>
+                    <td colspan="2"><span class="row-title">Kër 4</span><div id="k4" class="figure-dots"></div></td>
+                    <td colspan="2"><span class="row-title">Kër 3</span><div id="k3" class="figure-dots"></div></td>
+                    <td colspan="2"><span class="row-title">Kër 2</span><div id="k2" class="figure-dots"></div></td>
+                    <td colspan="2"><span class="row-title">Kër 1</span><div id="k1" class="figure-dots"></div></td>
+                </tr>
+                <!-- Row 2: 4 Kër -->
+                <tr>
+                    <td colspan="4"><span class="row-title">Kër 12</span><div id="k12" class="figure-dots"></div></td>
+                    <td colspan="4"><span class="row-title">Kër 11</span><div id="k11" class="figure-dots"></div></td>
+                    <td colspan="4"><span class="row-title">Kër 10</span><div id="k10" class="figure-dots"></div></td>
+                    <td colspan="4"><span class="row-title">Kër 9</span><div id="k9" class="figure-dots"></div></td>
+                </tr>
+                <!-- Row 3: 2 Kër -->
+                <tr>
+                    <td colspan="8"><span class="row-title">Kër 14</span><div id="k14" class="figure-dots"></div></td>
+                    <td colspan="8"><span class="row-title">Kër 13</span><div id="k13" class="figure-dots"></div></td>
+                </tr>
+                <!-- Row 4: Kër 15 -->
+                <tr>
+                    <td colspan="16" style="background: #fff9e6;"><span class="row-title" style="color:#b38600;">Kër 15 (ÀTTE BI)</span><div id="k15" class="figure-dots"></div></td>
+                </tr>
+                <!-- Row 5: Kër 16 -->
+                <tr>
+                    <td colspan="16" style="background: #f0f7ff;"><span class="row-title" style="color:#0056b3;">Kër 16 (FIRNDÉEL)</span><div id="k16" class="figure-dots"></div></td>
+                </tr>
+            </table>
+        </div>
     </div>
 
     <script>
-        function addFigures(f1, f2) {
-            let result = [];
-            for (let i = 0; i < 4; i++) {
-                let sum = Number(f1[i]) + Number(f2[i]);
-                result.push(sum % 2 === 0 ? 2 : 1);
-            }
-            return result;
-        }
-
-        function formatVerticalDots(arr) {
-            return arr.map(num => num === 1 ? "●" : "● ●").join("<br>");
-        }
-
-        function calculerRamli() {
-            let m1 = document.getElementById("m1").value.split(",").map(Number);
-            let m2 = document.getElementById("m2").value.split(",").map(Number);
