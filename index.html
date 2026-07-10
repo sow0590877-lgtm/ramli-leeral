@@ -3,29 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramli Leeral - Jantu Taxaw Bu Mat</title>
+    <title>Ramli Leeral - Téggaloo</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #121212;
             color: #ffffff;
             text-align: center;
-            padding: 5px;
-            margin: 0;
+            padding: 10px;
         }
-        h1 { color: #ffcc00; margin: 10px 0 5px 0; font-size: 22px; }
+        h1 { color: #ffcc00; margin-bottom: 5px; }
         .container {
-            max-width: 100%;
+            max-width: 600px;
             margin: auto;
             background: #1e1e1e;
-            padding: 10px;
+            padding: 15px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            box-sizing: border-box;
         }
         .mother-input {
-            margin: 8px 0;
-            padding: 5px;
+            margin: 12px 0;
+            padding: 8px;
+            border-bottom: 1px solid #333;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -36,56 +35,50 @@
             color: white;
             border: 1px solid #555;
             border-radius: 5px;
-            font-size: 15px;
-            width: 70%;
+            font-size: 16px;
+            width: 65%;
         }
         button {
             background: #ffcc00;
             color: #000;
             border: none;
             padding: 12px 25px;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
-            margin: 10px 0;
-            width: 100%;
-        }
-        .table-responsive {
-            width: 100%;
-            overflow-x: auto;
             margin-top: 15px;
-            -webkit-overflow-scrolling: touch;
-        }
-        .jant-table {
             width: 100%;
-            min-width: 500px;
-            border-collapse: collapse;
-            background: #ffffff;
-            color: #000000;
+        }
+        .result-grid {
+            margin-top: 25px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
             display: none;
         }
-        .jant-table td {
-            border: 1px solid #cccccc;
+        .house-box {
+            background: #252525;
+            padding: 10px 5px;
+            border-radius: 5px;
+            border: 1px solid #333;
             text-align: center;
-            vertical-align: middle;
-            padding: 6px 2px;
         }
-        .row-title {
-            font-size: 10px;
+        .house-title {
+            font-size: 13px;
             font-weight: bold;
-            color: #555555;
-            margin-bottom: 3px;
-            display: block;
+            color: #ffcc00;
+            margin-bottom: 8px;
         }
-        .figure-dots {
+        .geomancy-figure {
             font-family: monospace;
-            font-size: 18px;
-            font-weight: bold;
-            line-height: 1.1;
+            font-size: 20px;
+            line-height: 1.2;
             letter-spacing: 2px;
-            color: #121212;
-            display: inline-block;
+            color: #ffffff;
+            background: #1a1a1a;
+            padding: 5px 0;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -94,7 +87,10 @@
     <h1>🔮 Ramli Leeral</h1>
     
     <div class="container">
-        <div class="mother-input"><label>Kër 1 :</label>
+        <h3>Tànnal 4 Ndiy yi</h3>
+        
+        <div class="mother-input">
+            <label>Kër 1 :</label>
             <select id="m1">
                 <option value="2,2,1,1">Yuusufa (2,2,1,1)</option>
                 <option value="1,1,2,1">Solaymaan (1,1,2,1)</option>
@@ -114,7 +110,8 @@
             </select>
         </div>
 
-        <div class="mother-input"><label>Kër 2 :</label>
+        <div class="mother-input">
+            <label>Kër 2 :</label>
             <select id="m2">
                 <option value="2,1,1,1">Ayyuub (2,1,1,1)</option>
                 <option value="2,2,1,1">Yuusufa (2,2,1,1)</option>
@@ -134,7 +131,8 @@
             </select>
         </div>
 
-        <div class="mother-input"><label>Kër 3 :</label>
+        <div class="mother-input">
+            <label>Kër 3 :</label>
             <select id="m3">
                 <option value="1,2,1,2">Muhammad (1,2,1,2)</option>
                 <option value="2,2,1,1">Yuusufa (2,2,1,1)</option>
@@ -154,7 +152,8 @@
             </select>
         </div>
 
-        <div class="mother-input"><label>Kër 4 :</label>
+        <div class="mother-input">
+            <label>Kër 4 :</label>
             <select id="m4">
                 <option value="2,2,1,1">Yuusufa (2,2,1,1)</option>
                 <option value="1,1,2,1">Solaymaan (1,1,2,1)</option>
@@ -176,50 +175,62 @@
 
         <button onclick="calculerRamli()">Boole Poñ yi</button>
 
-        <div class="table-responsive">
-            <table id="jantDisplay" class="jant-table">
-                <tr>
-                    <td colspan="2"><span class="row-title">Kër 8</span><div id="k8" class="figure-dots"></div></td>
-                    <td colspan="2"><span class="row-title">Kër 7</span><div id="k7" class="figure-dots"></div></td>
-                    <td colspan="2"><span class="row-title">Kër 6</span><div id="k6" class="figure-dots"></div></td>
-                    <td colspan="2"><span class="row-title">Kër 5</span><div id="k5" class="figure-dots"></div></td>
-                    <td colspan="2"><span class="row-title">Kër 4</span><div id="k4" class="figure-dots"></div></td>
-                    <td colspan="2"><span class="row-title">Kër 3</span><div id="k3" class="figure-dots"></div></td>
-                    <td colspan="2"><span class="row-title">Kër 2</span><div id="k2" class="figure-dots"></div></td>
-                    <td colspan="2"><span class="row-title">Kër 1</span><div id="k1" class="figure-dots"></div></td>
-                </tr>
-                <tr>
-                    <td colspan="4"><span class="row-title">Kër 12</span><div id="k12" class="figure-dots"></div></td>
-                    <td colspan="4"><span class="row-title">Kër 11</span><div id="k11" class="figure-dots"></div></td>
-                    <td colspan="4"><span class="row-title">Kër 10</span><div id="k10" class="figure-dots"></div></td>
-                    <td colspan="4"><span class="row-title">Kër 9</span><div id="k9" class="figure-dots"></div></td>
-                </tr>
-                <tr>
-                    <td colspan="8"><span class="row-title">Kër 14</span><div id="k14" class="figure-dots"></div></td>
-                    <td colspan="8"><span class="row-title">Kër 13</span><div id="k13" class="figure-dots"></div></td>
-                </tr>
-                <tr>
-                    <td colspan="16" style="background: #fff9e6;"><span class="row-title" style="color:#b38600;">Kër 15 (ÀTTE BI)</span><div id="k15" class="figure-dots"></div></td>
-                </tr>
-                <tr>
-                    <td colspan="16" style="background: #f0f7ff;"><span class="row-title" style="color:#0056b3;">Kër 16 (FIRNDÉEL)</span><div id="k16" class="figure-dots"></div></td>
-                </tr>
-            </table>
-        </div>
+        <!-- Résultats sous forme de tableau de cartes -->
+        <div id="results" class="result-grid"></div>
     </div>
 
     <script>
         function addFigures(f1, f2) {
             let result = [];
             for (let i = 0; i < 4; i++) {
-                let sum = Number(f1[i]) + Number(f2[i]);
+                let sum = f1[i] + f2[i];
                 result.push(sum % 2 === 0 ? 2 : 1);
             }
             return result;
         }
 
+        // Firi poñ yi ci anam gu téggaloo (Bòpp ba Tank) mel ni sa natal
         function formatVerticalDots(arr) {
-            return arr.map(num => num === 1 ? "●" : "● ●").join("<br>");
+            return arr.map(num => num === 1 ? "o" : "o o").join("<br>");
         }
 
         function calculerRamli() {
+            let m1 = document.getElementById("m1").value.split(",").map(Number);
+            let m2 = document.getElementById("m2").value.split(",").map(Number);
+            let m3 = document.getElementById("m3").value.split(",").map(Number);
+            let m4 = document.getElementById("m4").value.split(",").map(Number);
+
+            let h = {};
+            h[1] = m1; h[2] = m2; h[3] = m3; h[4] = m4;
+
+            h[5] = [m1[0], m2[0], m3[0], m4[0]];
+            h[6] = [m1[1], m2[1], m3[1], m4[1]];
+            h[7] = [m1[2], m2[2], m3[2], m4[2]];
+            h[8] = [m1[3], m2[3], m3[3], m4[3]];
+
+            h[9] = addFigures(h[1], h[2]);
+            h[10] = addFigures(h[3], h[4]);
+            h[11] = addFigures(h[5], h[6]);
+            h[12] = addFigures(h[7], h[8]);
+
+            h[13] = addFigures(h[9], h[10]);
+            h[14] = addFigures(h[11], h[12]);
+            h[15] = addFigures(h[13], h[14]);
+            h[16] = addFigures(h[15], h[1]);
+
+            let html = "";
+            for (let i = 1; i <= 16; i++) {
+                let borderStyle = (i === 15) ? "style='border: 2px solid #ffcc00; background: #332b00;'" : "";
+                html += `<div class="house-box" ${borderStyle}>
+                            <div class="house-title">Kër ${i}</div>
+                            <div class="geomancy-figure">${formatVerticalDots(h[i])}</div>
+                         </div>`;
+            }
+
+            let resDiv = document.getElementById("results");
+            resDiv.innerHTML = html;
+            resDiv.style.display = "grid";
+        }
+    </script>
+</body>
+</html>
