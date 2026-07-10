@@ -3,34 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramli Leeral - Mat Sëkk</title>
+    <title>Ramli Leeral - Téggaloo</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #121212;
             color: #ffffff;
             text-align: center;
-            padding: 20px;
+            padding: 10px;
         }
         h1 { color: #ffcc00; margin-bottom: 5px; }
-        h2 { color: #aaaaaa; font-size: 16px; font-weight: normal; margin-top: 0; }
         .container {
             max-width: 600px;
             margin: auto;
             background: #1e1e1e;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
         .mother-input {
-            margin: 15px 0;
-            padding: 10px;
+            margin: 12px 0;
+            padding: 8px;
             border-bottom: 1px solid #333;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        label { font-weight: bold; }
         select {
             padding: 8px;
             background: #333;
@@ -49,37 +47,44 @@
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 15px;
             width: 100%;
         }
-        button:hover { background: #e6b800; }
-        .result-box {
-            margin-top: 30px;
-            text-align: left;
-            background: #252525;
-            padding: 15px;
-            border-radius: 5px;
+        .result-grid {
+            margin-top: 25px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
             display: none;
         }
-        .house-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid #333;
-            align-items: center;
+        .house-box {
+            background: #252525;
+            padding: 10px 5px;
+            border-radius: 5px;
+            border: 1px solid #333;
+            text-align: center;
         }
-        .dots {
+        .house-title {
+            font-size: 13px;
             font-weight: bold;
-            letter-spacing: 3px;
             color: #ffcc00;
-            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        .geomancy-figure {
+            font-family: monospace;
+            font-size: 20px;
+            line-height: 1.2;
+            letter-spacing: 2px;
+            color: #ffffff;
+            background: #1a1a1a;
+            padding: 5px 0;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
 
     <h1>🔮 Ramli Leeral</h1>
-    <h2>Mbooleem 16 Figiir yi mat sëkk</h2>
     
     <div class="container">
         <h3>Tànnal 4 Ndiy yi</h3>
@@ -87,7 +92,6 @@
         <div class="mother-input">
             <label>Kër 1 :</label>
             <select id="m1">
-                <!-- 16 Figures avec tous les Prophètes du Ramli -->
                 <option value="2,2,1,1">Yuusufa (2,2,1,1)</option>
                 <option value="1,1,2,1">Solaymaan (1,1,2,1)</option>
                 <option value="2,1,1,1">Ayyuub (2,1,1,1)</option>
@@ -100,7 +104,6 @@
                 <option value="2,2,1,2">Missa (2,2,1,2)</option>
                 <option value="1,2,1,1">Insa (1,2,1,1)</option>
                 <option value="1,1,1,2">Trawore (1,1,1,2)</option>
-                <option value="2,1,1,1">Aliou (2,1,1,1)</option>
                 <option value="2,1,2,2">Seahu (2,1,2,2)</option>
                 <option value="1,2,2,2">Yunus (1,2,2,2)</option>
                 <option value="2,2,2,1">Muusaa (2,2,2,1)</option>
@@ -172,10 +175,8 @@
 
         <button onclick="calculerRamli()">Boole Poñ yi</button>
 
-        <div id="results" class="result-box">
-            <h3 style="color: #ffcc00; text-align: center;">Gennayu Jant bi</h3>
-            <div id="house-list"></div>
-        </div>
+        <!-- Résultats sous forme de tableau de cartes -->
+        <div id="results" class="result-grid"></div>
     </div>
 
     <script>
@@ -188,8 +189,9 @@
             return result;
         }
 
-        function formatDots(arr) {
-            return arr.map(num => num === 1 ? "  o  " : "o  o").join(" | ");
+        // Firi poñ yi ci anam gu téggaloo (Bòpp ba Tank) mel ni sa natal
+        function formatVerticalDots(arr) {
+            return arr.map(num => num === 1 ? "o" : "o o").join("<br>");
         }
 
         function calculerRamli() {
@@ -214,20 +216,20 @@
             h[13] = addFigures(h[9], h[10]);
             h[14] = addFigures(h[11], h[12]);
             h[15] = addFigures(h[13], h[14]);
-
             h[16] = addFigures(h[15], h[1]);
 
             let html = "";
             for (let i = 1; i <= 16; i++) {
-                let bg = (i === 15) ? "background: #332b00; border: 1px solid #ffcc00;" : "";
-                html += `<div class="house-item" style="padding: 10px; margin: 4px 0; border-radius: 4px; ${bg}">
-                            <span style="font-weight:bold;">Kër ${i}</span>
-                            <span class="dots">[ ${formatDots(h[i])} ]</span>
+                let borderStyle = (i === 15) ? "style='border: 2px solid #ffcc00; background: #332b00;'" : "";
+                html += `<div class="house-box" ${borderStyle}>
+                            <div class="house-title">Kër ${i}</div>
+                            <div class="geomancy-figure">${formatVerticalDots(h[i])}</div>
                          </div>`;
             }
 
-            document.getElementById("house-list").innerHTML = html;
-            document.getElementById("results").style.display = "block";
+            let resDiv = document.getElementById("results");
+            resDiv.innerHTML = html;
+            resDiv.style.display = "grid";
         }
     </script>
 </body>
