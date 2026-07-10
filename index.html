@@ -10,204 +10,155 @@
             background-color: #121212;
             color: #ffffff;
             text-align: center;
-            padding: 5px;
+            padding: 20px;
             margin: 0;
         }
-        h1 { color: #ffcc00; margin: 10px 0 5px 0; font-size: 22px; }
+        h1 { color: #ffcc00; margin-bottom: 20px; }
         .container {
-            max-width: 100%;
+            max-width: 500px;
             margin: auto;
             background: #1e1e1e;
-            padding: 10px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            box-sizing: border-box;
         }
-        .mother-input {
-            margin: 8px 0;
-            padding: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        select {
-            padding: 8px;
-            background: #333;
-            color: white;
-            border: 1px solid #555;
-            border-radius: 5px;
+        .instruction {
+            color: #cccccc;
             font-size: 15px;
-            width: 70%;
+            margin-bottom: 20px;
+            line-height: 1.4;
         }
-        button {
+        /* Style barigo yu ñuy bës */
+        .figure-builder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .row-btn {
+            background: #2a2a2a;
+            border: 2px solid #ffcc00;
+            color: #ffcc00;
+            width: 120px;
+            padding: 10px;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .row-btn:hover {
+            background: #ffcc00;
+            color: #000;
+        }
+        .action-btn {
             background: #ffcc00;
             color: #000;
             border: none;
-            padding: 12px 25px;
+            padding: 14px 30px;
             font-size: 16px;
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
-            margin: 10px 0;
             width: 100%;
+            margin-top: 10px;
         }
-        .table-responsive {
-            width: 100%;
-            overflow-x: auto;
-            margin-top: 15px;
-            -webkit-overflow-scrolling: touch;
-        }
-        .jant-table {
-            width: 100%;
-            min-width: 550px;
-            border-collapse: collapse;
-            background: #ffffff;
-            color: #000000;
+        .action-btn:hover { background: #e6b800; }
+        /* Style u bbarigo ndam li */
+        #resultat {
+            margin-top: 25px;
+            padding: 15px;
+            background: #2a2a2a;
+            border-radius: 5px;
+            border-left: 5px solid #ffcc00;
             display: none;
+            text-align: left;
         }
-        .jant-table td {
-            border: 1px solid #cccccc;
-            text-align: center;
-            vertical-align: middle;
-            padding: 6px 2px;
-        }
-        .row-title {
-            font-size: 10px;
-            font-weight: bold;
-            color: #555555;
-            margin-bottom: 2px;
-            display: block;
-        }
-        .fig-name {
-            font-size: 9px;
-            color: #2b7a78;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 3px;
-        }
-        .figure-dots {
-            font-family: monospace;
-            font-size: 16px;
-            font-weight: bold;
-            line-height: 1.1;
-            letter-spacing: 2px;
-            color: #121212;
-            display: inline-block;
-        }
+        #resultat h2 { color: #ffcc00; margin-top: 0; font-size: 20px; }
+        #resultat p { color: #e0e0e0; line-height: 1.5; font-size: 15px; }
     </style>
 </head>
 <body>
 
-    <h1>🔮 Ramli Leeral</h1>
+<div class="container">
+    <h1>Ramli Leeral</h1>
+    <p class="instruction">Bësal ci barigo yi ngir tànn 1 walla 2i ponk ngir sàkk sa figure :</p>
+
+    <!-- Zone bu ñuy bës ngir toggu figure bi -->
+    <div class="figure-builder">
+        <button class="row-btn" id="l1" onclick="changerLigne('l1')">*</button>
+        <button class="row-btn" id="l2" onclick="changerLigne('l2')">*</button>
+        <button class="row-btn" id="l3" onclick="changerLigne('l3')">*</button>
+        <button class="row-btn" id="l4" onclick="changerLigne('l4')">*</button>
+    </div>
+
+    <button class="action-btn" onclick="interpreterRamli()">Firi Figure Bi</button>
+
+    <!-- Fii la firi gi di genné -->
+    <div id="resultat">
+        <h2 id="fig-nom"></h2>
+        <p id="fig-firi"></p>
+    </div>
+</div>
+
+<script>
+// Dictionnaire u 16 figure yi ci Wolof
+const dictionnaireRamli = {
+    "1111": { nom: "Youssof (Yoon)", firi: "Yoon bu uwwu, tukki bu hëw, doxalin, walla yoonu jamm bu ubbeeku." },
+    "2222": { nom: "Adama (Mbooloo)", firi: "Mbooloo mu dajalo, jëmm, rati rati, walla dund gu rafet ci biir nit ñi." },
+    "1122": { nom: "Mahdiou (Alal)", firi: "Alal, ngàariñ, barke, ak koom-koom bu bees bu lay dikal." },
+    "2211": { nom: "Idriss (Am / Ndariñ)", firi: "Ligéey bu am solo, ndam, walla li nga doon wut mu ngi lay jox njariñ." },
+    "1211": { nom: "Ibrahim (Mbégte)", firi: "Mbégte, jamm, xew-xew bu neex, ak wërsëg bu lëw." },
+    "1121": { nom: "Issa (Ñàkk / Rëcc)", firi: "Genn ñàkk walla rëcc-rëcc, faww nga saytu sa bopp ci wàllu dépense." },
+    "2122": { nom: "Oumar (Xonq / Fit)", firi: "Fit, xare, kàttan, walla col bu tàng. Dafa laaj tàyyeel ak reesal." },
+    "2212": { nom: "Ayoub (Naqar)", firi: "Metit, xel bu tiis, walla xaar gu yàgg. Ligéey bu laaj muñ." },
+    "1221": { nom: "Lomara (Biir / Suttura)", firi: "Teju, biir, suttura, walla mbir mu fuyu mu nekk ci suttura." },
+    "2112": { nom: "Abdoullah (Daje)", firi: "Daje bu am solo, wetu, walla waxtaan bu nuy jëme kanam." },
+    "1112": { nom: "Aliou (Lëkkalé / Sey)", firi: "Sey, lëkkalé, ligéeyandoo, walla diggante ñaari nit yu baax." },
+    "2111": { nom: "Nohou (Taxaw / Jagat)", firi: "Mbir mu taxaw, rëcc-rëcc bu laaj njaatige walla kilifa gu lay jàppale." },
+    "1212": { nom: "Ousmane (Set / Jamm)", firi: "Xel bu dal, xol bu set, jamm, ak selaat ci li ngay def." },
+    "2121": { nom: "Slemane (Tawat / Coona)", firi: "Coona, tawat, walla nattu bu ndaw. Dafa laaj nga noci sa bopp." },
+    "1222": { nom: "Moussa (Kàddu / Kaddou)", firi: "Kàddu yu am solo, tàggat, wax gu rëy walla xabar buy dikk." },
+    "2221": { nom: "Younous (Ndam)", firi: "Ndam bu mag, sargal, teddungal, ak lëf bu neex buy sotti." }
+};
+
+// Fonction buy soppi ponk yi (* walla **)
+function changerLigne(id) {
+    const btn = document.getElementById(id);
+    if (btn.innerText === "*") {
+        btn.innerText = "**";
+    } else {
+        btn.innerText = "*";
+    }
+}
+
+// Fonction buy kalkilé tey firi
+function interpreterRamli() {
+    let code = "";
     
-    <div class="container">
-        <!-- Sélection des 4 mères basées exactement sur tes figures -->
-        <div class="mother-input"><label>Kër 1 :</label>
-            <select id="m1">
-                <option value="1,1,2,1">Yoosufa (1,1,2,1)</option>
-                <option value="1,2,2,2">Adama (1,2,2,2)</option>
-                <option value="2,1,1,1">Muhammad (2,1,1,1)</option>
-                <option value="2,2,1,2">Idriis (2,2,1,2)</option>
-                <option value="1,1,1,1">Ibrahima (1,1,1,1)</option>
-                <option value="1,2,1,2">Hiisaa (1,2,1,2)</option>
-                <option value="2,1,2,2">Oumar (2,1,2,2)</option>
-                <option value="1,1,2,2">Jibriil (1,1,2,2)</option>
-                <option value="1,2,2,1">Solayman (1,2,2,1)</option>
-                <option value="2,1,1,2">Haliyyu (2,1,1,2)</option>
-                <option value="2,2,1,1">Nuuh (2,2,1,1)</option>
-                <option value="1,1,1,2">Hasan (1,1,1,2)</option>
-                <option value="1,2,1,1">Yunus (1,2,1,1)</option>
-                <option value="2,1,2,1">Ousmane (2,1,2,1)</option>
-                <option value="2,2,2,2">Muusaa (2,2,2,2)</option>
-            </select>
-        </div>
+    // Xool li nekk ci 4i ligne yi
+    for (let i = 1; i <= 4; i++) {
+        const val = document.getElementById("l" + i).innerText;
+        code += (val === "*") ? "1" : "2";
+    }
+    
+    // Gëstu ci dictionnaire bi
+    const figure = dictionnaireRamli[code];
+    const blocResultat = document.getElementById("resultat");
+    
+    if (figure) {
+        document.getElementById("fig-nom").innerText = figure.nom;
+        document.getElementById("fig-firi").innerText = figure.firi;
+        blocResultat.style.display = "block";
+    } else {
+        document.getElementById("fig-nom").innerText = "Njuumte !";
+        document.getElementById("fig-firi").innerText = "Figure bi dëppowul ak li am. Saytul ponk yi.";
+        blocResultat.style.display = "block";
+    }
+}
+</script>
 
-        <div class="mother-input"><label>Kër 2 :</label>
-            <select id="m2">
-                <option value="1,2,2,2">Adama (1,2,2,2)</option>
-                <option value="1,1,2,1">Yoosufa (1,1,2,1)</option>
-                <option value="2,1,1,1">Muhammad (2,1,1,1)</option>
-                <option value="2,2,1,2">Idriis (2,2,1,2)</option>
-                <option value="1,1,1,1">Ibrahima (1,1,1,1)</option>
-                <option value="1,2,1,2">Hiisaa (1,2,1,2)</option>
-                <option value="2,1,2,2">Oumar (2,1,2,2)</option>
-                <option value="1,1,2,2">Jibriil (1,1,2,2)</option>
-                <option value="1,2,2,1">Solayman (1,2,2,1)</option>
-                <option value="2,1,1,2">Haliyyu (2,1,1,2)</option>
-                <option value="2,2,1,1">Nuuh (2,2,1,1)</option>
-                <option value="1,1,1,2">Hasan (1,1,1,2)</option>
-                <option value="1,2,1,1">Yunus (1,2,1,1)</option>
-                <option value="2,1,2,1">Ousmane (2,1,2,1)</option>
-                <option value="2,2,2,2">Muusaa (2,2,2,2)</option>
-            </select>
-        </div>
-
-        <div class="mother-input"><label>Kër 3 :</label>
-            <select id="m3">
-                <option value="2,1,1,1">Muhammad (2,1,1,1)</option>
-                <option value="1,1,2,1">Yoosufa (1,1,2,1)</option>
-                <option value="1,2,2,2">Adama (1,2,2,2)</option>
-                <option value="2,2,1,2">Idriis (2,2,1,2)</option>
-                <option value="1,1,1,1">Ibrahima (1,1,1,1)</option>
-                <option value="1,2,1,2">Hiisaa (1,2,1,2)</option>
-                <option value="2,1,2,2">Oumar (2,1,2,2)</option>
-                <option value="1,1,2,2">Jibriil (1,1,2,2)</option>
-                <option value="1,2,2,1">Solayman (1,2,2,1)</option>
-                <option value="2,1,1,2">Haliyyu (2,1,1,2)</option>
-                <option value="2,2,1,1">Nuuh (2,2,1,1)</option>
-                <option value="1,1,1,2">Hasan (1,1,1,2)</option>
-                <option value="1,2,1,1">Yunus (1,2,1,1)</option>
-                <option value="2,1,2,1">Ousmane (2,1,2,1)</option>
-                <option value="2,2,2,2">Muusaa (2,2,2,2)</option>
-            </select>
-        </div>
-
-        <div class="mother-input"><label>Kër 4 :</label>
-            <select id="m4">
-                <option value="2,2,1,2">Idriis (2,2,1,2)</option>
-                <option value="1,1,2,1">Yoosufa (1,1,2,1)</option>
-                <option value="1,2,2,2">Adama (1,2,2,2)</option>
-                <option value="2,1,1,1">Muhammad (2,1,1,1)</option>
-                <option value="1,1,1,1">Ibrahima (1,1,1,1)</option>
-                <option value="1,2,1,2">Hiisaa (1,2,1,2)</option>
-                <option value="2,1,2,2">Oumar (2,1,2,2)</option>
-                <option value="1,1,2,2">Jibriil (1,1,2,2)</option>
-                <option value="1,2,2,1">Solayman (1,2,2,1)</option>
-                <option value="2,1,1,2">Haliyyu (2,1,1,2)</option>
-                <option value="2,2,1,1">Nuuh (2,2,1,1)</option>
-                <option value="1,1,1,2">Hasan (1,1,1,2)</option>
-                <option value="1,2,1,1">Yunus (1,2,1,1)</option>
-                <option value="2,1,2,1">Ousmane (2,1,2,1)</option>
-                <option value="2,2,2,2">Muusaa (2,2,2,2)</option>
-            </select>
-        </div>
-
-        <button onclick="calculerRamli()">Boole Poñ yi</button>
-
-        <div class="table-responsive">
-            <table id="jantDisplay" class="jant-table">
-                <!-- Sàll 1: 8 kër -->
-                <tr>
-                    <td><span class="row-title">Kër 8</span><span id="n8" class="fig-name"></span><div id="k8" class="figure-dots"></div></td>
-                    <td><span class="row-title">Kër 7</span><span id="n7" class="fig-name"></span><div id="k7" class="figure-dots"></div></td>
-                    <td><span class="row-title">Kër 6</span><span id="n6" class="fig-name"></span><div id="k6" class="figure-dots"></div></td>
-                    <td><span class="row-title">Kër 5</span><span id="n5" class="fig-name"></span><div id="k5" class="figure-dots"></div></td>
-                    <td><span class="row-title">Kër 4</span><span id="n4" class="fig-name"></span><div id="k4" class="figure-dots"></div></td>
-                    <td><span class="row-title">Kër 3</span><span id="n3" class="fig-name"></span><div id="k3" class="figure-dots"></div></td>
-                    <td><span class="row-title">Kër 2</span><span id="n2" class="fig-name"></span><div id="k2" class="figure-dots"></div></td>
-                    <td><span class="row-title">Kër 1</span><span id="n1" class="fig-name"></span><div id="k1" class="figure-dots"></div></td>
-                </tr>
-                <!-- Sàll 2: 4 kër -->
-                <tr>
-                    <td colspan="2"><span class="row-title">Kër 12</span><span id="n12" class="fig-name"></span><div id="k12" class="figure-dots"></div></td>
-                    <td colspan="2"><span class="row-title">Kër 11</span><span id="n11" class="fig-name"></span><div id="k11" class="figure-dots"></div></td>
-                    <td colspan="2"><span class="row-title">Kër 10</span><span id="n10" class="fig-name"></span><div id="k10" class="figure-dots"></div></td>
-                    <td colspan="2"><span class="row-title">Kër 9</span><span id="n9" class="fig-name"></span><div id="k9" class="figure-dots"></div></td>
-                </tr>
-                <!-- Sàll 3: 2 kër -->
-                <tr>
-                    <td colspan="4"><span class="row-title">Kër 14</span><span id="n14" class="fig-name"></span><div id="k14" class="figure-dots"></div></td>
-                    <td colspan="4"><span class="row-title">Kër 13</span><span id="n13" class="fig-name"></span><div id="k13" class="figure-dots"></div></td>
-                </tr>
-                <!-- Sàll 4: Kër 15 -->
-                <tr>
+</body>
+</html>
