@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramli Leeral - Àtte Gu Mujj</title>
+    <title>Ramli Leeral - 16 Figures</title>
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #0f0f15; color: #e0e0e6; text-align: center; padding: 20px; margin: 0; }
         h1 { color: #00ffcc; margin-bottom: 25px; }
@@ -14,7 +14,6 @@
         .tomb-yi { font-size: 26px; letter-spacing: 6px; line-height: 1; color: #00ffcc; margin: 10px 0; }
         .mbindeef-tur { font-weight: bold; color: #ffffff; font-size: 14px; }
         
-        /* Box firi bu woor bu féeñ ci suuf */
         .atte-gu-mujj-box { 
             background: linear-gradient(135deg, #1c1c3a, #161622); 
             border: 2px solid #00ffcc; 
@@ -38,17 +37,14 @@
     <h1>Ramli Leeral</h1>
     <button onclick="toggRamli()">Lancer Tirage Bi (Tombée)</button>
 
-    <!-- 1. 16 Kër yi dañuy féeñ fii -->
     <div class="grid" id="ramliGrid"></div>
 
-    <!-- 2. Benn Firi bu woor bu boole mbooleem mbir yi ci suuf -->
     <div class="atte-gu-mujj-box" id="atteBox" style="display:none;">
         <div class="atte-header">Àtte Gu Woor Gu Ramli Bi Joxe</div>
         <div class="atte-text" id="atteTexte"></div>
     </div>
 
     <script>
-        // Firi gu gatt gu mbindeef bu ci nekk di joxe ci wàllu àtte
         const firi_atte = {
             "1,1,1,1": { tur: "Tariki", xew: "mbir mi day dox, am na tukki walla yoon wu féeñ, lu gaaw lay doon." },
             "2,2,2,2": { tur: "Damama", xew: "mbooloo dina ci dajalo, mbir mi dina yaatu lool waaye am na jaxaso." },
@@ -64,7 +60,7 @@
             "1,2,2,2": { tur: "Akyan", xew: "nguur, daraja gu rëy, ak alal gu bari gu am barke te buy duren." },
             "1,2,1,2": { tur: "La hiyan", xew: "ree, fo, mbegte, ak ndaje mu neex mu lay dandi mbooleem coono yi." },
             "2,1,2,1": { tur: "Kousadj", xew: "gàkk-gàkk walla lu dog ci sa diggante ak li nga sàkku. Lu am lëndëm la." },
-            "2,1,2,2": { tur: "Nakiw", xew: "mbiro kumpa bu lëndëm te dëggu, faww nga sàytulu bu baax ba féeñ." },
+            "2,1,2,2": { tur: "Nakiw", xew: "mbiro kumpa bu lëndëm te dëggu, faww nga sàytulu bu baax ba mu féeñ." },
             "2,2,1,2": { tur: "Asbo", xew: "doles gu rëy, mbindeef gu dëgër, ak nguur gu lay dimbali ci sa yoon." }
         };
 
@@ -74,14 +70,29 @@
 
         function toggRamli() {
             let m = [];
+            
+            // 1. Sàkku 4 Ndey yi (Kër 1 ba Kër 4)
             for (let i=0; i<4; i++) m.push(rëddRandom());
-            for (let i=0; i<4; i++) m.push([m[i], m[i], m[i], m[i]]);
-            m.push(fusionner(m, m)); m.push(fusionner(m, m));
-            m.push(fusionner(m, m)); m.push(fusionner(m, m));
-            m.push(fusionner(m, m)); m.push(fusionner(m, m));
-            m.push(fusionner(m, m)); m.push(fusionner(m, m)); // M16
+            
+            // 2. Sàkku 4 Doom yi (Kër 5 ba Kër 8) ci rëdd gu dagg wu wër
+            m.push([m[0][0], m[1][0], m[2][0], m[3][0]]); // Kër 5 (Boppu Ndey yi)
+            m.push([m[0][1], m[1][1], m[2][1], m[3][1]]); // Kër 6 (Dënnu Ndey yi)
+            m.push([m[0][2], m[1][2], m[2][2], m[3][2]]); // Kër 7 (Biiru Ndey yi)
+            m.push([m[0][3], m[1][3], m[2][3], m[3][3]]); // Kër 8 (Tànku Ndey yi)
 
-            // Affichage 16 kër yi
+            // 3. Sàkku Sët yi (Kër 9 ba Kër 12)
+            m.push(fusionner(m[0], m[1])); // Kër 9 = K1 + K2
+            m.push(fusionner(m[2], m[3])); // Kër 10 = K3 + K4
+            m.push(fusionner(m[4], m[5])); // Kër 11 = K5 + K6
+            m.push(fusionner(m[6], m[7])); // Kër 12 = K7 + K8
+
+            // 4. Jeexal bi (Kër 13 ba Kër 16)
+            m.push(fusionner(m[8], m[9]));   // Kër 13 = K9 + K10
+            m.push(fusionner(m[10], m[11])); // Kër 14 = K11 + K12
+            m.push(fusionner(m[12], m[13])); // Kër 15 = K13 + K14 (Misaan)
+            m.push(fusionner(m[14], m[0]));  // Kër 16 = K15 + K1 (Àtte)
+
+            // Affichage tableau bi
             const grid = document.getElementById('ramliGrid');
             grid.innerHTML = '';
             m.forEach((fig, i) => {
@@ -91,16 +102,10 @@
                 grid.innerHTML += `<div class="kër"><div class="kër-tur">Kër ${i+1}</div><div class="tomb-yi">${visuel}</div><div class="mbindeef-tur">${name}</div></div>`;
             });
 
-            // Gëstu Kër 1, Kër 15 ak Kër 16 ngir Benn Firi bu woor bi
-            let cleM1 = m[0].join(",");
-            let cleM15 = m[14].join(",");
-            let cleM16 = m[15].join(",");
+            let firiM1 = firi_atte[m[0].join(",")] || { tur: "Mbindeef", xew: "lu bir" };
+            let firiM15 = firi_atte[m[14].join(",")] || { tur: "Mbindeef", xew: "lu am solo" };
+            let firiM16 = firi_atte[m[15].join(",")] || { tur: "Mbindeef", xew: "lu jeex" };
 
-            let firiM1 = firi_atte[cleM1] || { tur: "Mbindeef", xew: "lu bir" };
-            let firiM15 = firi_atte[cleM15] || { tur: "Mbindeef", xew: "lu am solo" };
-            let firiM16 = firi_atte[cleM16] || { tur: "Mbindeef", xew: "lu jeex" };
-
-            // Bind bindeef bu boole lépp ci suuf
             const texteAtte = `
                 Ci seet gu mat seuk gi nga togg léegi: Yaw mi sàkku seet bi (Kër 1), sa yaram ak sa xel dafa tëdd ci mbindeefu <span class="highlight">${firiM1.tur}</span>. 
                 Loolu dafa woné ne ci sa dundu léegi: ${firiM1.xew}<br><br>
