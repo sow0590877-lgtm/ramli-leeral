@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>علم الرمل - leeral</title>
+    <title>علم الرمل - ليرال</title>
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #0f0f15; color: #e0e0e6; text-align: center; padding: 20px; margin: 0; }
         h1 { color: #00ffcc; margin-bottom: 25px; }
@@ -36,7 +36,6 @@
 
     <h1>كَشْفُ عِلْمِ الرَّمْلِ</h1>
     
-    <!-- ل lëkkaloo gu Wolof gi -->
     <a href="index.html" style="background: #1c1c3a; color: #00ffcc; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 14px; border: 1px solid #00ffcc; display: inline-block; margin-bottom: 25px;">Wolof (وولوف)</a>
 
     <br><button onclick="toggRamli()">ضَرْبُ الرَّمْلِ (تَنْزِيلُ الْبُيُوتِ)</button>
@@ -49,7 +48,6 @@
     </div>
 
     <script>
-        // الأشكال والأحكام مع التشكيل الكامل والمطابق
         const firi_atte = {
             "1,1,2,1": { tur: "يُوسُفُ (النَّصْرَةُ الدَّاخِلَةُ)", xew: "دُخُولُ بَرَكَةٍ، مَالٍ أَوْ نَصْرَةٍ بَاطِنِيَّةٍ قَوِيَّةٍ قَادِمَةٍ إِلَيْكَ." },
             "1,2,2,2": { tur: "آدَمُ (الْأَحْيَانُ)", xew: "جَاهٌ عَظِيمٌ، سُلْطَانٌ، وَبَرَكَةٌ وَاسِعَةٌ وَرِزْقٌ مُسْتَمِرٌّ فِي حَيَاتِكَ." },
@@ -57,7 +55,7 @@
             "2,2,1,2": { tur: "إِدْرِيسُ (الْعَتَبَةُ الْخَارِجَةُ)", xew: "قُوَّةٌ عَظِيمَةٌ، ثَبَاتٌ، وَتَأْيِيدٌ يُرَافِقُكَ فِي طَرِيقِكَ." },
             "1,1,1,1": { tur: "إِبْرَاهِيمُ (الطَّرِيقُ)", xew: "الْأَمْرُ فِي حَرَكَةٍ، هُنَاكَ سَفَرٌ أَوْ طَرِيقٌ مَفْتُوحٌ يَظْهَرُ سَرِيعًا." },
             "1,2,1,2": { tur: "عِيسَى (الضَّاحِكُ)", xew: "ضِحْكٌ، سُرُورٌ، وَفَرْحَةٌ كَبِيرَةٌ تُذْهِبُ عَنْكَ كُلَّ الْهُمُومِ وَالْمَتَاعِبِ." },
-            "2,1,2,2": { tur: "عُمَرُ (النَّقِيُّ)", xew: "أَمْرٌ غَيْبِيٌّ مَسْتُورٌ وَصَادِقٌ، يَجِبُ التَّرَيُّثُ حَتَّى يَنْكَشِفَ تَمَامًا." },
+            "2,1,2,2": { tur: "عُمَرُ (النَّقِيُّ)", xew: "أَمْرٌ غَيْبِيٌ مَسْتُورٌ وَصَادِقٌ، يَجِبُ التَّرَيُّثُ حَتَّى يَنْكَشِفَ تَمَامًا." },
             "2,2,2,1": { tur: "أَيُّوبُ (الْمَنْكُوسُ)", xew: "تَرَاجُعٌ مُؤَقَّتٌ أَوْ مَشَقَّةٌ تَدْخُلُ عَلَى الْخَاطِرِ، تَحْتَاجُ إِلَى الصَّبْرِ." },
             "1,1,2,2": { tur: "جِبْرِيلُ (الِاجْتِمَاعُ)", xew: "اجْتِمَاعٌ مُبَارَكٌ، زَوَاجٌ، أَوْ دَمْجُ أَمْوَالٍ لِعَمَلٍ مُهِمٍّ وَنَاجِحٍ." },
             "1,2,2,1": { tur: "سُلَيْمَانُ (الْبَيَاضُ)", xew: "سَلَامَةٌ تَامَّةٌ، نُورٌ، وَصَفَاءُ قَلْبٍ. يَظْهَرُ الْخَيْرُ وَالْيُسْرُ فِي حَيَاتِكَ." },
@@ -71,23 +69,43 @@
 
         function rëddRandom() { return [Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1]; }
         function booleLigne(l1, l2) { return ((l1 + l2) % 2 === 0) ? 2 : 1; }
-        function fusionner(f1, f2) { return [booleLigne(f1, f2), booleLigne(f1, f2), booleLigne(f1, f2), booleLigne(f1, f2)]; }
+        
+        function fusionner(f1, f2) { 
+            return [
+                booleLigne(f1[0], f2[0]), 
+                booleLigne(f1[1], f2[1]), 
+                booleLigne(f1[2], f2[2]), 
+                booleLigne(f1[3], f2[3])
+            ]; 
+        }
 
         function toggRamli() {
             let m = []; 
-            for (let i=0; i<4; i++) m.push(rëddRandom());
             
-            m.push([m[0], m[1], m[2], m[3]]);
-            m.push([m[0], m[1], m[2], m[3]]);
-            m.push([m[0], m[1], m[2], m[3]]);
-            m.push([m[0], m[1], m[2], m[3]]);
+            // 1. الأمهات من 1 إلى 4
+            for (let i=0; i<4; i++) {
+                m.push(rëddRandom());
+            }
+            
+            // 2. تصحيح الأبناء (البيوت من 5 إلى 8) - بالتصويب الأفقي للأمهات
+            m.push([m[0][0], m[1][0], m[2][0], m[3][0]]); // البيت 5 (الرؤوس)
+            m.push([m[0][1], m[1][1], m[2][1], m[3][1]]); // البيت 6 (الصدور)
+            m.push([m[0][2], m[1][2], m[2][2], m[3][2]]); // البيت 7 (البطون)
+            m.push([m[0][3], m[1][3], m[2][3], m[3][3]]); // البيت 8 (الأقدام)
 
-            m.push(fusionner(m[0], m[1])); m.push(fusionner(m[2], m[3]));
-            m.push(fusionner(m[4], m[5])); m.push(fusionner(m[6], m[7]));
+            // 3. الحفدة (البيوت من 9 إلى 12)
+            m.push(fusionner(m[0], m[1])); // البيت 9 = 1 + 2
+            m.push(fusionner(m[2], m[3])); // البيت 10 = 3 + 4
+            m.push(fusionner(m[4], m[5])); // البيت 11 = 5 + 6
+            m.push(fusionner(m[6], m[7])); // البيت 12 = 7 + 8
 
-            m.push(fusionner(m[8], m[9])); m.push(fusionner(m[10], m[11]));
-            m.push(fusionner(m[12], m[13])); m.push(fusionner(m[14], m[0]));
+            // 4. الخواتيم (البيوت من 13 إلى 16)
+            m.push(fusionner(m[8], m[9]));   // البيت 13 = 9 + 10
+            m.push(fusionner(m[10], m[11])); // البيت 14 = 11 + 12
+            m.push(fusionner(m[12], m[13])); // البيت 15 = 13 + 14 (القاضي)
+            m.push(fusionner(m[14], m[0]));   // البيت 16 = 15 + 1 (الحكم)
 
+            // عرض جدول البيوت الـ 16 كاملة وبشكل صحيح
             const grid = document.getElementById('ramliGrid');
             grid.innerHTML = '';
             m.forEach((fig, i) => {
