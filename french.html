@@ -62,8 +62,10 @@
     </div>
 
     <script>
+        // Le code PIN par défaut
         const KODD_PIN_DËGGU = "1234"; 
 
+        // Gestion de la validité de 5 jours
         window.onload = function() {
             let pinDencu = localStorage.getItem("ramli_pin");
             let dateDencu = localStorage.getItem("ramli_pin_date");
@@ -82,6 +84,7 @@
             }
         };
 
+        // Fonction de vérification du PIN corrigée
         function verifierPIN() {
             let inputValeur = document.getElementById("pinInput").value;
             if (inputValeur === KODD_PIN_DËGGU) {
@@ -110,7 +113,7 @@
             "1,1,1,2": { tur: "Hasan", xew: "fatigue, perte de biens ou paroles confuses qui perturbent l'affaire. Soyez vigilant." },
             "1,2,1,1": { tur: "Yunus", xew: "victoire claire, gain et sortie définitive des problèmes vers la délivrance." },
             "2,1,2,1": { tur: "Ousmane", xew: "obstacle ou coupure entre vous et ce que vous cherchez, l'affaire est floue." },
-            "2,2,2,2": { tur: "Moussa", xew: "les gens se rassemblent autour de vous, l'affaire s'étend mais avec une certaine confusion." }
+            "2,2,2,2": { tur: "Moussa", xew: "les gens se rassemblent baskets autour de vous, l'affaire s'étend mais avec une certaine confusion." }
         };
 
         function rëddRandom() { return [Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1]; }
@@ -150,4 +153,3 @@
                 Cela indique sa situation actuelle : ${firiM1.xew}<br><br>
                 Selon le Juge interne du thème (<span class="highlight">Maison 15</span>), la figure fêtée est <span class="highlight">${firiM15.tur}</span>, ce qui signifie : 
                 <span class="highlight">${firiM15.xew}</span><br><br>
-                Enfin, la Sentence finale (<span class="highlight">Maison 16</span>) clôture le tirage avec la figure de <span class="highlight">${firiM16.tur}</span>. 
