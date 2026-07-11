@@ -12,7 +12,7 @@
         .kër { background: #161622; padding: 15px; border-radius: 8px; border: 1px solid #2a2a3a; text-align: center; }
         .kër-tur { font-size: 12px; color: #ff9900; font-weight: bold; text-transform: uppercase; }
         .tomb-yi { font-size: 26px; letter-spacing: 6px; line-height: 1; color: #00ffcc; margin: 10px 0; }
-        .mbindeef-tur { font-weight: bold; color: #ffffff; font-size: 14px; }
+        .mbindeef-tur { font-weight: bold; color: #ffffff; font-size: 15px; }
         
         .atte-gu-mujj-box { 
             background: linear-gradient(135deg, #1c1c3a, #161622); 
@@ -45,23 +45,24 @@
     </div>
 
     <script>
+        // Turi mbindeef yi soppi nañu ko ci turi Yonent yi dëgg-dëgg
         const firi_atte = {
-            "1,1,1,1": { tur: "Tariki", xew: "mbir mi day dox, am na tukki walla yoon wu féeñ, lu gaaw lay doon." },
-            "2,2,2,2": { tur: "Damama", xew: "mbooloo dina ci dajalo, mbir mi dina yaatu lool waaye am na jaxaso." },
-            "2,1,1,2": { tur: "Humra", xew: "tàngay xol, xare walla fitna dina ci am. Faww nga am jom te muur sa xel." },
-            "1,2,2,1": { tur: "Bayada", xew: "jàmm gu mucc ayib, leer, ak xol bu set. Lu baax te neex dina féeñ ci sa dundu." },
-            "1,2,1,1": { tur: "Nusra Al-Kharija", xew: "ganyé gu féeñ, ndàm, ak mbir mu guene ci jàfe-jàfe yi. Lu baax la." },
-            "1,1,2,1": { tur: "Nusra Al-Dakhila", xew: "barke gu duggu, alal walla ndimmis gu laqu gu dëgër buy ñëw ci yaw." },
-            "1,1,1,2": { tur: "Utba Al-Kharija", xew: "coono, sànku alal walla wax gu rëy guy tas mbir mi. Faww nga wattuku." },
-            "2,1,1,1": { tur: "Utba Al-Dakhila", xew: "mbir mu teju, batin bu dëgër, walla mbegte mu laqu mu nara duren." },
-            "2,2,1,1": { tur: "Kabd Al-Asad", xew: "jafe-jafe gu tar, tòj-tòj walla mettit buy tàkk ci biir. Da laaj ñaan." },
-            "1,1,2,2": { tur: "Ijtima'a", xew: "ndaje mu baax, sëy, walla boole alal yu bari ngir liggéej bu am solo." },
-            "2,2,2,1": { tur: "Ankis", xew: "daanu gu gaaw, jàfe-jàfe buy wadd, walla rëcc-rëcc ci sa yaakaar." },
-            "1,2,2,2": { urban: "Akyan", tur: "Akyan", xew: "nguur, daraja gu rëy, ak alal gu bari gu am barke te buy duren." },
-            "1,2,1,2": { tur: "La hiyan", xew: "ree, fo, mbegte, ak ndaje mu neex mu lay dandi mbooleem coono yi." },
-            "2,1,2,1": { tur: "Kousadj", xew: "gàkk-gàkk walla lu dog ci sa diggante ak li nga sàkku. Lu am lëndëm la." },
-            "2,1,2,2": { tur: "Nakiw", xew: "mbiro kumpa bu lëndëm te dëggu, faww nga sàytulu bu baax ba mu féeñ." },
-            "2,2,1,2": { tur: "Asbo", xew: "doles gu rëy, mbindeef gu dëgër, ak nguur gu lay dimbali ci sa yoon." }
+            "1,1,1,1": { tur: "Tariki (Yunus)", xew: "mbir mi day dox, am na tukki walla yoon wu féeñ, lu gaaw lay doon." },
+            "2,2,2,2": { tur: "Damama (Muhammad)", xew: "mbooloo dina ci dajalo, mbir mi dina yaatu lool waaye am na jaxaso." },
+            "2,1,1,2": { tur: "Humra (Moussa)", xew: "tàngay xol, xare walla fitna dina ci am. Faww nga am jom te muur sa xel." },
+            "1,2,2,1": { tur: "Bayada (Idris)", xew: "jàmm gu mucc ayib, leer, ak xol bu set. Lu baax te neex dina féeñ ci sa dundu." },
+            "1,2,1,1": { tur: "Nusra Al-Kharija (Ibrahim)", xew: "ganyé gu féeñ, ndàm, ak mbir mu guene ci jàfe-jàfe yi. Lu baax la." },
+            "1,1,2,1": { tur: "Nusra Al-Dakhila (Issa)", xew: "barke gu duggu, alal walla ndimmis gu laqu gu dëgër buy ñëw ci yaw." },
+            "1,1,1,2": { tur: "Utba Al-Kharija (Aymana / Khadija)", xew: "coono, sànku alal walla wax gu rëy guy tas mbir mi. Faww nga wattuku." },
+            "2,1,1,1": { tur: "Utba Al-Dakhila (Aliou)", xew: "mbir mu teju, batin bu dëgër, walla mbegte mu laqu mu nara duren." },
+            "2,2,1,1": { tur: "Kabd Al-Asad (Lougma)", xew: "jafe-jafe gu tar, tòj-tòj walla mettit buy tàkk ci biir. Da laaj ñaan." },
+            "1,1,2,2": { tur: "Ijtima'a (Ousmane)", xew: "ndaje mu baax, sëy, walla boole alal yu bari ngir liggéej bu am solo." },
+            "2,2,2,1": { tur: "Ankis (Inka)", xew: "daanu gu gaaw, jàfe-jàfe buy wadd, walla rëcc-rëcc ci sa yaakaar." },
+            "1,2,2,2": { tur: "Akyan (Yusuf)", xew: "nguur, daraja gu rëy, ak alal gu bari gu am barke te buy duren." },
+            "1,2,1,2": { tur: "La hiyan (Souleymane)", xew: "ree, fo, mbegte, ak ndaje mu neex mu lay dandi mbooleem coono yi." },
+            "2,1,2,1": { tur: "Kousadj (Adama)", xew: "gàkk-gàkk walla lu dog ci sa diggante ak li nga sàkku. Lu am lëndëm la." },
+            "2,1,2,2": { tur: "Nakiw (Daouda)", xew: "mbiro kumpa bu lëndëm te dëggu, faww nga sàytulu bu baax ba mu féeñ." },
+            "2,2,1,2": { tur: "Asbo (Ayouba)", xew: "doles gu rëy, mbindeef gu dëgër, ak nguur gu lay dimbali ci sa yoon." }
         };
 
         function rëddRandom() { return [Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1]; }
@@ -69,28 +70,28 @@
         
         function fusionner(f1, f2) { 
             return [
-                booleLigne(f1[0], f2[0]), 
-                booleLigne(f1[1], f2[1]), 
-                booleLigne(f1[2], f2[2]), 
-                booleLigne(f1[3], f2[3])
+                booleLigne(f1, f2), 
+                booleLigne(f1, f2), 
+                booleLigne(f1, f2), 
+                booleLigne(f1, f2)
             ]; 
         }
 
         function toggRamli() {
-            let m = []; // Di na denc 16 kër yi (0 ba 15)
+            let m = []; 
             
             // 1. Sàkku 4 Ndey yi (Kër 1 ba Kër 4)
             for (let i=0; i<4; i++) {
                 m.push(rëddRandom());
             }
             
-            // 2. Sàkku 4 Doom yi (Kër 5 ba Kër 8) ci rëdd gu dagg (Transposition)
+            // 2. Sàkku 4 Doom yi (Kër 5 ba Kër 8)
             m.push([m[0][0], m[1][0], m[2][0], m[3][0]]); // Kër 5 (Boppu Ndey yi)
             m.push([m[0][1], m[1][1], m[2][1], m[3][1]]); // Kër 6 (Dënnu Ndey yi)
             m.push([m[0][2], m[1][2], m[2][2], m[3][2]]); // Kër 7 (Biiru Ndey yi)
             m.push([m[0][3], m[1][3], m[2][3], m[3][3]]); // Kër 8 (Tànku Ndey yi)
 
-            // 3. Sàkku Sët yi (Kër 9 ba Kër 12) -> Boole ñaar-ñaar
+            // 3. Sàkku Sët yi (Kër 9 ba Kër 12)
             m.push(fusionner(m[0], m[1])); // Kër 9 = K1 + K2
             m.push(fusionner(m[2], m[3])); // Kër 10 = K3 + K4
             m.push(fusionner(m[4], m[5])); // Kër 11 = K5 + K6
@@ -102,7 +103,7 @@
             m.push(fusionner(m[12], m[13])); // Kër 15 = K13 + K14 (Misaan)
             m.push(fusionner(m[14], m[0]));  // Kër 16 = K15 + K1 (Àtte)
 
-            // Affichage Tableau bi yëpp
+            // Affichage Tableau bi
             const grid = document.getElementById('ramliGrid');
             grid.innerHTML = '';
             m.forEach((fig, i) => {
@@ -112,7 +113,7 @@
                 grid.innerHTML += `<div class="kër"><div class="kër-tur">Kër ${i+1}</div><div class="tomb-yi">${visuel}</div><div class="mbindeef-tur">${name}</div></div>`;
             });
 
-            // Tënk firi bi ci suuf
+            // Firi gu mujj gu teju bunt bi
             let firiM1 = firi_atte[m[0].join(",")] || { tur: "Mbindeef", xew: "lu bir" };
             let firiM15 = firi_atte[m[14].join(",")] || { tur: "Mbindeef", xew: "lu am solo" };
             let firiM16 = firi_atte[m[15].join(",")] || { tur: "Mbindeef", xew: "lu jeex" };
