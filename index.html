@@ -1,113 +1,104 @@
 <!DOCTYPE html>
-<html lang="wo">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramli Leeral</title>
+    <title>Application Ramli - 16 Figures</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #121212; color: #fff; text-align: center; padding: 15px; }
-        .container { max-width: 500px; margin: auto; background: #1e1e1e; padding: 20px; border-radius: 10px; }
-        h1 { color: #ffcc00; font-size: 22px; }
-        .house-selector { background: #2a2a2a; padding: 10px; border-radius: 8px; margin-bottom: 15px; text-align: left; }
-        .house-slot { margin-bottom: 5px; font-weight: bold; color: #ffcc00; }
-        .slot-val { color: #00ffcc; margin-left: 10px; }
-        .grid-tombu { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 15px; }
-        .btn-fig { background: #333; color: white; border: 1px solid #555; padding: 10px 2px; font-size: 12px; font-weight: bold; border-radius: 5px; cursor: pointer; }
-        .btn-fig:hover { border-color: #ffcc00; }
-        .action-btn { background: #ffcc00; color: #000; border: none; padding: 12px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; width: 100%; }
-        .result-box { margin-top: 20px; padding: 10px; background: #2a2a2a; border-radius: 5px; border-left: 5px solid #ffcc00; text-align: left; display: none; }
-        .house-item { margin-bottom: 10px; padding: 8px; background: #1e1e1e; border-radius: 5px; }
-        .house-title { font-weight: bold; color: #ffcc00; }
-        .fig-name { color: #00ffcc; font-weight: bold; }
+        body { font-family: Arial, sans-serif; background-color: #121212; color: white; text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; max-width: 800px; margin: 20px auto; }
+        .house { background: #1e1e1e; padding: 15px; border-radius: 8px; border: 1px solid #333; }
+        .dots { font-size: 24px; letter-spacing: 5px; line-height: 1.2; color: #ffcc00; }
+        button { background-color: #007644; color: white; border: none; padding: 12px 24px; font-size: 16px; cursor: pointer; border-radius: 5px; margin-top: 20px; }
+        button:hover { background-color: #005c34; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Ramli Leeral</h1>
-    <p style="color:#ccc; font-size:13px;">Tombul 4 figiir ngir firi mbir mi.</p>
+    <h1>Générateur de Thème Ramli</h1>
+    <button onclick="genererTheme()">Lancer le Tirage (Tombée)</button>
 
-    <div class="house-selector">
-        <div class="house-slot">Kër 1: <span id="slot1" class="slot-val">Seet...</span></div>
-        <div class="house-slot">Kër 2: <span id="slot2" class="slot-val">Seet...</span></div>
-        <div class="house-slot">Kër 3: <span id="slot3" class="slot-val">Seet...</span></div>
-        <div class="house-slot">Kër 4: <span id="slot4" class="slot-val">Seet...</span></div>
-        <button style="background:#cc0000; color:white; border:none; padding:3px 8px; border-radius:3px; font-size:11px; cursor:pointer; margin-top:5px;" onclick="raasalYëpp()">Dindi (Reset)</button>
+    <div class="grid" id="ramliGrid">
+        <!-- Les 16 maisons s'afficheront ici -->
     </div>
 
-    <div class="grid-tombu" id="buttonsContainer"></div>
-
-    <button class="action-btn" onclick="firiMbirYëpp()">Firi 16 Kër Yi</button>
-    <div id="resultat" class="result-box"></div>
-</div>
-
-<script>
-// Dencukaay bu gàtt wu 16 figiir yi
-const db = {
-    "yuusufa":   { c:, n: "Yuusufa", d: "Muus, yaakar bu baax, ak xéewal buy tàbbi bu gaaw. Ndam ci jàmm." },
-    "adama":     { c:, n: "Adama", d: "Suuf, dëgëray, alal walla liggéey buy yàgg. Sàqtu fula ak muñ." },
-    "muhammad":  { c:, n: "Muhammad", d: "Sellal, njub, ngor, ak teddanga ci mbooloo. Yoon wu neex." },
-    "idriis":    { c:, n: "Idriis", d: "Mbir mu wàcc walla coono bu gàtt buy joxe léson. Dëgëral sa xol." },
-    "ibrahima":  { c:, n: "Ibrahima", d: "Mbooloo, dajalo, taxawal mbir mu rëy ak ndimbalu nit ñi." },
-    "hiisaa":    { c:, n: "Hiisaa", d: "Weex, sell xol, jàmm gu rëy, ak xool bu sedd ci dundum nit ki." },
-    "oumar":     { c:, n: "Oumar", d: "Fitna, xonq, fit bu rëy, walla mer bu gaaw. Sàqtu teye ak muñ." },
-    "ayyuuba":   { c:, n: "Ayyuuba", d: "Tukki, génn kër, walla alal buy rëcc mbaa buy tàggoo dëkk." },
-    "jibriil":   { c:, n: "Jibriil", d: "Yoon buy dox, tukki, soppiku, walla xalaat buy ubbeeku yoon." },
-    "solayman":  { c:, n: "Solayman", d: "Laxas, alal buy génn loxo bu gaaw, mbaa jàqare gu gàtt." },
-    "haliyyu":   { c:, n: "Haliyyu", d: "Teye alal, sàmm mbir ci biir kër, mbaa soxla su faju ci jàmm." },
-    "nuuhu":     { c:, n: "Nuuhu", d: "Daje, mbooloo, liggéey bu rëy buy taxaw ci njubte ak dëgëray." },
-    "hasan":     { c:, n: "Hasan", d: "Ndam buy dugsi, barke, ak mbegte gu gaaw ci dundu njabot." },
-    "yunus":     { c:, n: "Yunus", d: "Siw, daraja, tudd bu rafet, ak bëgg joxe ndimbal mbooloo." },
-    "ousmane":   { c:, n: "Ousmane", d: "Mbir mu tëju-ubbeeku, faaw nga sàytu dundam ak say xarit bu baax." },
-    "muusaa":    { c:, n: "Muusaa", d: "Yoon bu tëju, fula bu rëy, coono buy joxe ndam bu dëgër bu yàgg." }
-};
-
-const houses = ["", "Nit ki ak dundam", "Alal ak koom", "Mbokk ak gox", "Kër, ndey ak baay", "Dom ak mbegte", "Tawat ak coono", "Sey ak liggéey", "Dee ak lu nexut", "Tukki ak xam-xam", "Ngur ak daraja", "Yaakar ak xarit", "Noon ak gàllankoor", "Kër gi / mbind mi", "Li buy dikk suba", "Mîzaan / Atte bi", "Dëgg gu mujj"];
-
-let selected = [null, null, null, null];
-
-// Sàkk boutons yi automatiqam ngir kood bi bañ a rëy
-const container = document.getElementById('buttonsContainer');
-Object.keys(db).forEach(k => {
-    let b = document.createElement('button');
-    b.className = 'btn-fig';
-    b.innerText = db[k].n;
-    b.onclick = () => {
-        for(let i=0; i<4; i++) {
-            if(selected[i]===null) { selected[i]=k; document.getElementById(`slot${i+1}`).innerText=db[k].n; break; }
+    <script>
+        // Fonction pour générer une figure aléatoire (1 ou 2 points par ligne)
+        function genererNdey() {
+            return [
+                Math.floor(Math.random() * 2) + 1, // Tête
+                Math.floor(Math.random() * 2) + 1, // Poitrine
+                Math.floor(Math.random() * 2) + 1, // Ventre
+                Math.floor(Math.random() * 2) + 1  // Pieds
+            ];
         }
-    };
-    container.appendChild(b);
-});
 
-function raasalYëpp() {
-    selected = [null, null, null, null];
-    for(let i=1; i<=4; i++) document.getElementById(`slot${i}`).innerText = "Seet...";
-    document.getElementById('resultat').style.display = "none";
-}
+        // Fonction pour additionner deux lignes selon les règles du Ramli (Pair/Impair)
+        function additionnerLignes(l1, l2) {
+            let total = l1 + l2;
+            return (total % 2 === 0) ? 2 : 1; // 2 points si pair, 1 point si impair
+        }
 
-const calc = (p1, p2) => (p1 + p2) % 2 === 0 ? 2 : 1;
+        // Fonction principale pour calculer tout le thème
+        function genererTheme() {
+            let maisons = [];
 
-function firiMbirYëpp() {
-    if(selected.includes(null)) { alert("Tombul 4 figiir jëkk!"); return; }
-    let k = [null, ...selected.map(x => db[x].c)];
-    
-    for(let i=0; i<4; i++) {
-        k[5+i] = [k[1][i], k[2][i], k[3][i], k[4][i]];
-    }
-    for(let i=0; i<4; i++) k[9+i] = [calc(k[1+i*2][0], k[2+i*2][0]), calc(k[1+i*2][1], k[2+i*2][1]), calc(k[1+i*2][2], k[2+i*2][2]), calc(k[1+i*2][3], k[2+i*2][3])];
-    for(let i=0; i<3; i++) k[13+i] = [calc(k[9+i*2][0], k[10+i*2][0]), calc(k[9+i*2][1], k[10+i*2][1]), calc(k[9+i*2][2], k[10+i*2][2]), calc(k[9+i*2][3], k[10+i*2][3])];
-    k[16] = [calc(k[1][0], k[15][0]), calc(k[1][1], k[15][1]), calc(k[1][2], k[15][2]), calc(k[1][3], k[15][3])];
+            // 1. Génération des 4 Mères (Ndey yi : Maisons 1 à 4)
+            for (let i = 0; i < 4; i++) {
+                maisons.push(genererNdey());
+            }
 
-    let txt = "<h2>Resultat yi:</h2>";
-    for(let i=1; i<=16; i++) {
-        let str = k[i].join(" ");
-        let f = Object.values(db).find(x => x.c.join(" ") === str) || {n:"Xamut", d:"Lëndëm."};
-        txt += `<div class="house-item"><span class="house-title">Kër ${i} (${houses[i]}):</span> <span class="fig-name">${f.n}</span><br><span style="color:#ccc;font-size:13px;">${f.d}</span></div>`;
-    }
-    document.getElementById('resultat').innerHTML = txt;
-    document.getElementById('resultat').style.display = "block";
-}
-</script>
+            // 2. Génération des 4 Filles (Doom yi : Maisons 5 à 8)
+            for (let i = 0; i < 4; i++) {
+                maisons.push([
+                    maisons[0][i], // Tête
+                    maisons[1][i], // Poitrine
+                    maisons[2][i], // Ventre
+                    maisons[3][i]  // Pieds
+                ]);
+            }
+
+            // 3. Génération des Sœurs/Neveux (Sët yi : Maisons 9 à 12)
+            maisons.push(fusionner(maisons[0], maisons[1])); // M9  = M1 + M2
+            maisons.push(fusionner(maisons[2], maisons[3])); // M10 = M3 + M4
+            maisons.push(fusionner(maisons[4], maisons[5])); // M11 = M5 + M6
+            maisons.push(fusionner(maisons[6], maisons[7])); // M12 = M7 + M8
+
+            // 4. Génération des maisons de conclusion (Maisons 13 à 16)
+            maisons.push(fusionner(maisons[8], maisons[9]));   // M13 = M9 + M10
+            maisons.push(fusionner(maisons[10], maisons[11])); // M14 = M11 + M12
+            maisons.push(fusionner(maisons[12], maisons[13])); // M15 = M13 + M14 (Le Juge)
+            maisons.push(fusionner(maisons[14], maisons[0]));  // M16 = M15 + M1 (La Sentence)
+
+            afficherGrid(maisons);
+        }
+
+        // Fonction outil pour fusionner deux figures ligne par ligne
+        function fusionner(f1, f2) {
+            return [
+                additionnerLignes(f1[0], f2[0]),
+                additionnerLignes(f1[1], f2[1]),
+                additionnerLignes(f1[2], f2[2]),
+                additionnerLignes(f1[3], f2[3])
+            ];
+        }
+
+        // Fonction pour afficher visuellement les résultats dans le HTML
+        function afficherGrid(maisons) {
+            const grid = document.getElementById('ramliGrid');
+            grid.innerHTML = '';
+
+            maisons.forEach((fig, index) => {
+                let div = document.createElement('div');
+                div.className = 'house';
+                
+                // Convertit les chiffres 1 et 2 en points visuels (• ou ••)
+                let visuel = fig.map(points => points === 1 ? "•" : "••").join("<br>");
+                
+                div.innerHTML = `<h3>Maison ${index + 1}</h3><div class="dots">${visuel}</div>`;
+                grid.appendChild(div);
+            });
+        }
+    </script>
 </body>
 </html>
