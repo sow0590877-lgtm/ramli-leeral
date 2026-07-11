@@ -28,41 +28,45 @@
         .atte-text { font-size: 16px; line-height: 1.8; color: #ffffff; }
         .highlight { color: #ffcc00; font-weight: bold; }
         
-        button { background: linear-gradient(135deg, #007644, #009955); color: white; border: none; padding: 15px 35px; font-size: 18px; cursor: pointer; border-radius: 30px; font-weight: bold; box-shadow: 0 4px 15px rgba(0,118,68,0.4); transition: 0.3s; }
+        button { background: linear-gradient(135deg, #007644, #009955); color: white; border: none; padding: 15px 35px; font-size: 18px; cursor: pointer; border-radius: 30px; font-weight: bold; box-shadow: 0 4px 15px rgba(0,118,68,0.4); transition: 0.3s; margin-top: 10px; }
         button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,118,68,0.6); }
     </style>
 </head>
 <body>
 
-    <h1>كشف علم الرمل</h1>
-    <button onclick="toggRamli()">ضرب الرمل (تنزيل البيوت)</button>
+    <h1>كَشْفُ عِلْمِ الرَّمْلِ</h1>
+    
+    <!-- ل lëkkaloo gu Wolof gi -->
+    <a href="index.html" style="background: #1c1c3a; color: #00ffcc; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 14px; border: 1px solid #00ffcc; display: inline-block; margin-bottom: 25px;">Wolof (وولوف)</a>
+
+    <br><button onclick="toggRamli()">ضَرْبُ الرَّمْلِ (تَنْزِيلُ الْبُيُوتِ)</button>
 
     <div class="grid" id="ramliGrid"></div>
 
     <div class="atte-gu-mujj-box" id="atteBox" style="display:none;">
-        <div class="atte-header">الحكم النهائي الصادر من التخت</div>
+        <div class="atte-header">الْحُكْمُ النِّهَائِيُّ الصَّادِرُ مِنَ التَّخْتِ</div>
         <div class="atte-text" id="atteTexte"></div>
     </div>
 
     <script>
-        // الترجمة العربية الصحيحة للأشكال والأنبياء كما طلبت
+        // الأشكال والأحكام مع التشكيل الكامل والمطابق
         const firi_atte = {
-            "1,1,2,1": { tur: "يوسف (النصرة الداخلة)", xew: "دخول بركة، مال أو نصرة باطنية قوية قادمة إليك." },
-            "1,2,2,2": { tur: "آدم (الأحيان)", xew: "جاه عظيم، سلطان، وبركة واسعة ورزق مستمر في حياتك." },
-            "2,1,1,1": { tur: "محمد (العتبة الداخلة)", xew: "أمر مستور، باطن قوي، أو فرحة مخفية ستدوم طويلاً." },
-            "2,2,1,2": { tur: "إدريس (العتبة الخارجة)", xew: "قوة عظيمة، ثبات، وتأييد يرافقك في طريقك." },
-            "1,1,1,1": { tur: "إبراهيم (الطريق)", xew: "الأمر في حركة، هناك سفر أو طريق مفتوح يظهر سريعاً." },
-            "1,2,1,2": { tur: "عيسى (الضاحك)", xew: "ضحك، سرور، وفرحة كبيرة تذهب عنك كل الهموم والمتاعب." },
-            "2,1,2,2": { tur: "عمر (النقي)", xew: "أمر غيبي مستور وصادق، يجب التريث حتى ينكشف تماماً." },
-            "2,2,2,1": { tur: "أيوب (المنكوس)", xew: "تراجع مؤقت أو مشقة تدخل على الخاطر، تحتاج إلى الصبر." },
-            "1,1,2,2": { tur: "جبريل (الاجتماع)", xew: "اجتماع مبارك، زواج، أو دمج أموال لعمل مهم وناجح." },
-            "1,2,2,1": { tur: "سليمان (البياض)", xew: "سلامة تامة، نور، وصفاء قلب. يظهر الخير واليسر في حياتك." },
-            "2,1,1,2": { tur: "علي (الحمرة)", xew: "حرارة في القلب، مواجهة أو شدة. يجب الحذر وضبط النفس." },
-            "2,2,1,1": { tur: "نوح (قبض الأسد)", xew: "صعوبة شديدة أو تعب داخلي يمر به الخاطر، يستوجب الدعاء." },
-            "1,1,1,2": { tur: "الحسن (الأنكيس)", xew: "مشقة أو تعب أو كلام يشتت الأمر، يجب التحصن والتحذر." },
-            "1,2,1,1": { tur: "يونس (النصرة الخارجة)", xew: "ظهور نصر، ربح، وخروج تام من الضيق والمشاكل إلى الفرج." },
-            "2,1,2,1": { tur: "عثمان (الكوسج)", xew: "خلل أو انقطاع بينك وبين ما تطلب، الأمر فيه غموض." },
-            "2,2,2,2": { tur: "موسى (الجماعة)", xew: "الناس تجتمع حولك، أمر يتسع كثيراً لكن فيه بعض الاختلاط." }
+            "1,1,2,1": { tur: "يُوسُفُ (النَّصْرَةُ الدَّاخِلَةُ)", xew: "دُخُولُ بَرَكَةٍ، مَالٍ أَوْ نَصْرَةٍ بَاطِنِيَّةٍ قَوِيَّةٍ قَادِمَةٍ إِلَيْكَ." },
+            "1,2,2,2": { tur: "آدَمُ (الْأَحْيَانُ)", xew: "جَاهٌ عَظِيمٌ، سُلْطَانٌ، وَبَرَكَةٌ وَاسِعَةٌ وَرِزْقٌ مُسْتَمِرٌّ فِي حَيَاتِكَ." },
+            "2,1,1,1": { tur: "مُحَمَّدٌ (الْعَتَبَةُ الدَّاخِلَةُ)", xew: "أَمْرٌ مَسْتُورٌ، بَاطِنٌ قَوِيٌّ، أَوْ فَرْحَةٌ مَخْفِيَّةٌ سَتَدُومُ طَوِيلًا." },
+            "2,2,1,2": { tur: "إِدْرِيسُ (الْعَتَبَةُ الْخَارِجَةُ)", xew: "قُوَّةٌ عَظِيمَةٌ، ثَبَاتٌ، وَتَأْيِيدٌ يُرَافِقُكَ فِي طَرِيقِكَ." },
+            "1,1,1,1": { tur: "إِبْرَاهِيمُ (الطَّرِيقُ)", xew: "الْأَمْرُ فِي حَرَكَةٍ، هُنَاكَ سَفَرٌ أَوْ طَرِيقٌ مَفْتُوحٌ يَظْهَرُ سَرِيعًا." },
+            "1,2,1,2": { tur: "عِيسَى (الضَّاحِكُ)", xew: "ضِحْكٌ، سُرُورٌ، وَفَرْحَةٌ كَبِيرَةٌ تُذْهِبُ عَنْكَ كُلَّ الْهُمُومِ وَالْمَتَاعِبِ." },
+            "2,1,2,2": { tur: "عُمَرُ (النَّقِيُّ)", xew: "أَمْرٌ غَيْبِيٌّ مَسْتُورٌ وَصَادِقٌ، يَجِبُ التَّرَيُّثُ حَتَّى يَنْكَشِفَ تَمَامًا." },
+            "2,2,2,1": { tur: "أَيُّوبُ (الْمَنْكُوسُ)", xew: "تَرَاجُعٌ مُؤَقَّتٌ أَوْ مَشَقَّةٌ تَدْخُلُ عَلَى الْخَاطِرِ، تَحْتَاجُ إِلَى الصَّبْرِ." },
+            "1,1,2,2": { tur: "جِبْرِيلُ (الِاجْتِمَاعُ)", xew: "اجْتِمَاعٌ مُبَارَكٌ، زَوَاجٌ، أَوْ دَمْجُ أَمْوَالٍ لِعَمَلٍ مُهِمٍّ وَنَاجِحٍ." },
+            "1,2,2,1": { tur: "سُلَيْمَانُ (الْبَيَاضُ)", xew: "سَلَامَةٌ تَامَّةٌ، نُورٌ، وَصَفَاءُ قَلْبٍ. يَظْهَرُ الْخَيْرُ وَالْيُسْرُ فِي حَيَاتِكَ." },
+            "2,1,1,2": { tur: "عَلِيٌّ (الْحُمْرَةُ)", xew: "حَرَارَةٌ فِي الْقَلْبِ، مُوَاجَهَةٌ أَوْ شِدَّةٌ. يَجِبُ الْحَذَرُ وَضَبْطُ النَّفْسِ." },
+            "2,2,1,1": { tur: "نُوحٌ (قَبْضُ الْأَسَدِ)", xew: "صُعُوبَةٌ شَدِيدَةٌ أَوْ تَعَبٌ دَاخِلِيٌّ يَمُرُّ بِهِ الْخَاطِرُ، يَسْتَوْجِبُ الدُّعَاءَ." },
+            "1,1,1,2": { tur: "الْحَسَنُ (الْأَنْكِيسُ)", xew: "مَشَقَّةٌ أَوْ تَعَبٌ أَوْ كَلَامٌ يُشَتِّتُ الْأَمْرَ، يَجِبُ التَّحَصُّنُ وَالتَّحَذُّرُ." },
+            "1,2,1,1": { tur: "يُونُسُ (النَّصْرَةُ الْخَارِجَةُ)", xew: "ظُهُورُ نَصْرٍ، رِبْحٍ، وَخُرُوجٌ تَمَامٌ مِنَ الضِّيقِ وَالْمَشَاكِلِ إِلَى الْفَرَجِ." },
+            "2,1,2,1": { tur: "عُثْمَانُ (الْكَوْسَجُ)", xew: "خَلَلٌ أَوْ انْقِطَاعٌ بَيْنَكَ وَبَيْنَ مَا تَطْلُبُ، الْأَمْرُ فِيهِ غُمُوضٌ." },
+            "2,2,2,2": { tur: "مُوسَى (الْجَمَاعَةُ)", xew: "النَّاسُ تَجْتَمِعُ حَوْلَكَ، أَمْرٌ يَتَّسِعُ كَثِيرًا لَكِنْ فِيهِ بَعْضُ الِاخْتِلَاطِ." }
         };
 
         function rëddRandom() { return [Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1]; }
@@ -73,37 +77,37 @@
             let m = []; 
             for (let i=0; i<4; i++) m.push(rëddRandom());
             
-            m.push([m, m, m, m]);
-            m.push([m, m, m, m]);
-            m.push([m, m, m, m]);
-            m.push([m, m, m, m]);
+            m.push([m[0], m[1], m[2], m[3]]);
+            m.push([m[0], m[1], m[2], m[3]]);
+            m.push([m[0], m[1], m[2], m[3]]);
+            m.push([m[0], m[1], m[2], m[3]]);
 
-            m.push(fusionner(m, m)); m.push(fusionner(m, m));
-            m.push(fusionner(m, m)); m.push(fusionner(m, m));
+            m.push(fusionner(m[0], m[1])); m.push(fusionner(m[2], m[3]));
+            m.push(fusionner(m[4], m[5])); m.push(fusionner(m[6], m[7]));
 
-            m.push(fusionner(m, m)); m.push(fusionner(m, m));
-            m.push(fusionner(m, m)); m.push(fusionner(m, m));
+            m.push(fusionner(m[8], m[9])); m.push(fusionner(m[10], m[11]));
+            m.push(fusionner(m[12], m[13])); m.push(fusionner(m[14], m[0]));
 
             const grid = document.getElementById('ramliGrid');
             grid.innerHTML = '';
             m.forEach((fig, i) => {
                 let cle = fig.join(",");
-                let name = firi_atte[cle]?.tur || "غير معروف";
+                let name = firi_atte[cle]?.tur || "غَيْرُ مَعْرُوفٍ";
                 let visuel = fig.map(p => p === 1 ? "•" : "••").join("<br>");
-                grid.innerHTML += `<div class="kër"><div class="kër-tur">البيت ${i+1}</div><div class="tomb-yi">${visuel}</div><div class="mbindeef-tur">${name}</div></div>`;
+                grid.innerHTML += `<div class="kër"><div class="kër-tur">الْبَيْتُ ${i+1}</div><div class="tomb-yi">${visuel}</div><div class="mbindeef-tur">${name}</div></div>`;
             });
 
-            let firiM1 = firi_atte[m.join(",")] || { tur: "شكل", xew: "أمر ظاهر" };
-            let firiM15 = firi_atte[m.join(",")] || { tur: "شكل", xew: "أمر مهم" };
-            let firiM16 = firi_atte[m.join(",")] || { tur: "شكل", xew: "خاتمة" };
+            let firiM1 = firi_atte[m[0].join(",")] || { tur: "شَكْلٌ", xew: "أَمْرٌ ظَاهِرٌ" };
+            let firiM15 = firi_atte[m[14].join(",")] || { tur: "شَكْلٌ", xew: "أَمْرٌ مُهِمٌّ" };
+            let firiM16 = firi_atte[m[15].join(",")] || { tur: "شَكْلٌ", xew: "خَاتِمَةٌ" };
 
             const texteAtte = `
-                بناءً على التخت الذي ظهر الآن: صاحب المسألة (البيت 1) يقع في شكل <span class="highlight">${firiM1.tur}</span>. 
-                وهذا يدل على حاله الحالي: ${firiM1.xew}<br><br>
-                وفي حكم القاضي الباطني (البيت 15) يظهر شكل <span class="highlight">${firiM15.tur}</span>، ومفاده: 
+                بِنَاءً عَلَى التَّخْتِ الَّذِي ظَهَرَ الْآنَ: صَاحِبُ الْمَسْأَلَةِ (<span class="highlight">الْبَيْتُ 1</span>) يَقَعُ فِي شَكْلِ <span class="highlight">${firiM1.tur}</span>. 
+                وَهَذَا يَدُلُّ عَلَى حَالِهِ الْحَالِيِّ: ${firiM1.xew}<br><br>
+                وَفِي حُكْمِ الْقَاضِي الْبَاطِنِيِّ (<span class="highlight">الْبَيْتُ 15</span>) يَظْهَرَ شَكْلُ <span class="highlight">${firiM15.tur}</span>، وَمَفَادُهُ: 
                 <span class="highlight">${firiM15.xew}</span><br><br>
-                أما العاقبة الميزان النهائي (البيت 16) فهو قفل الكشف، ويقع في شكل <span class="highlight">${firiM16.tur}</span>. 
-                وهذا هو المآل النهائي للأمر: <span class="highlight">المسألة كلها ترتبط وتنتهي بـ ${firiM16.xew}</span>.
+                أَمَّا الْعَاقِبَةُ وَالْمِيزَانُ النِّهَائِيُّ (<span class="highlight">الْبَيْتُ 16</span>) فَهُوَ قُفْلُ الْكَشْفِ، وَيَقَعُ فِي شَكْلِ <span class="highlight">${firiM16.tur}</span>. 
+                وَهَذَا هُوَ الْمَآلُ النِّهَائِيُّ لِلْأَمْرِ: <span class="highlight">الْمَسْأَلَةُ كُلُّهَا تَرْتَبِطُ وَتَنْتَهِي بِـ ${firiM16.xew}</span>.
             `;
 
             document.getElementById('atteTexte').innerHTML = texteAtte;
