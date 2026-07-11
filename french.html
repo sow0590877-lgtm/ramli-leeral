@@ -46,7 +46,6 @@
 
     <h1>Géomancie Ramli</h1>
     
-    <!-- Liens de navigation lakk yi -->
     <div class="nav-links">
         <a href="index.html">Wolof (وولوف)</a>
         <a href="arabic.html">العربية (Arabe)</a>
@@ -62,13 +61,14 @@
     </div>
 
     <script>
-        const KODD_PIN_DËGGU = "1234"; 
+        // Correction de la variable (sans accents)
+        const KODD_PIN_DEGGU = "1234"; 
 
         window.onload = function() {
             let pinDencu = localStorage.getItem("ramli_pin");
             let dateDencu = localStorage.getItem("ramli_pin_date");
 
-            if (pinDencu === KODD_PIN_DËGGU && dateDencu) {
+            if (pinDencu === KODD_PIN_DEGGU && dateDencu) {
                 let dateLeegi = new Date().getTime();
                 let coonoFan = (dateLeegi - parseInt(dateDencu)) / (1000 * 60 * 60 * 24);
 
@@ -82,10 +82,9 @@
             }
         };
 
-        // Corrigé dërët pour que le bouton Valider fonctionne à coup sûr
         function verifierPIN() {
             let valueInput = document.getElementById("pinInput").value;
-            if (valueInput === KODD_PIN_DËGGU) {
+            if (valueInput === KODD_PIN_DEGGU) {
                 let dateLeegi = new Date().getTime();
                 localStorage.setItem("ramli_pin", valueInput);
                 localStorage.setItem("ramli_pin_date", dateLeegi.toString());
@@ -99,7 +98,7 @@
             "1,1,2,1": { tur: "Yusuf", xew: "entrée d'une bénédiction, d'argent ou d'un soutien spirituel fort à venir." },
             "1,2,2,2": { tur: "Adama", xew: "grand prestige, autorité, bénédiction vaste et richesse durable dans votre vie." },
             "2,1,1,1": { tur: "Muhammad", xew: "affaire cachée, secret solide ou joie discrète qui durera longtemps." },
-            "2,2,1,2": { tur: "Idris", xew: "grande force, stabilité et soutien qui vous accompagne sur votre chemin." },
+            "2,2,1,2": { tur: "Idris", xew: "grande force, stabilityé et soutien qui vous accompagne sur votre chemin." },
             "1,1,1,1": { tur: "Ibrahim", xew: "l'affaire est en mouvement, un grand voyage ou une voie ouverte apparaît rapidement." },
             "1,2,1,2": { tur: "Issa", xew: "rires, joie et grand bonheur qui effacent tous vos soucis et difficultés." },
             "2,1,2,2": { tur: "Oumar", xew: "affaire mystérieuse, cachée et véridique. Il faut patienter jusqu'à sa révélation." },
@@ -122,7 +121,6 @@
             let m = []; 
             for (let i=0; i<4; i++) m.push(rëddRandom());
             
-            // Juralanté 16 kër yu dëggu yi
             m.push([m[0][0], m[1][0], m[2][0], m[3][0]]); // M5
             m.push([m[0][1], m[1][1], m[2][1], m[3][1]]); // M6
             m.push([m[0][2], m[1][2], m[2][2], m[3][2]]); // M7
@@ -135,8 +133,8 @@
 
             m.push(fusionner(m[8], m[9]));   // M13
             m.push(fusionner(m[10], m[11])); // M14
-            m.push(fusionner(m[12], m[13])); // M15 (Le Juge)
-            m.push(fusionner(m[14], m[0]));   // M16 (La Sentence)
+            m.push(fusionner(m[12], m[13])); // M15
+            m.push(fusionner(m[14], m[0]));  // M16
 
             const grid = document.getElementById('ramliGrid');
             grid.innerHTML = '';
@@ -154,3 +152,5 @@
             const texteAtte = `
                 D'après le thème généré : Le consultant (<span class="highlight">Maison 1</span>) se trouve dans la figure de <span class="highlight">${firiM1.tur}</span>. 
                 Cela indique sa situation actuelle : ${firiM1.xew}<br><br>
+                Selon le Juge interne du thème (<span class="highlight">Maison 15</span>), la figure fêtée est <span class="highlight">${firiM15.tur}</span>, ce qui signifie : 
+                <span class="highlight">${firiM15.xew}</span><br><br>
