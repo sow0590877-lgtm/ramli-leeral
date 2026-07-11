@@ -109,7 +109,7 @@
             "2,2,1,1": { tur: "Nouhou", xew: "difficulté majeure, blocage ou douleur interne qui pèse, nécessite des prières." },
             "1,1,1,2": { tur: "Hasan", xew: "fatigue, perte de biens ou paroles confuses qui perturbent l'affaire. Soyez vigilant." },
             "1,2,1,1": { tur: "Yunus", xew: "victoire claire, gain et sortie définitive des problèmes vers la délivrance." },
-            "2,1,2,1": { tur: "Ousmane", xew: "obstacle ou coupure entre vous et ce que vous cherchez, l'affaire est floue." },
+            "2,1,2,1": { tur: "Ousmane", xew: "obstacle ou coupure entre vous et ce que vous cherchez, l'affaire floue." },
             "2,2,2,2": { tur: "Moussa", xew: "les gens se rassemblent autour de vous, l'affaire s'étend mais avec une certaine confusion." }
         };
 
@@ -121,16 +121,23 @@
             let m = []; 
             for (let i=0; i<4; i++) m.push(rëddRandom());
             
-            m.push([m, m, m, m]);
-            m.push([m, m, m, m]);
-            m.push([m, m, m, m]);
-            m.push([m, m, m, m]);
+            // Correction de la transposition des filles (M5 à M8)
+            m.push([m[0][0], m[1][0], m[2][0], m[3][0]]); // Maison 5 (Têtes)
+            m.push([m[0][1], m[1][1], m[2][1], m[3][1]]); // Maison 6 (Poitrines)
+            m.push([m[0][2], m[1][2], m[2][2], m[3][2]]); // Maison 7 (Ventres)
+            m.push([m[0][3], m[1][3], m[2][3], m[3][3]]); // Maison 8 (Pieds)
 
-            m.push(fusionner(m, m)); m.push(fusionner(m, m));
-            m.push(fusionner(m, m)); m.push(fusionner(m, m));
+            // Fusion des neveux (M9 à M12)
+            m.push(fusionner(m[0], m[1])); // Maison 9 = M1 + M2
+            m.push(fusionner(m[2], m[3])); // Maison 10 = M3 + M4
+            m.push(fusionner(m[4], m[5])); // Maison 11 = M5 + M6
+            m.push(fusionner(m[6], m[7])); // Maison 12 = M7 + M8
 
-            m.push(fusionner(m, m)); m.push(fusionner(m, m));
-            m.push(fusionner(m, m)); m.push(fusionner(m, m));
+            // Conclusion (M13 à M16)
+            m.push(fusionner(m[8], m[9]));   // Maison 13 = M9 + M10
+            m.push(fusionner(m[10], m[11])); // Maison 14 = M11 + M12
+            m.push(fusionner(m[12], m[13])); // Maison 15 = M13 + M14 (Le Juge)
+            m.push(fusionner(m[14], m[0]));   // Maison 16 = M15 + M1 (La Sentence)
 
             const grid = document.getElementById('ramliGrid');
             grid.innerHTML = '';
@@ -141,13 +148,8 @@
                 grid.innerHTML += `<div class="kër"><div class="kër-tur">Maison ${i+1}</div><div class="tomb-yi">${visuel}</div><div class="mbindeef-tur">${name}</div></div>`;
             });
 
-            let firiM1 = firi_atte[m.join(",")] || { tur: "Figure", xew: "affaire visible" };
-            let firiM15 = firi_atte[m.join(",")] || { tur: "Figure", xew: "élément clé" };
-            let firiM16 = firi_atte[m.join(",")] || { tur: "Figure", xew: "conclusion" };
+            let firiM1 = firi_atte[m[0].join(",")] || { tur: "Figure", xew: "affaire visible" };
+            let firiM15 = firi_atte[m[14].join(",")] || { tur: "Figure", xew: "élément clé" };
+            let firiM16 = firi_atte[m[15].join(",")] || { tur: "Figure", xew: "conclusion" };
 
             const texteAtte = `
-                D'après le thème généré : Le consultant (<span class="highlight">Maison 1</span>) se trouve dans la figure de <span class="highlight">${firiM1.tur}</span>. 
-                Cela indique sa situation actuelle : ${firiM1.xew}<br><br>
-                Selon le Juge interne du thème (<span class="highlight">Maison 15</span>), la figure fêtée is <span class="highlight">${firiM15.tur}</span>, ce qui signifie : 
-                <span class="highlight">${firiM15.xew}</span><br><br>
-                Enfin, la Sentence finale (<span class="highlight">Maison 16</span>) clôture le tirage avec la figure de <span class="highlight">${firiM16.tur}</span>. 
