@@ -3,170 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramli Leeral - 16 Mbindeef yu Mat</title>
+    <title>Ramli Leeral - Àtte Gu Mujj</title>
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #0f0f15; color: #e0e0e6; text-align: center; padding: 20px; margin: 0; }
-        h1 { color: #00ffcc; margin-bottom: 5px; }
-        .subtitle { color: #888; margin-bottom: 25px; font-size: 14px; }
-        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1100px; margin: 20px auto; }
-        @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 500px) { .grid { grid-template-columns: 1fr; } }
-        .kër { background: #161622; padding: 20px; border-radius: 12px; border: 1px solid #2a2a3a; box-shadow: 0 6px 12px rgba(0,0,0,0.5); text-align: left; }
-        .kër-tur { font-size: 14px; color: #ff9900; font-weight: bold; border-bottom: 1px solid #2a2a3a; padding-bottom: 5px; margin-bottom: 10px; text-transform: uppercase; text-align: center; }
-        .tomb-yi { font-size: 32px; letter-spacing: 10px; line-height: 1; color: #00ffcc; text-align: center; margin: 15px 0; font-weight: bold; }
-        .mbindeef-tur { font-weight: bold; color: #ffffff; font-size: 18px; text-align: center; margin-bottom: 10px; }
-        .firi-box { background: #1c1c2e; padding: 10px; border-radius: 6px; font-size: 12px; line-height: 1.4; color: #b5b5c3; }
-        .firi-item { margin-bottom: 6px; }
-        .firi-item:last-child { margin-bottom: 0; }
-        .label { font-weight: bold; color: #ffcc00; }
-        button { background: linear-gradient(135deg, #007644, #009955); color: white; border: none; padding: 15px 35px; font-size: 18px; cursor: pointer; border-radius: 30px; margin-top: 10px; font-weight: bold; box-shadow: 0 4px 15px rgba(0,118,68,0.4); transition: 0.3s; }
+        h1 { color: #00ffcc; margin-bottom: 25px; }
+        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; max-width: 1000px; margin: 20px auto; }
+        @media (max-width: 800px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+        .kër { background: #161622; padding: 15px; border-radius: 8px; border: 1px solid #2a2a3a; text-align: center; }
+        .kër-tur { font-size: 12px; color: #ff9900; font-weight: bold; text-transform: uppercase; }
+        .tomb-yi { font-size: 26px; letter-spacing: 6px; line-height: 1; color: #00ffcc; margin: 10px 0; }
+        .mbindeef-tur { font-weight: bold; color: #ffffff; font-size: 14px; }
+        
+        /* Box firi bu woor bu féeñ ci suuf */
+        .atte-gu-mujj-box { 
+            background: linear-gradient(135deg, #1c1c3a, #161622); 
+            border: 2px solid #00ffcc; 
+            border-radius: 12px; 
+            padding: 25px; 
+            max-width: 1000px; 
+            margin: 30px auto; 
+            text-align: left;
+            box-shadow: 0 8px 20px rgba(0,255,204,0.15);
+        }
+        .atte-header { font-size: 20px; color: #00ffcc; font-weight: bold; border-bottom: 2px solid #2a2a3a; padding-bottom: 10px; margin-bottom: 15px; text-transform: uppercase; text-align: center; }
+        .atte-text { font-size: 16px; line-height: 1.6; color: #ffffff; }
+        .highlight { color: #ffcc00; font-weight: bold; }
+        
+        button { background: linear-gradient(135deg, #007644, #009955); color: white; border: none; padding: 15px 35px; font-size: 18px; cursor: pointer; border-radius: 30px; font-weight: bold; box-shadow: 0 4px 15px rgba(0,118,68,0.4); transition: 0.3s; }
         button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,118,68,0.6); }
     </style>
 </head>
 <body>
 
     <h1>Ramli Leeral</h1>
-    <div class="subtitle">Sàytoog 16 kër yi ak mbooleem firé yi ci Wolof</div>
-    
     <button onclick="toggRamli()">Lancer Tirage Bi (Tombée)</button>
 
-    <div class="grid" id="ramliGrid">
-        <!-- 16 kër yi fi lañuy féeñ -->
+    <!-- 1. 16 Kër yi dañuy féeñ fii -->
+    <div class="grid" id="ramliGrid"></div>
+
+    <!-- 2. Benn Firi bu woor bu boole mbooleem mbir yi ci suuf -->
+    <div class="atte-gu-mujj-box" id="atteBox" style="display:none;">
+        <div class="atte-header">Àtte Gu Woor Gu Ramli Bi Joxe</div>
+        <div class="atte-text" id="atteTexte"></div>
     </div>
 
     <script>
-        // Mbooleem firi gu mat ci suufu 16 mbindeef yi
-        const dencu_mbindeef = {
-            "1,1,1,1": { 
-                tur: "Tariki (Al-Tariq)", 
-                mana: "Yoon / Tukki",
-                alal: "Xaalis buy guene walla buy tukki", 
-                wér: "Gàww a wér, tànk yi laal", 
-                mbir: "Mbir mu lay sànt dox walla tukki bu gaaw." 
-            },
-            "2,2,2,2": { 
-                tur: "Damama (Al-Jama'ah)", 
-                mana: "Mbooloo / Dajalo",
-                alal: "Alal juko bari bokk, waaye du teye", 
-                wér: "Febar buy yaatu ci yaram, xel mu bari xalaat", 
-                mbir: "Dajalo nit ñu bari, ndaje mu am solo walla jaxaso." 
-            },
-            "2,1,1,2": { 
-                tur: "Humra (Al-Humrah)", 
-                mana: "Xonq / Xare",
-                alal: "Ganyé xaalis ci coono walla xare", 
-                wér: "Tàngay yaram, deret buy tàkk, coler", 
-                mbir: "Xare walla bërré gu tar, tàngay xol ak doles." 
-            },
-            "1,2,2,1": { 
-                tur: "Bayada (Al-Bayad)", 
-                mana: "Weex / Leer",
-                alal: "Alal gu set te am barke, lew dëgg", 
-                wér: "Wér-gu-yaram gu mucc ayib, xol bu set", 
-                mbir: "Jàmm gu dëggu, kumpa gu féeñ, ak mbegte mu mag." 
-            },
-            "1,2,1,1": { 
-                tur: "Nusra Al-Kharija", 
-                mana: "Ndimmis gu guene",
-                alal: "Xaalis buy guene ngir jënd lu am solo", 
-                wér: "Yaram buy doles, febar buy guene", 
-                mbir: "Ndàm bu féeñ, ganyé ci kaw noon yi, mbaax." 
-            },
-            "1,1,2,1": { 
-                tur: "Nusra Al-Dakhila", 
-                mana: "Ndimmis gu duggu",
-                alal: "Alal buy duggu ci kër gi, nganyé", 
-                wér: "Wér gu dëgër, febar buy laqu ci biir", 
-                mbir: "Barke gu duggu, am ndimmis lu bir, mbir mu baax." 
-            },
-            "1,1,1,2": { 
-                tur: "Utba Al-Kharija", 
-                mana: "Bunt bu guene",
-                alal: "Xaalis buy sotti, sànku, walla reer", 
-                wér: "Febar buy bir, coono gu rëy", 
-                mbir: "Wax gu rëy gu guene, tas gu am, jaxaso." 
-            },
-            "2,1,1,1": { 
-                tur: "Utba Al-Dakhila", 
-                mana: "Bunt bu duggu",
-                alal: "Alal jumu denc, mbeget mu teju", 
-                wér: "Wér-gu-yaram gu laqu, coono gu teju", 
-                mbir: "Mbir mu teju, batin bu dëgër, mbegte mu bir." 
-            },
-            "2,2,1,1": { 
-                tur: "Kabd Al-Asad", 
-                mana: "Biiru jenaas",
-                alal: "Xaalis bu mu xoolé ci lëndëm, tas", 
-                wér: "Biir buy métti, coono gu tar", 
-                mbir: "Tàngay xol, jafe-jafe, walla tòj-tòj ci dundu." 
-            },
-            "1,1,2,2": { 
-                tur: "Ijtima'a", 
-                mana: "Ndaje / Sëy",
-                alal: "Boole alal yu bari ngir liggéey", 
-                wér: "Mbooloo febar, xel mu dajalo", 
-                mbir: "Sëy mu am barke, ndaje mu baax, boole." 
-            },
-            "2,2,2,1": { 
-                tur: "Ankis", 
-                mana: "Tënku gu wadd",
-                alal: "Alal buy wadd, jàfe-jàfe xaalis", 
-                wér: "Febar buy wadd ci yaram, gàyc", 
-                mbir: "Daanu gu gaaw, ndaxar lu mag, coono gu teju." 
-            },
-            "1,2,2,2": { 
-                tur: "Akyan", 
-                mana: "Alal gu bari",
-                alal: "Alal gu mag, barke gu wër, nguur", 
-                wér: "Wér-gu-yaram gu mucc ayib", 
-                mbir: "Daraja gu rëy, nguur, ak yaakaar gu dëggu." 
-            },
-            "1,2,1,2": { 
-                tur: "La hiyan", 
-                mana: "Ree / Mbegte",
-                alal: "Xaalis bu lay jox mbegte ak po", 
-                wér: "Yaram mu mucc ayib, xel mu fo", 
-                mbir: "Ree, kaf, mbegte mu rëy, ndaje mu neex." 
-            },
-            "2,1,2,1": { 
-                tur: "Kousadj", 
-                mana: "Gàkk-gàkk",
-                alal: "Alal jumu dog, jàfe-jàfe gu ndaw", 
-                wér: "Febar bu ndaw buy dagg", 
-                mbir: "Gàkk-gàkk ci mbir, dogu gu dagg, lëndëm." 
-            },
-            "2,1,2,2": { 
-                tur: "Nakiw", firi: "Kumpa",
-                mana: "Lu lëndëm",
-                alal: "Xaalis bumu xamul fi mu jóge", 
-                wér: "Febar bumu xamul, kumpa", 
-                mbir: "Mbiro kumpa lu bir, lu lëndëm te dëggu." 
-            },
-            "2,2,1,2": { 
-                tur: "Asbo", 
-                mana: "Doles / Mag",
-                alal: "Alal ju dëgër te daggul", 
-                wér: "Doles gu rëy ci yaram", 
-                mbir: "Mbindeef gu rëy, doles gu mag, nguur." 
-            }
+        // Firi gu gatt gu mbindeef bu ci nekk di joxe ci wàllu àtte
+        const firi_atte = {
+            "1,1,1,1": { tur: "Tariki", xew: "mbir mi day dox, am na tukki walla yoon wu féeñ, lu gaaw lay doon." },
+            "2,2,2,2": { tur: "Damama", xew: "mbooloo dina ci dajalo, mbir mi dina yaatu lool waaye am na jaxaso." },
+            "2,1,1,2": { tur: "Humra", xew: "tàngay xol, xare walla fitna dina ci am. Faww nga am jom te muur sa xel." },
+            "1,2,2,1": { tur: "Bayada", xew: "jàmm gu mucc ayib, leer, ak xol bu set. Lu baax te neex dina féeñ ci sa dundu." },
+            "1,2,1,1": { tur: "Nusra Al-Kharija", xew: "ganyé gu féeñ, ndàm, ak mbir mu guene ci jàfe-jàfe yi. Lu baax la." },
+            "1,1,2,1": { tur: "Nusra Al-Dakhila", xew: "barke gu duggu, alal walla ndimmis gu laqu gu dëgër buy ñëw ci yaw." },
+            "1,1,1,2": { tur: "Utba Al-Kharija", xew: "coono, sànku alal walla wax gu rëy guy tas mbir mi. Faww nga wattuku." },
+            "2,1,1,1": { tur: "Utba Al-Dakhila", xew: "mbir mu teju, batin bu dëgër, walla mbegte mu laqu mu nara duren." },
+            "2,2,1,1": { tur: "Kabd Al-Asad", xew: "jafe-jafe gu tar, tòj-tòj walla mettit buy tàkk ci biir. Da laaj ñaan." },
+            "1,1,2,2": { tur: "Ijtima'a", xew: "ndaje mu baax, sëy, walla boole alal yu bari ngir liggéej bu am solo." },
+            "2,2,2,1": { tur: "Ankis", xew: "daanu gu gaaw, jàfe-jàfe buy wadd, walla rëcc-rëcc ci sa yaakaar." },
+            "1,2,2,2": { tur: "Akyan", xew: "nguur, daraja gu rëy, ak alal gu bari gu am barke te buy duren." },
+            "1,2,1,2": { tur: "La hiyan", xew: "ree, fo, mbegte, ak ndaje mu neex mu lay dandi mbooleem coono yi." },
+            "2,1,2,1": { tur: "Kousadj", xew: "gàkk-gàkk walla lu dog ci sa diggante ak li nga sàkku. Lu am lëndëm la." },
+            "2,1,2,2": { tur: "Nakiw", xew: "mbiro kumpa bu lëndëm te dëggu, faww nga sàytulu bu baax ba féeñ." },
+            "2,2,1,2": { tur: "Asbo", xew: "doles gu rëy, mbindeef gu dëgër, ak nguur gu lay dimbali ci sa yoon." }
         };
 
-        const turu_kër_yi = [
-            "Kër 1: Nit ki / Dundu gi", "Kër 2: Alal / Xaalis", "Kër 3: Bokk / Deggandoo", "Kër 4: Kër / Maam",
-            "Kër 5: Dom / Mbegte", "Kër 6: Febar / Liggéey", "Kër 7: Sëy / Sope", "Kër 8: Gaawu / Kumpa",
-            "Kër 9: Tukki / Diine", "Kër 10: Nguur / Daraja", "Kër 11: Yaakaar / Xarit", "Kër 12: Noon / Rëb",
-            "Kër 13: Sàkkukat", "Kër 14: Lu ñuy sàkku", "Kër 15: Misaan bi (Juge)", "Kër 16: Àtte gu mujj"
-        ];
-
-        function rëddRandom() {
-            return [Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1];
-        }
-
+        function rëddRandom() { return [Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1]; }
         function booleLigne(l1, l2) { return ((l1 + l2) % 2 === 0) ? 2 : 1; }
-
-        function fusionner(f1, f2) {
-            return [booleLigne(f1, f2), booleLigne(f1, f2), booleLigne(f1, f2), booleLigne(f1, f2)];
-        }
+        function fusionner(f1, f2) { return [booleLigne(f1, f2), booleLigne(f1, f2), booleLigne(f1, f2), booleLigne(f1, f2)]; }
 
         function toggRamli() {
             let m = [];
@@ -175,31 +79,39 @@
             m.push(fusionner(m, m)); m.push(fusionner(m, m));
             m.push(fusionner(m, m)); m.push(fusionner(m, m));
             m.push(fusionner(m, m)); m.push(fusionner(m, m));
-            m.push(fusionner(m, m)); m.push(fusionner(m, m));
+            m.push(fusionner(m, m)); m.push(fusionner(m, m)); // M16
 
+            // Affichage 16 kër yi
             const grid = document.getElementById('ramliGrid');
             grid.innerHTML = '';
-
             m.forEach((fig, i) => {
                 let cle = fig.join(",");
-                let info = dencu_mbindeef[cle] || { tur: "Xamul", mana: "-", alal: "-", wér: "-", mbir: "-" };
+                let name = firi_atte[cle]?.tur || "Xamul";
                 let visuel = fig.map(p => p === 1 ? "•" : "••").join("<br>");
-
-                let d = document.createElement('div');
-                d.className = 'kër';
-                d.innerHTML = `
-                    <div class="kër-tur">${turu_kër_yi[i]}</div>
-                    <div class="tomb-yi">${visuel}</div>
-                    <div class="mbindeef-tur">${info.tur}</div>
-                    <div class="firi-box">
-                        <div class="firi-item"><span class="label">Tekki:</span> ${info.mana}</div>
-                        <div class="firi-item"><span class="label">Alal:</span> ${info.alal}</div>
-                        <div class="firi-item"><span class="label">Wér:</span> ${info.wér}</div>
-                        <div class="firi-item"><span class="label">Mbir:</span> ${info.mbir}</div>
-                    </div>
-                `;
-                grid.appendChild(d);
+                grid.innerHTML += `<div class="kër"><div class="kër-tur">Kër ${i+1}</div><div class="tomb-yi">${visuel}</div><div class="mbindeef-tur">${name}</div></div>`;
             });
+
+            // Gëstu Kër 1, Kër 15 ak Kër 16 ngir Benn Firi bu woor bi
+            let cleM1 = m[0].join(",");
+            let cleM15 = m[14].join(",");
+            let cleM16 = m[15].join(",");
+
+            let firiM1 = firi_atte[cleM1] || { tur: "Mbindeef", xew: "lu bir" };
+            let firiM15 = firi_atte[cleM15] || { tur: "Mbindeef", xew: "lu am solo" };
+            let firiM16 = firi_atte[cleM16] || { tur: "Mbindeef", xew: "lu jeex" };
+
+            // Bind bindeef bu boole lépp ci suuf
+            const texteAtte = `
+                Ci seet gu mat seuk gi nga togg léegi: Yaw mi sàkku seet bi (Kër 1), sa yaram ak sa xel dafa tëdd ci mbindeefu <span class="highlight">${firiM1.tur}</span>. 
+                Loolu dafa woné ne ci sa dundu léegi: ${firiM1.xew}<br><br>
+                Ci àtte gu biir gu Misaan bi joxe (Kër 15) mu ngi féeñal mbindeefu <span class="highlight">${firiM15.tur}</span>, té loolu mu ngi lay won ne: 
+                <span class="highlight">${firiM15.xew}</span><br><br>
+                Kòdd gu mujj gi (Kër 16) mooy teju buntu seet bi, té dafa tàbblu mbindeefu <span class="highlight">${firiM16.tur}</span>. 
+                Lii moodi tënk gu woor gu mbir mi di jeexe: <span class="highlight">Mbir mi lépp mu ngi lëkkaloo ak ndax ${firiM16.xew}</span>.
+            `;
+
+            document.getElementById('atteTexte').innerHTML = texteAtte;
+            document.getElementById('atteBox').style.display = 'block';
         }
     </script>
 </body>
