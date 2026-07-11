@@ -66,33 +66,43 @@
 
         function rëddRandom() { return [Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1]; }
         function booleLigne(l1, l2) { return ((l1 + l2) % 2 === 0) ? 2 : 1; }
-        function fusionner(f1, f2) { return [booleLigne(f1, f2), booleLigne(f1, f2), booleLigne(f1, f2), booleLigne(f1, f2)]; }
+        
+        function fusionner(f1, f2) { 
+            return [
+                booleLigne(f1[0], f2[0]), 
+                booleLigne(f1[1], f2[1]), 
+                booleLigne(f1[2], f2[2]), 
+                booleLigne(f1[3], f2[3])
+            ]; 
+        }
 
         function toggRamli() {
             let m = [];
             
-            // 1. Sàkku 4 Ndey yi (Kër 1 ba Kër 4)
-            for (let i=0; i<4; i++) m.push(rëddRandom());
+            // 1. Sàkku 4 Ndey yi (Kër 1 ba Kër 4) -> m[0] ba m[3]
+            for (let i=0; i<4; i++) {
+                m.push(rëddRandom());
+            }
             
-            // 2. Sàkku 4 Doom yi (Kër 5 ba Kër 8) ci rëdd gu dagg wu wër
+            // 2. Sàkku 4 Doom yi (Kër 5 ba Kër 8) -> m[4] ba m[7]
             m.push([m[0][0], m[1][0], m[2][0], m[3][0]]); // Kër 5 (Boppu Ndey yi)
             m.push([m[0][1], m[1][1], m[2][1], m[3][1]]); // Kër 6 (Dënnu Ndey yi)
             m.push([m[0][2], m[1][2], m[2][2], m[3][2]]); // Kër 7 (Biiru Ndey yi)
             m.push([m[0][3], m[1][3], m[2][3], m[3][3]]); // Kër 8 (Tànku Ndey yi)
 
-            // 3. Sàkku Sët yi (Kër 9 ba Kër 12)
+            // 3. Sàkku Sët yi (Kër 9 ba Kër 12) -> m[8] ba m[11]
             m.push(fusionner(m[0], m[1])); // Kër 9 = K1 + K2
             m.push(fusionner(m[2], m[3])); // Kër 10 = K3 + K4
             m.push(fusionner(m[4], m[5])); // Kër 11 = K5 + K6
             m.push(fusionner(m[6], m[7])); // Kër 12 = K7 + K8
 
-            // 4. Jeexal bi (Kër 13 ba Kër 16)
+            // 4. Jeexal bi (Kër 13 ba Kër 16) -> m[12] ba m[15]
             m.push(fusionner(m[8], m[9]));   // Kër 13 = K9 + K10
             m.push(fusionner(m[10], m[11])); // Kër 14 = K11 + K12
             m.push(fusionner(m[12], m[13])); // Kër 15 = K13 + K14 (Misaan)
             m.push(fusionner(m[14], m[0]));  // Kër 16 = K15 + K1 (Àtte)
 
-            // Affichage tableau bi
+            // Display grid bu mat
             const grid = document.getElementById('ramliGrid');
             grid.innerHTML = '';
             m.forEach((fig, i) => {
@@ -102,6 +112,7 @@
                 grid.innerHTML += `<div class="kër"><div class="kër-tur">Kër ${i+1}</div><div class="tomb-yi">${visuel}</div><div class="mbindeef-tur">${name}</div></div>`;
             });
 
+            // Jël firi kër yu dëggu yi ngir àtte bi
             let firiM1 = firi_atte[m[0].join(",")] || { tur: "Mbindeef", xew: "lu bir" };
             let firiM15 = firi_atte[m[14].join(",")] || { tur: "Mbindeef", xew: "lu am solo" };
             let firiM16 = firi_atte[m[15].join(",")] || { tur: "Mbindeef", xew: "lu jeex" };
