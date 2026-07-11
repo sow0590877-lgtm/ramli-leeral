@@ -101,16 +101,20 @@
             let m = []; 
             for (let i=0; i<4; i++) m.push(rëddRandom());
             
-            m.push([m, m, m, m]);
-            m.push([m, m, m, m]);
-            m.push([m, m, m, m]);
-            m.push([m, m, m, m]);
+            m.push([m[0], m[1], m[2], m[3]]); // Maison 5
+            m.push([m[0], m[1], m[2], m[3]]); // Maison 6
+            m.push([m[0], m[1], m[2], m[3]]); // Maison 7
+            m.push([m[0], m[1], m[2], m[3]]); // Maison 8
 
-            m.push(fusionner(m, m)); m.push(fusionner(m, m));
-            m.push(fusionner(m, m)); m.push(fusionner(m, m));
+            m.push(fusionner(m[0], m[1])); // Maison 9 = M1 + M2
+            m.push(fusionner(m[2], m[3])); // Maison 10 = M3 + M4
+            m.push(fusionner(m[4], m[5])); // Maison 11 = M5 + M6
+            m.push(fusionner(m[6], m[7])); // Maison 12 = M7 + M8
 
-            m.push(fusionner(m, m)); m.push(fusionner(m, m));
-            m.push(fusionner(m, m)); m.push(fusionner(m, m));
+            m.push(fusionner(m[8], m[9]));   // Maison 13 = M9 + M10
+            m.push(fusionner(m[10], m[11])); // Maison 14 = M11 + M12
+            m.push(fusionner(m[12], m[13])); // Maison 15 = M13 + M14
+            m.push(fusionner(m[14], m[0]));   // Maison 16 = M15 + M1
 
             const grid = document.getElementById('ramliGrid');
             grid.innerHTML = '';
@@ -121,10 +125,10 @@
                 grid.innerHTML += `<div class="kër"><div class="kër-tur">Maison ${i+1}</div><div class="tomb-yi">${visuel}</div><div class="mbindeef-tur">${name}</div></div>`;
             });
 
-            // Corigé gu wër ngir index kër yi dëgg-dëgg
-            let firiM1 = firi_atte[m.join(",")] || { tur: "Figure", xew: "affaire visible" };
-            let firiM15 = firi_atte[m.join(",")] || { tur: "Figure", xew: "élément clé" };
-            let firiM16 = firi_atte[m.join(",")] || { tur: "Figure", xew: "conclusion" };
+            // Pexe dëgg-dëgg gu natt index array yi ci lu wër
+            let firiM1 = firi_atte[m[0].join(",")] || { tur: "Figure", xew: "Non défini" };
+            let firiM15 = firi_atte[m[14].join(",")] || { tur: "Figure", xew: "Non défini" };
+            let firiM16 = firi_atte[m[15].join(",")] || { tur: "Figure", xew: "Non défini" };
 
             document.getElementById('atteTexte').innerHTML = `
                 <b>Maison 1 (${firiM1.tur}) :</b> ${firiM1.xew}<br><br>
