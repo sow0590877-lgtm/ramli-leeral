@@ -33,6 +33,14 @@
     </style>
 </head>
 <body>
+    <!-- Box bu bees ngir sàkku kòdd PIN -->
+    <div id="pinBox" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0f0f15; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999;">
+        <h2 style="color: #00ffcc; padding: 0 15px; text-align: center;">S'il vous plaît, dugal sa kòdd PIN ngir uor Application bi</h2>
+        <p style="color: #aaa; font-size: 14px;">Kòdd PIN bi 5 fan rekk lay liggéey.</p>
+        <input type="password" id="pinInput" placeholder="Dugal sa PIN fii..." style="padding: 12px; font-size: 16px; border-radius: 8px; border: 1px solid #333; background: #161622; color: white; text-align: center; width: 200px; margin-bottom: 15px;">
+        <button onclick="verifierPIN()" style="background: linear-gradient(135deg, #007644, #009955); color: white; border: none; padding: 12px 30px; font-size: 16px; cursor: pointer; border-radius: 20px; font-weight: bold;">Valider</button>
+        <p id="pinErreur" style="color: #ff3333; margin-top: 10px; font-weight: bold;"></p>
+    </div>
 
     <h1>Ramli Leeral</h1>
 <br><a href="arabic.html" style="background: #1c1c3a; color: #00ffcc; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 14px; border: 1px solid #00ffcc; display: inline-block; margin-bottom: 25px;">العربية (Araab)</a>
@@ -47,7 +55,40 @@
     </div>
 
     <script>
-        // Mbooleem 16 mbindeef yi ak turi Yonent yi nga sànt dëgg-dëgg
+           // Kòdd PIN dëggu bi (Mën nga ko soppi dërët)
+        const KODD_PIN_DËGGU = "1234"; 
+
+        // Saytu 5 fan yi saa su kiliyan bi uoré application bi
+        window.onload = function() {
+            let pinDencu = localStorage.getItem("ramli_pin");
+            let dateDencu = localStorage.getItem("ramli_pin_date");
+
+            if (pinDencu === KODD_PIN_DËGGU && dateDencu) {
+                let dateLeegi = new Date().getTime();
+                let coonoFan = (dateLeegi - parseInt(dateDencu)) / (1000 * 60 * 60 * 24);
+
+                if (coonoFan < 5) {
+                    document.getElementById("pinBox").style.display = "none";
+                } else {
+                    localStorage.removeItem("ramli_pin");
+                    localStorage.removeItem("ramli_pin_date");
+                    alert("Sa kòdd PIN dafa expiré (5 fan yi mat na) ! Faww nga sàkku kòdd bu bees.");
+                }
+            }
+        };
+
+        function verifierPIN() {
+            let inputValeur = document.getElementById("pinInput").value;
+            if (inputValeur === KODD_PIN_DËGGU) {
+                let dateLeegi = new Date().getTime();
+                localStorage.setItem("ramli_pin", inputValeur);
+                localStorage.setItem("ramli_pin_date", dateLeegi.toString());
+                document.getElementById("pinBox").style.display = "none";
+            } else {
+                document.getElementById("pinErreur").innerText = "Kòdd PIN boogu dëng na ! Recommencer-al.";
+            }
+        }
+     // Mbooleem 16 mbindeef yi ak turi Yonent yi nga sànt dëgg-dëgg
         const firi_atte = {
             "1,1,2,1": { tur: "Yusuf", xew: "barke gu duggu, alal walla ndimmis gu laqu gu dëgër buy ñëw ci yaw." },
             "1,2,2,2": { tur: "Adama", xew: "nguur, daraja gu rëy, ak alal gu bari gu am barke te buy duren." },
