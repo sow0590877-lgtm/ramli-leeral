@@ -40,28 +40,29 @@
     <div class="grid" id="ramliGrid"></div>
 
     <div class="atte-gu-mujj-box" id="atteBox" style="display:none;">
-        <div class="atte-header">Àtte Gu Leer Gu Ramli Bi Joxe</div>
+        <div class="atte-header">Àtte Gu Woor Gu Ramli Bi Joxe</div>
         <div class="atte-text" id="atteTexte"></div>
     </div>
 
     <script>
+        // Mbooleem 16 mbindeef yi ak turi Yonent yi nga sànt dëgg-dëgg
         const firi_atte = {
-            "1,1,2,1": { tur: "Yusuf", nit_ki: "dafa am barke gu duggu, alal walla nganyé buy ñëw ci dundam.", xalaat: "mu ngi sàkku alal, denc barke, walla liggéej bu dëgër ci biir." },
-            "1,2,2,2": { tur: "Adama", nit_ki: "dafa am daraja gu rëy, nguur, ak barke gu yaatu ci dundam.", xalaat: "mu ngi xalaat ci alal gu bari, daraja, walla nguur gu dëgër." },
-            "2,1,1,1": { tur: "Muhammad", nit_ki: "dafa am mbir mu teju walla batin bu dëgër ci yaramam.", xalaat: "mu ngi xalaat ci lu teju, tënku mbir, walla mbegte mu bir." },
-            "2,2,1,2": { tur: "Idris", nit_ki: "dafa am doles gu rëy, mbindeef gu dëgër ci yaramam.", xalaat: "mu ngi xalaat ci doles gu mag, nguur, walla ku koy dimbali." },
-            "1,1,1,1": { tur: "Ibrahim", nit_ki: "dafa am yoon wu féeñ walla tukki bu rëy buy dox ci dundam léegi.", xalaat: "mu ngi tàbblu ci lu gaaw, bëgg a dagg yoon wu gatt walla tukki." },
-            "1,2,1,2": { tur: "Issa", nit_ki: "dafa nekk ci po, ree, ak mbegte mu mag ci yaramam.", xalaat: "mu ngi xalaat ci kaf, fo, mbegte, ak ndaje mu neex mu koy dandi coono." },
-            "2,1,2,2": { tur: "Oumar", nit_ki: "dafa nekk ci mbiro kumpa bu lëndëm te dëggu.", xalaat: "mu ngi xalaat ci kumpa, lu laqu, walla lu bët mënul a giss bu gaaw." },
-            "2,2,2,1": { tur: "Ayouba", nit_ki: "dafa wadd ci yaakaar walla mu ngi duren coono gu tar.", xalaat: "mu ngi xalaat ci daanu, jàfe-jàfe buy wadd, walla rëcc-rëcc." },
-            "1,1,2,2": { tur: "Jibriil", nit_ki: "dafa denc ndaje mu baax, sëy, walla lëkkaloo bu am solo.", xalaat: "mu ngi xalaat ci sëy, boole alal, walla lëkkaloo ak keneen." },
-            "1,2,2,1": { tur: "Souleymane", nit_ki: "dafa am xol bu set, jàmm gu mucc ayib, ak muur gu baax.", xalaat: "mu ngi xalaat ci lu set, jàmm, leer, walla mbirum diine mu am barke." },
-            "2,1,1,2": { tur: "Aliou", nit_ki: "dafa am tàngay xol, coler, walla mu ngi bërré ak jafe-jafe.", xalaat: "xalaatam dafa tàng, mu ngi denc fitna walla bëgg xare ngir ganyé." },
-            "2,2,1,1": { tur: "Nouhou", nit_ki: "dafa nekk ci jafe-jafe gu tar, tòj-tòj walla mettit bu rëy.", xalaat: "xalaat bu lëndëm, tàngay biir, ak coono gu tar moo ko uor." },
-            "1,1,1,2": { tur: "Hasan", nit_ki: "dafa nekk ci coono, sànku alal walla jaxaso bu rëy.", xalaat: "mu ngi xalaat ci wax gu rëy gu guene walla mbir mu koy tas xel." },
-            "1,2,1,1": { tur: "Yunus", nit_ki: "dafa nekk ci ndàm, guene ci jàfe-jàfe te am doles.", xalaat: "mu ngi xalaat ci guene, féeñal ndàmam, walla dandi noon yi." },
-            "2,1,2,1": { tur: "Ousmane", nit_ki: "dafa am gàkk-gàkk walla lu dog ci sa diggante ak li nga sàkku.", xalaat: "mu ngi xalaat ci lu dog, gàkk-gàkk ci mbir, walla lëndëm." },
-            "2,2,2,2": { tur: "Moussa", nit_ki: "dafa jaxaso ci mbooloo walla mu ngi saytu mbir yu bari.", xalaat: "mu ngi xalaat ci ndaje, mbooloo, walla lu laal dajalo nit ñu bari." }
+            "1,1,2,1": { tur: "Yusuf", xew: "barke gu duggu, alal walla ndimmis gu laqu gu dëgër buy ñëw ci yaw." },
+            "1,2,2,2": { tur: "Adama", xew: "nguur, daraja gu rëy, ak alal gu bari gu am barke te buy duren." },
+            "2,1,1,1": { tur: "Muhammad", xew: "mbir mu teju, batin bu dëgër, walla mbegte mu laqu mu nara duren." },
+            "2,2,1,2": { tur: "Idris", xew: "doles gu rëy, mbindeef gu dëgër, ak nguur gu lay dimbali ci sa yoon." },
+            "1,1,1,1": { tur: "Ibrahim", xew: "mbir mi day dox, am na tukki walla yoon wu féeñ, lu gaaw lay doon." },
+            "1,2,1,2": { tur: "Issa", xew: "ree, fo, mbegte, ak ndaje mu neex mu lay dandi mbooleem coono yi." },
+            "2,1,2,2": { tur: "Oumar", xew: "mbiro kumpa bu lëndëm te dëggu, faww nga sàytulu bu baax ba mu féeñ." },
+            "2,2,2,1": { tur: "Ayouba", xew: "daanu gu gaaw, jàfe-jàfe buy wadd, walla rëcc-rëcc ci sa yaakaar." },
+            "1,1,2,2": { tur: "Jibriil", xew: "ndaje mu baax, sëy, walla boole alal yu bari ngir liggéej bu am solo." },
+            "1,2,2,1": { tur: "Souleymane", xew: "jàmm gu mucc ayib, leer, ak xol bu set. Lu baax te neex dina féeñ ci sa dundu." },
+            "2,1,1,2": { tur: "Aliou", xew: "tàngay xol, xare walla fitna dina ci am. Faww nga am jom te muur sa xel." },
+            "2,2,1,1": { tur: "Nouhou", xew: "jafe-jafe gu tar, tòj-tòj walla mettit buy tàkk ci biir. Da laaj ñaan." },
+            "1,1,1,2": { tur: "Hasan", xew: "coono, sànku alal walla wax gu rëy guy tas mbir mi. Faww nga wattuku." },
+            "1,2,1,1": { tur: "Yunus", xew: "ganyé gu féeñ, ndàm, ak mbir mu guene ci jàfe-jàfe yi. Lu baax la." },
+            "2,1,2,1": { tur: "Ousmane", xew: "gàkk-gàkk walla lu dog ci sa diggante ak li nga sàkku. Lu am lëndëm la." },
+            "2,2,2,2": { tur: "Moussa", xew: "mbooloo dina ci dajalo, mbir mi dina yaatu lool waaye am na jaxaso." }
         };
 
         function rëddRandom() { return [Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1]; }
@@ -69,10 +70,10 @@
         
         function fusionner(f1, f2) { 
             return [
-                booleLigne(f1, f2), 
-                booleLigne(f1, f2), 
-                booleLigne(f1, f2), 
-                booleLigne(f1, f2)
+                booleLigne(f1[0], f2[0]), 
+                booleLigne(f1[1], f2[1]), 
+                booleLigne(f1[2], f2[2]), 
+                booleLigne(f1[3], f2[3])
             ]; 
         }
 
@@ -84,13 +85,13 @@
                 m.push(rëddRandom());
             }
             
-            // 2. Kër 5 ba 8 (Doom yi)
-            m.push([m[0][0], m[1][0], m[2][0], m[3][0]]); // Kër 5 (Boppu Ndey yi)
-            m.push([m[0][1], m[1][1], m[2][1], m[3][1]]); // Kër 6 (Dënnu Ndey yi)
-            m.push([m[0][2], m[1][2], m[2][2], m[3][2]]); // Kër 7 (Biiru Ndey yi)
-            m.push([m[0][3], m[1][3], m[2][3], m[3][3]]); // Kër 8 (Tànku Ndey yi)
+            // 2. Kër 5 ba 8 (Doom yi - Transposition)
+            m.push([m[0][0], m[1][0], m[2][0], m[3][0]]); // Kër 5
+            m.push([m[0][1], m[1][1], m[2][1], m[3][1]]); // Kër 6
+            m.push([m[0][2], m[1][2], m[2][2], m[3][2]]); // Kër 7
+            m.push([m[0][3], m[1][3], m[2][3], m[3][3]]); // Kër 8
 
-            // 3. Kër 9 ba 12 (Sët yi)
+            // 3. Kër 9 ba 12 (Sët yi - Fusion)
             m.push(fusionner(m[0], m[1])); // Kër 9 = K1 + K2
             m.push(fusionner(m[2], m[3])); // Kër 10 = K3 + K4
             m.push(fusionner(m[4], m[5])); // Kër 11 = K5 + K6
@@ -102,7 +103,7 @@
             m.push(fusionner(m[12], m[13])); // Kër 15 = K13 + K14
             m.push(fusionner(m[14], m[0]));  // Kër 16 = K15 + K1
 
-            // Affichage Grid bi
+            // Affichage Grid bi yëpp
             const grid = document.getElementById('ramliGrid');
             grid.innerHTML = '';
             m.forEach((fig, i) => {
@@ -112,18 +113,18 @@
                 grid.innerHTML += `<div class="kër"><div class="kër-tur">Kër ${i+1}</div><div class="tomb-yi">${visuel}</div><div class="mbindeef-tur">${name}</div></div>`;
             });
 
-            // Corigé gu wër: J jël index array dëgg yi [0] ak [12]
-            let cleM1 = m[0].join(",");
-            let cleM13 = m[12].join(",");
-
-            let firiM1 = firi_atte[cleM1] || { tur: "Mbindeef", nit_ki: "Wax gu bir féeñul" };
-            let firiM13 = firi_atte[cleM13] || { tur: "Mbindeef", xalaat: "Wax gu bir féeñul" };
+            // Tënk firi bu woor bi ci suuf
+            let firiM1 = firi_atte[m[0].join(",")] || { tur: "Mbindeef", xew: "lu bir" };
+            let firiM15 = firi_atte[m[14].join(",")] || { tur: "Mbindeef", xew: "lu am solo" };
+            let firiM16 = firi_atte[m[15].join(",")] || { tur: "Mbindeef", xew: "lu jeex" };
 
             const texteAtte = `
-                <span class="highlight">1. Mbiri Nit Ki (Kër 1 - ${firiM1.tur}):</span><br>
-                ${firiM1.nit_ki}<br><br>
-                <span class="highlight">2. Li nekk ci Xalaatam (Kër 13 - ${firiM13.tur}):</span><br>
-                ${firiM13.xalaat}
+                Ci seet gu mat seuk gi nga togg léegi: Yaw mi sàkku seet bi (Kër 1), sa yaram ak sa xel dafa tëdd ci mbindeefu <span class="highlight">${firiM1.tur}</span>. 
+                Loolu dafa woné ne ci sa dundu léegi: ${firiM1.xew}<br><br>
+                Ci àtte gu biir gu Misaan bi joxe (Kër 15) mu ngi féeñal mbindeefu <span class="highlight">${firiM15.tur}</span>, té loolu mu ngi lay won ne: 
+                <span class="highlight">${firiM15.xew}</span><br><br>
+                Kòdd gu mujj gi (Kër 16) mooy teju buntu seet bi, té dafa tàbblu mbindeefu <span class="highlight">${firiM16.tur}</span>. 
+                Lii moodi tënk gu woor gu mbir mi di jeexe: <span class="highlight">Mbir mi lépp mu ngi lëkkaloo ak ndax ${firiM16.xew}</span>.
             `;
 
             document.getElementById('atteTexte').innerHTML = texteAtte;
