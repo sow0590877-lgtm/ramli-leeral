@@ -12,7 +12,8 @@
         .kër-tur { font-size: 12px; color: #ff9900; font-weight: bold; }
         .tomb-yi { font-size: 26px; letter-spacing: 6px; color: #00ffcc; margin: 10px 0; line-height: 1; }
         .mbindeef-tur { font-weight: bold; color: #ffffff; font-size: 16px; }
-        .atte-box { background: #1c1c3a; border: 2px solid #00ffcc; border-radius: 12px; padding: 20px; max-width: 1000px; margin: 30px auto; text-align: left; }
+        .atte-box { background: #1c1c3a; border: 2px solid #00ffcc; border-radius: 12px; padding: 25px; max-width: 1000px; margin: 30px auto; text-align: left; }
+        .atte-header { font-size: 20px; color: #00ffcc; font-weight: bold; border-bottom: 2px solid #2a2a3a; padding-bottom: 10px; margin-bottom: 15px; text-transform: uppercase; text-align: center; }
         .atte-text { font-size: 16px; color: #ffffff; line-height: 1.6; }
         .highlight { color: #ffcc00; font-weight: bold; }
         button { background: #007644; color: white; border: none; padding: 15px 35px; font-size: 18px; cursor: pointer; border-radius: 30px; font-weight: bold; margin-top: 10px; }
@@ -42,6 +43,7 @@
     <div class="grid" id="ramliGrid"></div>
 
     <div class="atte-box" id="atteBox" style="display:none;">
+        <div class="atte-header">Interprétation Globale du Thème</div>
         <div class="atte-text" id="atteTexte"></div>
     </div>
 
@@ -74,23 +76,71 @@
             }
         }
 
+        // Firi yu yaatu te tolloo pékke ak wolof ak araab bi
         const firi_atte = {
-            "1,1,2,1": { tur: "Yusuf", xew: "Bénédiction et argent à venir." },
-            "1,2,2,2": { tur: "Adama", xew: "Grand prestige et autorité durable." },
-            "2,1,1,1": { tur: "Muhammad", xew: "Affaire cachée ou joie secrète." },
-            "2,2,1,2": { tur: "Idris", xew: "Force, stabilité et protection." },
-            "1,1,1,1": { tur: "Ibrahim", xew: "Mouvement gaaw ou grand voyage." },
-            "1,2,1,2": { tur: "Issa", xew: "Joie, rires et bonheur immédiat." },
-            "2,1,2,2": { tur: "Oumar", xew: "Secret mystérieux à patienter." },
-            "2,2,2,1": { tur: "Ayouba", xew: "Difficulté ou blocage passager." },
-            "1,1,2,2": { tur: "Jibriil", xew: "Réunion, union ou mariage." },
-            "1,2,2,1": { tur: "Souleymane", xew: "Paix totale et pureté du coeur." },
-            "2,1,1,2": { tur: "Aliou", xew: "Colère ou affrontement intense." },
-            "2,2,1,1": { tur: "Nouhou", xew: "Épreuve lourde, besoin de prières." },
-            "1,1,1,2": { tur: "Hasan", xew: "Fatigue ou paroles confuses." },
-            "1,2,1,1": { tur: "Yunus", xew: "Victoire claire et délivrance." },
-            "2,1,2,1": { tur: "Ousmane", xew: "Coupure ou obstacle flou." },
-            "2,2,2,2": { tur: "Moussa", xew: "Rassemblement mais confusion." }
+            "1,1,2,1": { 
+                tur: "Yusuf", 
+                xew: "Indique l'entrée imminente d'une bénédiction financière ou d'un soutien spirituel secret et très fort. Vos affaires matérielles vont s'améliorer nettement dans les jours à venir." 
+            },
+            "1,2,2,2": { 
+                tur: "Adama", 
+                xew: "Signifie un grand prestige, l'élévation sociale, une autorité durable et l'obtention d'un pouvoir ou d'un honneur important. C'est un signe de succès total et pérenne." 
+            },
+            "2,1,1,1": { 
+                tur: "Muhammad", 
+                xew: "Représente une affaire cachée de nature positive, des secrets bien gardés ou une joie intérieure profonde qui va durer longtemps. Ce qui est caché est protégé par la grâce divine." 
+            },
+            "2,2,1,2": { 
+                tur: "Idris", 
+                xew: "Annonce une grande force physique et spirituelle, une stabilité inébranlable et une protection divine rigoureuse sur tous vos projets. Idéal pour surmonter les obstacles actuels." 
+            },
+            "1,1,1,1": { 
+                tur: "Ibrahim", 
+                xew: "L'affaire se débloque par un mouvement rapide. Indique des opportunités de voyage, un déplacement important ou l'ouverture imminente de nouvelles voies bénéfiques pour votre avenir." 
+            },
+            "1,2,1,2": { 
+                tur: "Issa", xew: "Promet des rires, de grands moments de bonheur et un soulagement immédiat de l'esprit. Cette figure dissipe tous les soucis accumulés et apporte le bien-être." 
+            },
+            "2,1,2,2": { 
+                tur: "Oumar", 
+                xew: "Révèle une vérité mystérieuse encore voilée mais absolument sincère. Il est fortement recommandé de patienter et de faire preuve de sagesse jusqu'à sa pleine révélation." 
+            },
+            "2,2,2,1": { 
+                tur: "Ayouba", 
+                xew: "Indique un recul temporaire, une épreuve de patience ou un blocage passager de vos projets. Face à cette situation lourde pour le cœur, la résilience et les prières sont nécessaires." 
+            },
+            "1,1,2,2": { 
+                tur: "Jibriil", 
+                xew: "Annonce une réunion très bénéfique, la conclusion d'un accord important, ou l'union harmonieuse de deux personnes par le mariage. Les énergies se rassemblent pour le bien." 
+            },
+            "1,2,2,1": { 
+                tur: "Souleymane", 
+                xew: "Amène une paix totale, la clarté d'esprit et une grande pureté du cœur. Tout se déroule de façon fluide, juste et légitime. Signe d'harmonie totale." 
+            },
+            "2,1,1,2": { 
+                tur: "Aliou", 
+                xew: "Alerte sur une forte tension émotionnelle, un risque de dispute intense ou d'affrontement difficile. Vous devez impérativement faire preuve de prudence et maîtriser votre colère." 
+            },
+            "2,2,1,1": { 
+                tur: "Nouhou", 
+                xew: "Signale un lourd fardeau intérieur, un blocage difficile ou une profonde tristesse de l'esprit. L'affaire est complexe et demande des prières et des sacrifices spirituels." 
+            },
+            "1,1,1,2": { 
+                tur: "Hasan", 
+                xew: "Évoque de la fatigue générale, des pertes matérielles ou des paroles confuses et contradictoires autour de vous. Soyez extrêmement vigilant pour protéger vos intérêts." 
+            },
+            "1,2,1,1": { 
+                tur: "Yunus", 
+                xew: "Annonce une victoire éclatante sur les épreuves, un gain matériel certain et une délivrance définitive de tous vos problèmes actuels. Le triomphe est assuré." 
+            },
+            "2,1,2,1": { 
+                tur: "Ousmane", 
+                xew: "Révèle un obstacle flou, une coupure soudaine ou une incertitude majeure entre vous et l'objet de vos désirs. L'affaire manque de clarté pour le moment." 
+            },
+            "2,2,2,2": { 
+                tur: "Moussa", 
+                xew: "Les gens se rassemblent en grand nombre autour de votre question. L'affaire s'étend de manière considérable mais comporte un risque d'agitation et de grande confusion." 
+            }
         };
 
         function rëddRandom() { return [Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1, Math.floor(Math.random()*2)+1]; }
@@ -101,20 +151,16 @@
             let m = []; 
             for (let i=0; i<4; i++) m.push(rëddRandom());
             
-            m.push([m[0], m[1], m[2], m[3]]); // Maison 5
-            m.push([m[0], m[1], m[2], m[3]]); // Maison 6
-            m.push([m[0], m[1], m[2], m[3]]); // Maison 7
-            m.push([m[0], m[1], m[2], m[3]]); // Maison 8
+            m.push([m, m, m, m]);
+            m.push([m, m, m, m]);
+            m.push([m, m, m, m]);
+            m.push([m, m, m, m]);
 
-            m.push(fusionner(m[0], m[1])); // Maison 9 = M1 + M2
-            m.push(fusionner(m[2], m[3])); // Maison 10 = M3 + M4
-            m.push(fusionner(m[4], m[5])); // Maison 11 = M5 + M6
-            m.push(fusionner(m[6], m[7])); // Maison 12 = M7 + M8
+            m.push(fusionner(m, m)); m.push(fusionner(m, m));
+            m.push(fusionner(m, m)); m.push(fusionner(m, m));
 
-            m.push(fusionner(m[8], m[9]));   // Maison 13 = M9 + M10
-            m.push(fusionner(m[10], m[11])); // Maison 14 = M11 + M12
-            m.push(fusionner(m[12], m[13])); // Maison 15 = M13 + M14
-            m.push(fusionner(m[14], m[0]));   // Maison 16 = M15 + M1
+            m.push(fusionner(m, m)); m.push(fusionner(m, m));
+            m.push(fusionner(m, m)); m.push(fusionner(m, m));
 
             const grid = document.getElementById('ramliGrid');
             grid.innerHTML = '';
@@ -125,18 +171,3 @@
                 grid.innerHTML += `<div class="kër"><div class="kër-tur">Maison ${i+1}</div><div class="tomb-yi">${visuel}</div><div class="mbindeef-tur">${name}</div></div>`;
             });
 
-            // Pexe dëgg-dëgg gu natt index array yi ci lu wër
-            let firiM1 = firi_atte[m[0].join(",")] || { tur: "Figure", xew: "Non défini" };
-            let firiM15 = firi_atte[m[14].join(",")] || { tur: "Figure", xew: "Non défini" };
-            let firiM16 = firi_atte[m[15].join(",")] || { tur: "Figure", xew: "Non défini" };
-
-            document.getElementById('atteTexte').innerHTML = `
-                <b>Maison 1 (${firiM1.tur}) :</b> ${firiM1.xew}<br><br>
-                <b>Maison 15 (${firiM15.tur}) :</b> ${firiM15.xew}<br><br>
-                <b>Maison 16 (${firiM16.tur}) :</b> <span class="highlight">${firiM16.xew}</span>
-            `;
-            document.getElementById('atteBox').style.display = 'block';
-        }
-    </script>
-</body>
-</html>
